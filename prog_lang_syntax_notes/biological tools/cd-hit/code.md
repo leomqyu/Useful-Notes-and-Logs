@@ -3,7 +3,8 @@
 ## basic notes
 cd-hit-est designed for nucleotide. But don't have too low threshold. 
 cd-hit has lower possible threshold. Originally used for protein, can also use for RNA 
-## sample cluster of RNA
+## sample cluster of RNA and protein (exactly the same)
+
 
 ```bash
 #!/bin/bash

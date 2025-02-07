@@ -1,5 +1,4 @@
-# <span style="color:blue">sample template</span><span style="color:blue">sample template</span>
-
+# <span style="color:blue">sample template</span>
 ## <span style="color:green">24-10-03 sample prob</span>
 
 ### error message 
@@ -24,7 +23,34 @@ how to avoid this next time
 
 ---
 
+
 # <span style="color:blue"> linux related </span>
+
+## <span style="color:green">25-01-17 version `GLIBCXX_3.4.29' not found </span>
+
+### error message 
+```
+ImportError: /lib64/libstdc++.so.6: version `GLIBCXX_3.4.29' not found (required by /share/home/Andrew/anaconda3/envs/torch251/lib/python3.12/site-packages/PIL/../../.././libLerc.so.4)
+```
+### brief analysis
+
+When importing some packages, has this problem. eg `from PIL import Image`
+
+### full trace back
+
+```
+>>> from PIL import Image
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+  File "/share/home/Andrew/anaconda3/envs/torch251/lib/python3.12/site-packages/PIL/Image.py", line 97, in <module>
+    from . import _imaging as core
+ImportError: /lib64/libstdc++.so.6: version `GLIBCXX_3.4.29' not found (required by /share/home/Andrew/anaconda3/envs/torch251/lib/python3.12/site-packages/PIL/../../.././libLerc.so.4)
+```
+
+### solution
+
+refer to  this [link](https://stackoverflow.com/questions/58424974/anaconda-importerror-usr-lib64-libstdc-so-6-version-glibcxx-3-4-21-not-fo)
+Did: `export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/share/home/Andrew/anaconda3/lib/`
 
 ## <span style="color:green">24-10-07 server no connection</span>
 
@@ -164,6 +190,88 @@ The following packages are incompatible
 Currently not solved. 
 Workarounds such as using pip install
 
+---
+
+## <span style="color:green">24-10-08 cannot find a specific gcc </span>
+
+### error message 
+
+```
+The Open MPI wrapper compiler was unable to find the specified compiler
+x86_64-conda_cos6-linux-gnu-cc in your PATH.
+
+Note that this compiler was either specified at configure time or in
+one of several possible environment variables.
+```
+
+### brief analysis
+
+This is due to version problem. Cannot find the specific compiler `x86_64-conda_cos6-linux-gnu-cc`
+
+### solution
+
+If no `sudo` rights, a workaround is to wrap the normal gcc in a file named `x86_64-conda_cos6-linux-gnu-cc` and add it to `$PATH`.
+
+1. Create a file named `x86_64-conda_cos6-linux-gnu-cc` with the following content: 
+```bash
+#!/bin/bash
+exec gcc "$@"
+```
+2. then:
+```
+chmod +x x86_64-conda_cos6-linux-gnu-cc
+export PATH="${PATH}:/path/to/directory/containing/wrapper"
+```
+---
+
+# <span style="color:blue"> general python packages </span>
+
+---
+
+## <span style="color:green">25-01-17 In VScode ipynb cannot find kernel in when selecting kernel</span>
+
+### error message 
+When clicking Select Kernel, can't find the conda environment
+
+### solution
+
+Install the Jupyter extension, and `pip install jupyterlab`. Then reload window and try again
+
+---
+
+## <span style="color:green">24-11-30 Rectangle.set() got an unexpected keyword argument 'normed'</span>
+
+### error message 
+```
+Traceback (most recent call last):
+  File "/data2/mqyu/work/ynu/beam/post_analysis.py", line 324, in <module>
+    plotScoresDistributions(file, motpath)
+  File "/data2/mqyu/work/ynu/beam/post_analysis.py", line 202, in plotScoresDistributions
+    plt.hist(scores,normed=True, alpha=0.5, label="input", bins=np.arange(minmin, maxmax + binwidth, binwidth))
+  File "/data2/mqyu/anaconda3/envs/rnafm/lib/python3.12/site-packages/matplotlib/pyplot.py", line 3440, in hist
+    return gca().hist(
+           ^^^^^^^^^^^
+  File "/data2/mqyu/anaconda3/envs/rnafm/lib/python3.12/site-packages/matplotlib/__init__.py", line 1473, in inner
+    return func(
+           ^^^^^
+  File "/data2/mqyu/anaconda3/envs/rnafm/lib/python3.12/site-packages/matplotlib/axes/_axes.py", line 7154, in hist
+    p._internal_update(kwargs)
+  File "/data2/mqyu/anaconda3/envs/rnafm/lib/python3.12/site-packages/matplotlib/artist.py", line 1216, in _internal_update
+    return self._update_props(
+           ^^^^^^^^^^^^^^^^^^^
+  File "/data2/mqyu/anaconda3/envs/rnafm/lib/python3.12/site-packages/matplotlib/artist.py", line 1190, in _update_props
+    raise AttributeError(
+AttributeError: Rectangle.set() got an unexpected keyword argument 'normed'
+```
+
+### brief analysis
+
+Because the updated version of plt.hist, no more keyword `normed`. `normed=True` changed to `density=True`
+
+### solution
+
+Change all the `normed=True` to `density=True` in `plt.hist()`
+
 
 ---
 
@@ -276,3 +384,26 @@ pi.cpp":27, please report a bug to PyTorch. Can't find nvmlDeviceGetNvLinkRemote
 ### solution
 
 Just waited for one night and becomes OK
+
+
+---
+
+#  <span style="color:blue"> Others </span>
+
+---
+
+## <span style="color:green"> 24-11-11 markdone print unable to print latex </span>
+
+### solution
+
+add below to the .md file
+
+```
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({ tex2jax: {inlineMath: [['$', '$']]}, messageStyle: "none" });
+    </script>
+```
+
+
+---

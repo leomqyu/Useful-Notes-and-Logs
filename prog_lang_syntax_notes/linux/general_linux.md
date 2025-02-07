@@ -35,6 +35,7 @@ When you say run a command like `ls`, how does it know which exe is this `ls`? J
     ```
     kill -9 PID
     killall -u mqyu
+    kill -2 PID     # more warmly. Like CTRL+C (SIG_INT)
     ```
 
 # OS related
@@ -52,3 +53,12 @@ When you say run a command like `ls`, how does it know which exe is this `ls`? J
 # Others
 1. Find
     `find . -name thisfile.txt`
+
+# compress uncompress
+1. compress  
+    tar -czvf [archive name].tar.gz [pathtofile]
+1. uncompress 
+    tar -xzvf [file .tar.gz]
+
+    zip file: unzip file.zip
+    bed file: gunzip [file path]

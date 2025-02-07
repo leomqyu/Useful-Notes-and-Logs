@@ -1,0 +1,19 @@
+---
+title: "concepts"
+output: html_notebook
+---
+
+# ***R concept***
+1. assignment  
+similar to asignment of other languages.  
+can use symbols `=` or `<=`  
+
+1. datatype  
+common data type: numeric, logical, character  
+method `mode()` shows the data type  
+character is string or character like python, denoted by double quote " or single quote no diff 
+logical is `TRUE` and `FALSE`, you write can also `T` and `F`
+
+1. indexing  
+all indexing in R is from 1 not 0  
+the slicing (eg 1:3): start and end are included
