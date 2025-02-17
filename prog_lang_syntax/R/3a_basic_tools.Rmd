@@ -1,0 +1,89 @@
+---
+title: "3a_basic_tools"
+output: 
+  html_notebook: 
+    toc: true
+    toc_float: true
+---
+
+# ***common built-in tools***
+
+## 1. **random**
+
+### 1.1. random sample
+
+1. seed: `set.seed(13579)`   
+
+1. `sample()`
+
+    1. syntax  
+    `sample(x, size, replace = FALSE, prob = NULL)`
+    `sample.int(n, size = n, replace = FALSE, prob = NULL, useHash = (n > 1e+07 && !replace && is.null(prob) && size <= n/2))`
+    
+    2. usage
+```{r}
+# basics
+sample(c(1, 2, 3), size=2)
+sample(52, size = 5, replace=F)   # means sample from 1:52
+
+# without size param: means sample same num of (permutation)
+sample(10)  # permutation of 1:10 (since replace=F)
+
+# sample with probability
+sample(c(-1, 0, 1), size=2, prob=c(0.25, 0.5, 0.25))
+```
+      
+### 1.2 Random distributions
+
+1. Supported distributions  
+    ![](./images/Screenshot 2025-02-16 144515.png)
+1. Supported functions for these distributions  
+    When using, just `<R_function_name><R_dist_name>`  
+    Math def: Lec2 P22  
+    1. sample random number from the distribution:  
+        R_function_name: `r`        
+        eg. `runif(n, min = 0, max = 1)`
+        
+    1. Probability density function (pdf) for discrete or Probability mass function (pmf) for continuous
+        R_function_name: `d`  
+        eg. `dnorm(seq(-4, 4, 0.1))`; `dbinom(0:20,size=20,prob=1/4)`
+        
+    1. Cumulative probability distribution function (cdf)
+        R_function_name: `p`  
+        eg. `pnorm(1.96)`: P(x<1.96)
+        
+    1. Quantiles
+        R_function_name: `q`  
+        eg. `qnorm(0.25)`: x such that P(X<x) = 0.25  
+        
+
+1. 
+
+### 1.z Examples
+1. eg of random walk and plotting as time series  
+    Lec2 P12-14  
+1. eg of Mont Carlo:  
+    Intro Lec2 P16-17, 31-
+
+
+## 2. **sorting**
+
+1. sort
+`sort(x, decreasing = FALSE, ...)`
+```
+> sort(c(3, 12, 2, 1))
+[1]  1  2  3 12
+```
+
+1. give sort order
+```
+# 2 methods both OK
+> order(c(3, 12, 2, 1))
+[1] 4 3 1 2
+
+> sort.list(c(3, 12, 2, 1))
+[1] 4 3 1 2
+```
+
+
+

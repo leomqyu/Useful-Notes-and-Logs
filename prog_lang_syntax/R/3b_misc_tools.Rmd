@@ -1,0 +1,11 @@
+---
+title: "3b_misc_tools"
+output: html_notebook
+---
+
+# ***misc built-in tools***
+
+1. polyroot()  
+
+1. imaginary number
+    1. Im()

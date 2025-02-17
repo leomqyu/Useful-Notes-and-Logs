@@ -1,0 +1,58 @@
+---
+title: "concepts"
+output: html_notebook
+---
+
+# ***R basic concept***
+
+1. indexing  
+  all indexing in R is from 1 not 0  
+  the slicing (eg 1:3): start and end are included
+
+1. R language is case sensitive.
+
+1. R operations are vector based, performs on each element of vector.
+
+# ***Variable naming Conventions***
+
+![](./images/Screenshot 2025-02-16 132330.png){width=70%}
+
+# ***datatype*** 
+
+## **data type intr**
+  common data type: numeric, logical, character  
+    1. numeric represents both int and float  
+    1. character is string or character like python, denoted by double quote " or single quote no diff 
+    1. logical is `TRUE` and `FALSE`, you write can also `T` and `F`
+  
+## **Inspect data type**
+    1. `mode()`  
+        describe the data type used for storage, e.g., numeric, logical, character, etc.
+    1. `class()`  
+        describe the object class of the input variable, e.g., numeric, integer, list, matrix, factor, etc.
+    1. egs
+```{R}
+> mode(1L); class(1L) 
+[1] "numeric" 
+[1] "integer" 
+
+> mode(factor(c("a","b"))); class(factor(c("a","b"))) 
+[1] "numeric" 
+[1] "factor" 
+
+> mode(matrix(0,2,2)); class(matrix(0,2,2)) 
+[1] "numeric" 
+[1] "matrix"
+```
+
+## **Special values**
+
+### Missing value `NA` 
+
+1. Intro
+Missing values often arise in real data problems, but they can also arise because of the way calculations are performed.  
+
+1. Inspect: `is.na()`
+
+## **Technical: storage of numbers**
+lec1 49-50

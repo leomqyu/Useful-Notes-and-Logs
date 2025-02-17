@@ -1,0 +1,28 @@
+---
+title: "4_visualization_lec3"
+output: html_notebook
+---
+
+# Intro and notes
+## Intro and def
+1. defs (?) 
+    1. graphic: a "plot", eg a histogram, pie chart ...
+    1. frame: a single picture is called a frame, can contain sub graphics
+
+## Notes
+1. High level plots  
+    Lec3 P3
+    
+# General operations
+1. Setup a frame (signifying a new frame)
+    `par(...)`: means param: is to configure graphical param
+
+1. sub graphics in a single frame  
+    `par(mfrow=c(2,2))`
+    `mfrow` means multi-frame filled row-wise. `mfcol`: column-wise
+    `c(2,2)`: the configuration of sub-frame
+    
+# Plotting basic graphs
+
+## Histogram
+

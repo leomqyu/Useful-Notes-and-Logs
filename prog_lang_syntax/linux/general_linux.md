@@ -45,16 +45,12 @@ When you say run a command like `ls`, how does it know which exe is this `ls`? J
 # Connection
 1. scp and file transfer
 
-    `scp -P 2347 -r work/rna_mod/model/data/ mqyu@projgw.cse.cuhk.edu.hk:~`
+    `scp -P <port> -r work/rna_mod/model/data/ mqyu@some.address:~`
 
 2. see ip address
    `ifconfig`
 
-# Others
-1. Find
-    `find . -name thisfile.txt`
-
-# compress uncompress
+# Compress uncompress
 1. compress  
     tar -czvf [archive name].tar.gz [pathtofile]
 1. uncompress 
@@ -62,3 +58,13 @@ When you say run a command like `ls`, how does it know which exe is this `ls`? J
 
     zip file: unzip file.zip
     bed file: gunzip [file path]
+
+# Configuration
+
+1. set alias
+    For temporary: just eg `alias ll='ls -lah'`
+    For permanent: add `alias ll='ls -lah'` in `~/.bash.rc`
+
+# Others
+1. Find
+    `find . -name thisfile.txt`

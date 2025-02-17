@@ -26,6 +26,8 @@ how to avoid this next time
 
 # <span style="color:blue"> linux related </span>
 
+---
+
 ## <span style="color:green">25-01-17 version `GLIBCXX_3.4.29' not found </span>
 
 ### error message 
@@ -222,6 +224,34 @@ exec gcc "$@"
 chmod +x x86_64-conda_cos6-linux-gnu-cc
 export PATH="${PATH}:/path/to/directory/containing/wrapper"
 ```
+---
+
+# <span style="color:blue"> Git related  </span>
+
+---
+
+## <span style="color:green">25-02-17 Cannot commit due to pull error </span>
+### brief analysis
+
+If the remote repo is modified in remote, and tried to push on local repo, then should be pulled first
+
+### solution
+
+Just follow the instruction to do git pull then push.
+
+---
+
+## <span style="color:green">25-02-17 Large file issue </span>
+### brief analysis
+
+If the file trying to upload is more than 100M, then will have this problem.
+Note: even if the large file is deleted but haved being tried to push once, will still have the problem.  
+Solve with the git lfs
+
+### solution
+
+follow the instruction on https://git-lfs.com/ to  track the file, then do the things
+
 ---
 
 # <span style="color:blue"> general python packages </span>

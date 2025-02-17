@@ -1,0 +1,7 @@
+---
+title: "6_file_IO"
+output: html_notebook
+---
+
+# Exploratory data analysis: an eg of File I/O in interactive mode
+Lec2 P32+
