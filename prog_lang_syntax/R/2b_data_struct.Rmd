@@ -61,50 +61,90 @@ return the diff `v[i+1]-v[i]`
 [1] 1 2
 ```
 
-
-
-
 ### 1.4 misc operations
+
+1. `:`  
+    Similar to the basics of `seq`  
+    
+    ```
+    1:5 gets 1 2 3 4 5
+    5:1 gets 5 4 3 2 1
+    ```
 
 1. length()  
 
 1. combination of vectors  
-use `c()`. Can combine diff datatype, but will convert to the same:  
-    1. numeric + logical: logical F -> 0, T -> 1
-    1. character + numerical/logical: numerical/logical -> char
+    use `c()`. Can combine diff datatype, but will convert to the same:  
+        1. numeric + logical: logical F -> 0, T -> 1
+        1. character + numerical/logical: numerical/logical -> char
 
 1. explicit conversion of data type
-`as.numeric(v)`: eg characters that cannot be converted will be `NA`
+    `as.numeric(v)`: eg characters that cannot be converted will be `NA`
 
 1. unique()  
-return unique elements as a list  
-```
-> unique(c("C", "D", "H", "D", "H"))
-[1] "C" "D" "H"
-```
+    return unique elements as a list  
+    
+    ```
+    > unique(c("C", "D", "H", "D", "H"))
+    [1] "C" "D" "H"
+    ```
 
-### 1.5 related misc function
+1. split()  
+    split the vector to several vectors and return as a list  
+    
+    ```
+    > g = c('a', 'b', 'c', 'a', 'b', 'c', 'a', 'b', 'c')
+    > x = c(1, 2, 3, 4, 5,  6, 7, 8, 9)
+    > split(x, g)
+    $a
+    [1] 1 4 7
+    
+    $b
+    [1] 2 5 8
+    
+    $c
+    [1] 3 6 9
+    ```
+    
+1. repeat  
 
-a. `:`
-```
-1:5 gets 1 2 3 4 5
-5:1 gets 5 4 3 2 1
-```
-a. repeat
+    ```
+    # repeat a number: rep(x, times)
+    rep(3, 12)
+    
+    
+    # repeat a vector:
+    rep(seq(1,3), 2)        # 1, 2, 3, 1, 2, 3 
+    rep(c(1,2,3), c(1,2,3)) # 1, 2, 2, 3, 3, 3; note: if num not match, error
+    rep(c(1,2,3), each=2)   # 1, 1, 2, 2, 3, 3
+    
+    
+    rep(seq(1,3), each=2)        # 1, 2, 3, 1, 2, 3 
+    ```
+    
+1. `tapply`
+    1. Intro: Apply a function to subsets of a vector or array, split by factors
+    
+    1. Syntax
+        `tapply(data, INDEX, FUN, ...)`
 
-```{r}
-# repeat a number: rep(x, times)
-rep(3, 12)
+        data: The vector or array you want to summarize.  
+        INDEX: A list of factors or grouping variables used to split the data.  
+        FUN: The function you want to apply to each subset.  
+    1. Eg.  
+    
+        ```
+        scores <- c(85, 90, 78, 92, 88, 76, 84, 92, 95, 89)
+        grades <- c("A", "A", "B", "A", "B", "C", "B", "A", "A", "B")
 
+        # Using tapply() to calculate the average score for each grade
+        tapply(scores, grades, mean)
+        
+            A     B     C 
+        90.80 84.75 76.00 
+        ```
+      
 
-# repeat a vector:
-rep(seq(1,3), 2)        # 1, 2, 3, 1, 2, 3 
-rep(c(1,2,3), c(1,2,3)) # 1, 2, 2, 3, 3, 3; note: if num not match, error
-rep(c(1,2,3), each=2)   # 1, 1, 2, 2, 3, 3
-
-
-rep(seq(1,3), each=2)        # 1, 2, 3, 1, 2, 3 
-```
 
 ## 2. **matrix (& multi dimensional arrays)**
 
@@ -147,39 +187,55 @@ m[1:2, 3:4]   # (result is a matrix)
 ```
 ### 4. misc op
 
-1. combine:
-```
-m = cbind(m1, m2)   # bind in axis of col. If m1 is axb, m2 is cxb, then m is (a+c)xb
-m = rbind(m1, m2)   # similarly
+1. combine:  
 
-```
+      ```
+      m = cbind(m1, m2)   # bind in axis of col. If m1 is axb, m2 is cxb, then m is (a+c)xb
+      m = rbind(m1, m2)   # similarly
+      
+      ```
 
-### mul-dim array
+1. transpose: `t()`
 
-1. create
-`array(data = NA, dim = length(data), dimnames = NULL)`  
-mind the dim! first 2 dim is the array, then is the third dim  
-also mind for filling  
+1. `prop.table(rs,margin=1)`: along axis=margin (1 for row, 2 for col), return the proportion (percentage)
 
-```
-> array(data=1:24, dim=c(4, 3, 2))
-, , 1
+1. `col()`, `row()`  
+    Returns a matrix of integers indicating their row number in a matrix-like object, or a factor indicating the row labels.
+    
+    ```
+    > row(matrix(0, 2, 3))
+         [,1] [,2] [,3]
+    [1,]    1    1    1
+    [2,]    2    2    2
+    ```
+  
 
-     [,1] [,2] [,3]
-[1,]    1    5    9
-[2,]    2    6   10
-[3,]    3    7   11
-[4,]    4    8   12
+### z. side track: mul-dim array
 
-, , 2
-
-     [,1] [,2] [,3]
-[1,]   13   17   21
-[2,]   14   18   22
-[3,]   15   19   23
-[4,]   16   20   24
-
-```
+1. create  
+    `array(data = NA, dim = length(data), dimnames = NULL)`  
+    mind the dim! first 2 dim is the array, then is the third dim  
+    also mind for filling  
+    
+    ```
+    > array(data=1:24, dim=c(4, 3, 2))
+    , , 1
+    
+         [,1] [,2] [,3]
+    [1,]    1    5    9
+    [2,]    2    6   10
+    [3,]    3    7   11
+    [4,]    4    8   12
+    
+    , , 2
+    
+         [,1] [,2] [,3]
+    [1,]   13   17   21
+    [2,]   14   18   22
+    [3,]   15   19   23
+    [4,]   16   20   24
+    
+    ```
 
 ## 3. **list**
 
@@ -255,9 +311,9 @@ NULL
 1. `unlist()`: change the list obj to a long vector, using similar data type casting rule
 
 
-## 2. **dataframe**
+## 4. **dataframe**
 
-### 2.1. intro
+### 4.1. intro
 
 data frame is a special kind of list where each member (col, but not row) are vectors of equal length  
 
@@ -273,8 +329,8 @@ data frame is a special kind of list where each member (col, but not row) are ve
 
 Each row is called an **observation** and each column is called a **variable**  
 
-### 2.2 create dataframe
-```{r}
+### 4.2 create dataframe
+```
 member <- data.frame( 
   name = c("Tom", "May"), 
   age = c(22, 20) 
@@ -298,14 +354,24 @@ with(women, weight/height)
 # gives out a vector: [1] 1.982759 1.983051 2.000000 2.016393 ...
 ```
 
+### 2.4 vector-wise operations
+
+1. `by()`: 
+    similar to `tapply()`, but the return obj class is "by"
+    1. Syntax:  
+        `by(data, INDICES, FUN)`
+
 ### 2.5 common untrivial operations
-```
-# ~
-women$height[women$weight > 140]    # [1] 67 68 69 70 71 72  
-## explain: 
-##`women$weight > 140` is vector operation and result is a vector of T and F
-## then use this T F vector to find elements
-```
+1. Find the elements that satisfy some rule
+
+    ```
+    > women$height[women$weight > 140]    
+    [1] 67 68 69 70 71 72  
+    ```
+    
+    explain: 
+    `women$weight > 140` is vector operation and result is a vector of T and F  
+     then use this T F vector to find elements
 
 ### 2.4 misc methods
 

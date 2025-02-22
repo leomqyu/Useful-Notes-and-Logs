@@ -1,6 +1,9 @@
 ---
 title: "4_visualization_lec3"
-output: html_notebook
+output: 
+  html_notebook:
+    toc: true 
+    toc_float: true
 ---
 
 # Intro and notes
@@ -10,19 +13,462 @@ output: html_notebook
     1. frame: a single picture is called a frame, can contain sub graphics
 
 ## Notes
-1. High level plots  
-    Lec3 P3
+1. High level plots:   
+    mine: well wrapped up for you, don't need to care about the details of ... 
+    Lec3 P3  
+    In contrast is the low level plot functions. Are more specific, detailed. High and low level functions can be used together, eg, to add some details to high level plots using low level functions.
     
 # General operations
-1. Setup a frame (signifying a new frame)
+
+1. Setup a new frame (signifying a new frame)
+    `plot.new()` or `frame()` (alias)
+    
+1. Configurations using `par()`  
+    General options are mainly configured in `par()`. Details of `par()` can be inspected using `help()`. Below serves as a result oriented list.  
+    Many things set in `par()` can also be set when calling the detailed plot function. eg `lty`, `cex` ...
     `par(...)`: means param: is to configure graphical param
 
-1. sub graphics in a single frame  
-    `par(mfrow=c(2,2))`
-    `mfrow` means multi-frame filled row-wise. `mfcol`: column-wise
-    `c(2,2)`: the configuration of sub-frame
+    1. Plot arrangement in frames
+        1. sub graphics in a single frame  
+            `par(mfrow=c(2,2))`  
+            Explain:  
+            1. `mfrow` means multi-frame filled row-wise. `mfcol`: column-wise  
+            1. `c(2,2)`: the configuration of sub-frame  
+        1. A common title for sub-plots: call par for multiple times  
+        
+            ```
+            par(mfrow=c(1,3))
+            # boxplot(...) for 3 times
+            par(mfrow=c(1,1))
+            title(sub="ln pd86 vs ln pd90 by Region")
+            ```
+        
+        Then just do plotting four times without the need to specify which subplot, will fill automatically.
+        
+    1. line, box, ... types  
+        1. `lty`
+             (0=blank, 1=solid (default), 2=dashed, 3=dotted, 4=dotdash, 5=longdash, 6=twodash) or as one of the character strings "blank", "solid", "dashed", "dotted", "dotdash", "longdash", or "twodash", where "blank" uses ‘invisible lines’ (i.e., does not draw them).
+        1. `bty`
+            A character string which determined the type of box which is drawn about plots.  
+            If bty is one of "o" (the default), "l", "7", "c", "u", or "]" the resulting box resembles the corresponding upper case letter.  
+            A value of "n" suppresses the box.
+        1. `pch`
+            type of the points. Some common: 19=solid circle, 20=bullet, 21=circle, 22=square, 23=diamond, 24=triangle point‐up, 25=triangle point down
+             
+    1. text related
+        1. `cex`
+            character expansion factor. It indicates the amount by which the text and symbols should be scaled relative to the default size. 1 is default, 1.5 is 50% larger, 0.5 is 50% smaller, etc.
+            
+        1. las: style (arrangement of axis labels)    
+            Note: can also be configured in `mtext`  
+            
+            ```
+            numeric in {0,1,2,3}; the style of axis labels.
+
+            0: always parallel to the axis [default],
+            
+            1: always horizontal,
+            
+            2: always perpendicular to the axis,
+            
+            3: always vertical.
+            ```
+            
     
-# Plotting basic graphs
+    1. color related
+        1. `bg`
+            The color of the background when calling in par. In some graphic functions, can also be called and this means the color of points / lines ... and can be passed as vectors.
+            ```
+            # region is a vector consisting of three different string of "HK" "KL" and "NT", and will be in different color in this case.
+            plot(d$lnpd86,d$lnpd90,pch=21,bg=c("red","blue","green")[d$Region])
+            ```
+    
+# High level graphis function for basic graphs
+
+1. Basic notes
+    1. Many settings used in `par()` can be used in specific plotting below. eg `lty`, `cex`
+    1. Common params
+        1. `main`: the title of the plot that will be shown on plot
+        1. `col`: for specifying the color
+            1. Single color: eg. `"white"`
+            1. col=rainbow(20) use rainbow colour scheme up to 20
+        1. `xlim`, `ylim`: eg `xlim=c(0,15)`
+
+## plot(): not only Scatter plot
+
+1. Note: Use keyword `plot()` can do scatter plot, but doesn't mean `plot()` is only for scatter plot.
+
+1. Syntax  
+
+  ```
+  plot(x, y = NULL, type = "p",  xlim = NULL, ylim = NULL,
+       log = "", main = NULL, sub = NULL, xlab = NULL, ylab = NULL,
+       ann = par("ann"), axes = TRUE, frame.plot = axes,
+       panel.first = NULL, panel.last = NULL, asp = NA,
+       xgap.axis = NA, ygap.axis = NA,
+       ...)
+  ```
+  
+  1. `type`: 1-character string giving the type of plot desired. The following values are possible, for details, see plot: "p" for points, "l" for lines, "b" for both points and lines, "c" for empty points joined by lines, "o" for overplotted points and lines, "s" and "S" for stair steps and "h" for histogram-like vertical lines. Finally, "n" does not produce any points or lines.
+
+1. Usages  
+
+    1. scatter plot
+        set `type` parameter to "p"
+    
+    1. Time series plot  
+        time series is a special kind of datatype and has its own plotting methods.  
+        See lec3 P54-60
+        
+    1. plot curves
+        set `type` parameter to "l"
+
+1. Advanced
+
+    1. Matrix scatter plot   
+    
+        ```
+        pairs(d[,1:4],pch=21,bg=c("red","blue","green")[d$Species])
+        ```
+        Use keyword `pairs`, then for the 4-dimensional `d[,1:4]`, give pairs of scatter plot  
+        
+        ![](./images/Screenshot 2025-02-22 093805.png)
+
+1. Family methods
+
+    1. `matplot()`: see section `Advanced plots`.
+
+    
+
+## Curve lines
+
+Plot the curve given x and y: multiple ways
+
+1. using `plot()`  
+
+    see plot section
+
+1. using `curve()`  
+
+    1. syntax  
+    
+        ```
+        curve(expr, from = NULL, to = NULL, n = 101, add = FALSE,
+              type = "l", xname = "x", xlab = xname, ylab = NULL,
+              log = NULL, xlim = NULL, ...)
+        ```
+        1. `add` logical; if TRUE add to an already existing plot; if NA start a new plot taking the defaults for the limits and log-scaling of the x-axis from the previous plot. Taken as FALSE (with a warning if a different value is supplied) if no graphics device is open.
+        
+    1. eg.
+        ```
+        curve(x*sin(x),-4*pi,4*pi)
+        ```     
+1. using `lines()`  
+    see low level function section for adding lines in plots
+
+
 
 ## Histogram
 
+1. Syntax:
+```{R}
+hist(x, breaks = "Sturges",
+     freq = NULL, probability = !freq,
+     include.lowest = TRUE, right = TRUE, fuzz = 1e-7,
+     density = NULL, angle = 45, col = "lightgray", border = NULL,
+     main = paste("Histogram of" , xname),
+     xlim = range(breaks), ylim = NULL,
+     xlab = xname, ylab,
+     axes = TRUE, plot = TRUE, labels = FALSE,
+     nclass = NULL, warn.unused = TRUE, ...)
+```
+
+
+## Pie charts
+
+1. Syntax  
+
+    ```
+    pie(x, labels = names(x), edges = 200, radius = 0.8,
+        clockwise = FALSE, init.angle = if(clockwise) 90 else 0,
+        density = NULL, angle = 45, col = NULL, border = NULL,
+        lty = NULL, main = NULL, ...)
+    ```
+    1. `labels` are the names of each section that will be shwon in plot
+    
+## Bar charts
+1. Syntax
+
+      ```
+      barplot(height, width = 1, space = NULL,
+              names.arg = NULL, legend.text = NULL, beside = FALSE,
+              horiz = FALSE, density = NULL, angle = 45,
+              col = NULL, border = par("fg"),
+              main = NULL, sub = NULL, xlab = NULL, ylab = NULL,
+              xlim = NULL, ylim = NULL, xpd = TRUE, log = "",
+              axes = TRUE, axisnames = TRUE,
+              cex.axis = par("cex.axis"), cex.names = par("cex.axis"),
+              inside = TRUE, plot = TRUE, axis.lty = 0, offset = 0,
+              add = FALSE, ann = !add && par("ann"), args.legend = NULL, ...)
+      ```
+
+    1. horiz=T produces a horizontal bar
+
+    1. grouped bar
+        1. `beside=T` sets the grouped bar to be side‐by‐side instead
+of stacked.  
+
+    1. args.legend is a list of configurations,  
+        details see legend section in low level functions
+        eg `args.legend=list(x=25, y=23, cex=0.8)`  
+    
+1. Egs.
+
+    1. grouped bar plot 
+        Use a matrix. first dim
+    
+        ```
+        rs
+                yr86 yr90
+        HK 28.61877 28.54684
+        KL 86.26508 85.29111
+        NT 57.95122 60.23391
+        
+        # vertical
+        barplot(t(rs),beside=T,horiz=F,
+        legend.text=c("yr86","yr90"),main="log(density)")
+        
+        # horizontal
+        barplot(rs,beside=T, horiz=T, xlim=c(0,100),
+                ylim=c(0,10), legend.text=c("HK","KL","NT"),
+                args.legend=list(horiz=T,bty="n"),main="log(density)")
+        ```
+        
+        ![](./images/Screenshot 2025-02-18 145827.png)
+
+## Box plot
+
+1. Syntax
+
+    ```
+    boxplot(x, ..., range = 1.5, width = NULL, varwidth = FALSE,
+        notch = FALSE, outline = TRUE, names, plot = TRUE,
+        border = par("fg"), col = "lightgray", log = "",
+        pars = list(boxwex = 0.8, staplewex = 0.5, outwex = 0.5),
+         ann = !add, horizontal = FALSE, add = FALSE, at = NULL)
+    ```
+
+1. eg
+
+    ```
+    > yr
+    [1] 86 86 86 86 86 86 86 86 86 86 86 86 86 86 86 86 86 86 86 90 90 90 90
+    [24] 90 90 90 90 90 90 90 90 90 90 90 90 90 90 90
+    > pd
+     [1]  8.495050  7.706225 12.302366  9.423615  7.806626  8.210457
+     [7]  9.956463  9.382136 12.441562 11.227524  8.743441 12.335675
+    [13] 12.948431 11.897643  9.859023  9.968771  9.565116  8.314174
+    [19]  9.550573 14.462239  9.701815 11.128456  9.862916 10.488372
+    [25] 12.674530  8.862424 12.082842 12.634275 13.350876 14.558758
+    [31] 10.506432 15.107069 11.191977 10.988099 14.590922 12.315276
+    [37] 17.162754 17.231083
+    > boxplot(pd ~ yr, main="pd86 vs pd90", col=c("lightblue", "lightgreen"))
+    ```
+    should be y ~ x  
+    ![](./images/Screenshot 2025-02-18 181421.png){width=40%}
+
+## QQ plot
+1. Intro: 
+    Intro: lec3 P23
+    Remarks: lec3 P30-31
+
+1. Syntax
+
+    `qqnorm()` to provide plot and `qqline()` to add a reference line to the plot
+
+    ```
+    qqnorm(d$year86,main="Normal Q-Q plot for 1986")
+    qqline(d$year86,col="red")
+    ```
+
+# Advanced plots
+
+1. Plot multiple columns of a matrix in one figure  
+    Use keyword `matxxx`  
+
+    1. Syntax:
+        ```
+        matplot(x, y, type = "p", lty = 1:5, lwd = 1, lend = par("lend"),
+        pch = NULL,
+        col = 1:6, cex = NULL, bg = NA,
+        xlab = NULL, ylab = NULL, xlim = NULL, ylim = NULL,
+        log = "", ..., add = FALSE, verbose = getOption("verbose"))
+
+        matpoints(x, y, type = "p", lty = 1:5, lwd = 1, pch = NULL,
+                  col = 1:6, ...)
+        
+        matlines (x, y, type = "l", lty = 1:5, lwd = 1, pch = NULL,
+                  col = 1:6, ...)
+        ```
+        
+        `
+
+# Low level graphics functions
+
+## 1. Concepts on R drawing
+
+Base graphics in R divides up the display into several
+regions  
+
+![](./images/Screenshot 2025-02-22 100645.png){width=50%}
+
+1. Plot region:  
+    where data will be drawn.  
+    1. Within the plot region R maintains a coordinate system
+based on the data.  
+
+1. margins:  
+    Outside the plot region are the margins  
+    1. numbered clockwise from 1 to 4, starting at the bottom.
+    1. Normally text and labels are plotted in the margins  
+    1. R positions objects based on a count of lines out from the plot region.
+
+## 2. Low level functions adding to plot regions (plotting)
+
+1. Adding points or (curved) lines
+
+    ```
+    points(x, y, ...) # adds points
+    lines(x, y, ...) # adds line segments
+    ```
+
+1. Add straght line according to k and b
+
+    1. syntax  
+  
+        ```
+        abline(a = NULL, b = NULL, h = NULL, v = NULL, reg = NULL,
+               coef = NULL, untf = FALSE, ...)
+        ```
+        1. `a, b`: the intercept and slope, single values.
+        
+    1. eg  
+
+        ```
+        abline(a, b, ...) # adds the line $y = a + bx$
+        abline(h = y, ...) # adds a horizontal line
+        abline(v = x, ...) # adds a vertical line
+        ```
+    
+1. Line segments
+
+    1. syntax
+        ```
+        segments(x0, y0, x1, y1, ...) # draws line segments
+        arrows(x0, y0, x1, y1, ...) # draws line segments with arrows
+        ```
+1. common symbols
+
+    keyword: `symbols`  
+    draws symbols on a plot. One of six symbols; circles, squares, rectangles, stars, thermometers, and boxplots, can be plotted at a specified set of x and y coordinates.
+    
+    1. syntax  
+    
+    ```
+    symbols(x, y = NULL, circles, squares, rectangles, stars,
+        thermometers, boxplots, inches = TRUE, add = FALSE,
+        fg = par("col"), bg = NA,
+        xlab = NULL, ylab = NULL, main = NULL,
+        xlim = NULL, ylim = NULL, ...)
+    ```
+
+1. Others plots
+    1. polygon
+        adds a closed and possibly filled polygon
+        `polygon(x, y, ...)`
+
+1. Add text
+    1. Syntax   
+    
+        ```
+        text(x, y = NULL, labels = seq_along(x$x), adj = NULL,
+             pos = NULL, offset = 0.5, vfont = NULL,
+             cex = 1, col = NULL, font = NULL, ...)
+        ```
+        
+        1. `x, y`: numeric vectors of coordinates where the text labels should be written. If the length of x and y differs, the shorter one is recycled.
+        1. `labels`:	a character vector or expression specifying the text to be written.
+        
+    1. Eg
+        1. On barplot  
+        
+            ```
+            y<-barplot(d$lnpd90,horiz=T,col="white",xlim=c(0,15),main="log(Density) HK1990")
+            
+            text(0.5*x,y,d$district,cex=0.8)
+            # add legend inside the bar
+            text(x+0.8,y,labels=x,cex=0.8)
+            # add number at the end
+            ```
+
+1. Add legend  
+
+    1. syntax  
+    
+        ```
+        legend(x, y = NULL, legend, fill = NULL, col = par("col"),
+               border = "black", lty, lwd, pch,
+               angle = 45, density = NULL, bty = "o", bg = par("bg"),
+               box.lwd = par("lwd"), box.lty = par("lty"), box.col = par("fg"),
+               pt.bg = NA, cex = 1, pt.cex = cex, pt.lwd = lwd,
+               xjust = 0, yjust = 1, x.intersp = 1, y.intersp = 1,
+               adj = c(0, 0.5), text.width = NULL, text.col = par("col"),
+               text.font = NULL, merge = do.lines && has.pch, trace = FALSE,
+               plot = TRUE, ncol = 1, horiz = FALSE, title = NULL,
+               inset = 0, xpd, title.col = text.col[1], title.adj = 0.5,
+               title.cex = cex[1], title.font = text.font[1],
+               seg.len = 2)
+        ```
+        1. `x`, `y` are the position of the logend
+        1. `legend` is the content of the legend
+        1. `cex`
+        1. horiz=T: diff legend horizontally placed
+        1. bty="n": means box no boundary
+        1. legend.text is the name of the legend. Give as vector. Eg. `legend.text=c("yr86","yr90")`
+
+## 3. Low level functions adding to margin regions (labelling)
+
+1. Add title
+
+    1. Syntax
+    
+        ```
+        title(main = NULL, sub = NULL, xlab = NULL, ylab = NULL,
+          line = NA, outer = FALSE, ...)
+        ```
+        `main` is the main title on top, `sub` is the subtitle at bottom  
+        `xlab`, `ylab`: x-axis label, y-axis label
+
+1. Text in margins
+
+    1. Syntax  
+        
+        ```
+        mtext(text, side = 3, line = 0, outer = FALSE, at = NA,
+              adj = NA, padj = NA, cex = NA, col = NA, font = NA, ...)
+        ```
+        
+1. Add axis (the scale thing ...)
+
+    1. Syntax  
+        
+        ```
+        axis(side, at = NULL, labels = TRUE, tick = TRUE, line = NA,
+             pos = NA, outer = FALSE, font = NA, lty = "solid",
+             lwd = 1, lwd.ticks = lwd, col = NULL, col.ticks = NULL,
+             hadj = NA, padj = NA, gap.axis = NA, ...)
+        ```
+
+1. Add box around the plot region
+
+    `box()`

@@ -9,3 +9,6 @@ output: html_notebook
 
 1. imaginary number
     1. Im()
+    
+1. Fit a straight line
+    `lsfit()` or `lm()`

@@ -4,9 +4,11 @@ output:
   html_notebook:
     toc: true
     toc_float: true
+number_sections: true
 ---
 
-# basics
+
+# 1. basics
 
 1.   
 run a line in a R code: ctrl+enter  
@@ -14,7 +16,7 @@ run the whole file: ctrl+shift+enter
 
 1. comment: ctrl + shft + c
 
-# How to use Rmd
+# 1. How to use Rmd
 
 1. the header is like   
 output should be `html_notebook` so that can preview
@@ -40,3 +42,6 @@ plot(cars)
     When you save the notebook, an HTML file containing the code and output will be saved alongside it (click the *Preview* button or press *Ctrl+Shift+K* to preview the HTML file).
     
     The preview shows you a rendered HTML copy of the contents of the editor. Consequently, unlike *Knit*, *Preview* does not run any R code chunks. Instead, the output of the chunk when it was last run in the editor is displayed.
+    
+    
+Using auto index section
