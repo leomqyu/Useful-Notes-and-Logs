@@ -1,0 +1,130 @@
+---
+title: "5_programming"
+output: 
+  html_notebook:
+    toc: true
+    toc_float: true
+---
+
+# ***basic built-in functions for function***
+
+## 1. **misc**
+
+1. import functions:  
+
+    ```
+    source("ch4.r")
+    ```
+    
+1. Functions can be entered or edited using `fix(function_name)`
+
+1. `stop(message)`: terminates evaluation of the current function and display message
+  
+## 2. **basic function syntax**  
+
+1. Define  
+
+    1. syntax  
+  
+        ```
+        myfunction <- function(arg1, arg2, ... ) {
+          statements
+          ...
+          return(object)
+        }
+        ```
+        
+    1. notes
+        1. If there are no explicit returns from a function, the value of the last evaluated expression is returned automatically.
+        1. Can return only one object. If multiple, wrap it in a list/vector ...
+        
+## 3. Function related syntax
+
+1. Scope
+
+    1. variables defined within functions have local scope
+        1. Even if using `<-`. 
+        1. A variable with the same name could be created in a different function but there is no risk of a clash
+      
+    1. super assignment 
+        1. syntax: use `<<-`
+        1. eg  
+        
+            ```
+            f <- function() {
+                if (!exists("f_count"))
+                    # check existence of f_count
+                    f_count <<- 1
+                else
+                    f_count <<- f_count + 1
+                return(f_count)
+            }
+            ```
+            
+1. default value of function arguments
+
+    same with python (?)
+    
+# ***recursive functions***
+
+1. syntax
+
+    eg
+    ```
+    fac<-function(n){
+        if (n<=2) return(n)
+        else return(n*fac(n-1))
+    }
+    ```
+  
+# ***error handling***
+
+1. raise error: by `stop`
+
+    eg. ```if (low>up) stop ("Error: first arg. > second arg.")```
+    
+1. raise warning: by `warning()`
+
+    eg. ```warning("W1")```
+    
+# ***"rename" functions***
+
+1. User defined operator
+
+    eg.
+    
+    ```
+    > "%+-%" <- function(x,s) { c(x-s,x+s) }
+    > 3 %+-% 5
+    [1] -2 8
+    ```
+
+1. Replacement functions
+    1. idea: similar to `names()`
+    1. eg
+    
+        ```
+        > "modify<-" <- function(x, position, value) {
+              x[position] <- value
+          }
+        > x <- 1:10
+        > modify(x,2) <- 5L
+        > x
+        [1] 5
+        ```
+
+# ***flexible num of arguments***
+
+Use `...`
+
+eg.
+
+    ```
+    maxlen <- function (...) { # allow flexible arguments
+        arg <- list(...) # save the argument list to arg
+        mx <- 0 # initialize mx
+        for (x in arg) mx <-max(mx,length(x)) # find max length
+        return(mx)
+    }
+    ```
+

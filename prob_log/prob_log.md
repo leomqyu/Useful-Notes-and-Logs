@@ -305,7 +305,22 @@ Change all the `normed=True` to `density=True` in `plt.hist()`
 
 ---
 
+
 #  <span style="color:blue"> Pytorch / cuda </span>
+
+---
+
+## <span style="color:green"> 25-02-24 Multiple GPU distributed, kill process but memory on GPU persists </span>
+
+### error message 
+
+When running process with multiple GPU (ddp), if directly use `kill` to end one of the process (even including the main process), the gpu processes might stuck.  
+In this way, when using the `nvidia-smi`, not able to see the running process, but can see that the gpu's memory is still occupied.
+
+### solution
+
+The best way is to use tmux or screen from the start and don't directly kill a process.  
+If this already happens, use `fuser -v /dev/nvidia0` (also /dev/nvidia1, /dev/nvidia2 ...) to find the process occupying gpu. Then kill it.
 
 ---
 
@@ -313,9 +328,9 @@ Change all the `normed=True` to `density=True` in `plt.hist()`
 
 ### error message 
 
-```
+
 When importing lightning on python, error and report "max recursion depth reached"
-```
+
 ### brief analysis
 
 It's a version conflict problem. Just recreate an env following the .md

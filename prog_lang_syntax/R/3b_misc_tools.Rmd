@@ -3,6 +3,29 @@ title: "3b_misc_tools"
 output: html_notebook
 ---
 
+# ***vectorization***
+
+1. `ifelse()` is a vectorization tool
+
+1. generally `vapply()`
+
+    1. idea: can use the vapply() function to vectorize the operation of a function that does not support vectorization.
+    
+    1. syntax
+    
+        ```
+        vapply(X, FUN, FUN.VALUE, ...)
+        ```
+    1. eg
+        
+        ```
+        vapply(x,is.positive,FUN.VALUE=numeric(1))
+        ```
+        
+        1. note:  
+            numeric(1) indicating floating point format.
+            Other possible output format includes: logical(1), integer(1), character(1)
+
 # ***misc built-in tools***
 
 1. polyroot()  
@@ -12,3 +35,4 @@ output: html_notebook
     
 1. Fit a straight line
     `lsfit()` or `lm()`
+    

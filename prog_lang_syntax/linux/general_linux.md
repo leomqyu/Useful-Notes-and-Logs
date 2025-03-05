@@ -38,6 +38,11 @@ When you say run a command like `ls`, how does it know which exe is this `ls`? J
     kill -2 PID     # more warmly. Like CTRL+C (SIG_INT)
     ```
 
+5. Inspect process by PID
+    ```
+    ps -p <PID> -o user,comm        # get the command and the user name
+    ```
+
 # OS related
 1. See the size of a dir:
     `du -sb /path/to/directory`

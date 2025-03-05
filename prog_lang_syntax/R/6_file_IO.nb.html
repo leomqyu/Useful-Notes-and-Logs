@@ -1752,14 +1752,62 @@ display: none;
 
 
 <!-- rnb-text-begin -->
-<div id="exploratory-data-analysis-an-eg-of-file-io-in-interactive-mode" class="section level1">
-<h1>Exploratory data analysis: an eg of File I/O in interactive
-mode</h1>
-<p>Lec2 P32+</p>
+<div id="input" class="section level1">
+<h1><strong><em>input</em></strong></h1>
+<ol style="list-style-type: decimal">
+<li><p><code>readline</code></p>
+<p>1.syntax</p>
+<pre><code> ```
+ readline(prompt = &quot;&quot;)
+ ```
+ return the string from the console</code></pre></li>
+</ol>
+</div>
+<div id="output" class="section level1">
+<h1><strong><em>output</em></strong></h1>
+<ol style="list-style-type: decimal">
+<li><p><code>print</code></p>
+<p>Just give a var and print.</p></li>
+<li><p><code>sprintf</code></p>
+<ol style="list-style-type: decimal">
+<li><p>syntax: like the C printf, and the return is a string (in
+console, just print the return string on the console)</p></li>
+<li><p>detailed formats</p>
+<ol style="list-style-type: decimal">
+<li><p>float</p>
+<pre><code>&gt; sprintf(&quot;Pi is %f&quot;, pi)
+# output real number with default option = 6 decimal places
+[1] “Pi is 3.141593&quot;
+&gt; sprintf(&quot;%.3f&quot;, pi) # with 3 decimal places
+[1] &quot;3.142&quot;
+&gt; sprintf(&quot;%5.1f&quot;, pi) # fixed width=5 with 1 decimal places
+[1] &quot; 3.1&quot;
+&gt; sprintf(&quot;%-10f&quot;, pi) # left justified with fixed width=10
+[1] &quot;3.141593 &quot;
+&gt; sprintf(&quot;%e&quot;, pi) # scientific notation
+[1] &quot;3.141593e+00“</code></pre></li>
+</ol></li>
+</ol></li>
+<li><p><code>cat</code></p>
+<ol style="list-style-type: decimal">
+<li><p>idea: just input multiple string, concatenate them together with
+auto coersion. No automatic space.</p></li>
+<li><p>eg</p>
+<pre><code>&gt; cat(&quot;iteration = &quot;, 7, &quot;\n&quot;)
+iteration =  7 </code></pre></li>
+</ol></li>
+</ol>
+</div>
+<div id="useful-eg" class="section level1">
+<h1><strong><em>Useful eg</em></strong></h1>
+<ol style="list-style-type: decimal">
+<li>Exploratory data analysis: an eg of File I/O in interactive mode
+Lec2 P32+</li>
+</ol>
 <!-- rnb-text-end -->
 </div>
 
-<div id="rmd-source-code">LS0tDQp0aXRsZTogIjZfZmlsZV9JTyINCm91dHB1dDogaHRtbF9ub3RlYm9vaw0KLS0tDQoNCiMgRXhwbG9yYXRvcnkgZGF0YSBhbmFseXNpczogYW4gZWcgb2YgRmlsZSBJL08gaW4gaW50ZXJhY3RpdmUgbW9kZQ0KTGVjMiBQMzIr</div>
+<div id="rmd-source-code">LS0tDQp0aXRsZTogIjZfZmlsZV9JTyINCm91dHB1dDogaHRtbF9ub3RlYm9vaw0KLS0tDQoNCiMgKioqaW5wdXQqKioNCg0KMS4gYHJlYWRsaW5lYA0KDQogICAgMS5zeW50YXgNCiAgICANCiAgICAgICAgYGBgDQogICAgICAgIHJlYWRsaW5lKHByb21wdCA9ICIiKQ0KICAgICAgICBgYGANCiAgICAgICAgcmV0dXJuIHRoZSBzdHJpbmcgZnJvbSB0aGUgY29uc29sZQ0KDQojICoqKm91dHB1dCoqKg0KDQoxLiBgcHJpbnRgDQoNCiAgICBKdXN0IGdpdmUgYSB2YXIgYW5kIHByaW50Lg0KDQoxLiBgc3ByaW50ZmANCiAgICANCiAgICAxLiBzeW50YXg6IGxpa2UgdGhlIEMgcHJpbnRmLCBhbmQgdGhlIHJldHVybiBpcyBhIHN0cmluZyAoaW4gY29uc29sZSwganVzdCBwcmludCB0aGUgcmV0dXJuIHN0cmluZyBvbiB0aGUgY29uc29sZSkNCiAgICANCiAgICAxLiBkZXRhaWxlZCBmb3JtYXRzDQogICAgDQogICAgICAgIDEuIGZsb2F0DQogICAgICAgICAgICANCiAgICAgICAgICAgIGBgYA0KICAgICAgICAgICAgPiBzcHJpbnRmKCJQaSBpcyAlZiIsIHBpKQ0KICAgICAgICAgICAgIyBvdXRwdXQgcmVhbCBudW1iZXIgd2l0aCBkZWZhdWx0IG9wdGlvbiA9IDYgZGVjaW1hbCBwbGFjZXMNCiAgICAgICAgICAgIFsxXSDigJxQaSBpcyAzLjE0MTU5MyINCiAgICAgICAgICAgID4gc3ByaW50ZigiJS4zZiIsIHBpKSAjIHdpdGggMyBkZWNpbWFsIHBsYWNlcw0KICAgICAgICAgICAgWzFdICIzLjE0MiINCiAgICAgICAgICAgID4gc3ByaW50ZigiJTUuMWYiLCBwaSkgIyBmaXhlZCB3aWR0aD01IHdpdGggMSBkZWNpbWFsIHBsYWNlcw0KICAgICAgICAgICAgWzFdICIgMy4xIg0KICAgICAgICAgICAgPiBzcHJpbnRmKCIlLTEwZiIsIHBpKSAjIGxlZnQganVzdGlmaWVkIHdpdGggZml4ZWQgd2lkdGg9MTANCiAgICAgICAgICAgIFsxXSAiMy4xNDE1OTMgIg0KICAgICAgICAgICAgPiBzcHJpbnRmKCIlZSIsIHBpKSAjIHNjaWVudGlmaWMgbm90YXRpb24NCiAgICAgICAgICAgIFsxXSAiMy4xNDE1OTNlKzAw4oCcDQogICAgICAgICAgICBgYGANCg0KMS4gYGNhdGANCg0KICAgIDEuIGlkZWE6IGp1c3QgaW5wdXQgbXVsdGlwbGUgc3RyaW5nLCBjb25jYXRlbmF0ZSB0aGVtIHRvZ2V0aGVyIHdpdGggYXV0byBjb2Vyc2lvbi4gTm8gYXV0b21hdGljIHNwYWNlLg0KICAgIA0KICAgIDEuIGVnDQogICAgDQogICAgICAgIGBgYA0KICAgICAgICA+IGNhdCgiaXRlcmF0aW9uID0gIiwgNywgIlxuIikNCiAgICAgICAgaXRlcmF0aW9uID0gIDcgDQogICAgICAgIGBgYA0KDQoNCg0KIyAqKipVc2VmdWwgZWcqKioNCg0KMS4gRXhwbG9yYXRvcnkgZGF0YSBhbmFseXNpczogYW4gZWcgb2YgRmlsZSBJL08gaW4gaW50ZXJhY3RpdmUgbW9kZQ0KICAgIExlYzIgUDMyKw==</div>
 
 
 

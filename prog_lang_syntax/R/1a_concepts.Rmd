@@ -19,31 +19,35 @@ output: html_notebook
 
 # ***datatype*** 
 
-## **data type intr**
+## **1. data type intro**
   common data type: numeric, logical, character  
     1. numeric represents both int and float  
+        Note: to explicitly name integer, use suffix `L`, eg `1L` means integer 1
     1. character is string or character like python, denoted by double quote " or single quote no diff 
     1. logical is `TRUE` and `FALSE`, you write can also `T` and `F`
   
-## **Inspect data type**
-    1. `mode()`  
+## **2. Inspect data type**
+
+1. `mode()`  
         describe the data type used for storage, e.g., numeric, logical, character, etc.
-    1. `class()`  
+1. `class()`  
         describe the object class of the input variable, e.g., numeric, integer, list, matrix, factor, etc.
-    1. egs
-```{R}
-> mode(1L); class(1L) 
-[1] "numeric" 
-[1] "integer" 
+1. egs
 
-> mode(factor(c("a","b"))); class(factor(c("a","b"))) 
-[1] "numeric" 
-[1] "factor" 
-
-> mode(matrix(0,2,2)); class(matrix(0,2,2)) 
-[1] "numeric" 
-[1] "matrix"
-```
+    ```
+    > mode(1L); class(1L) 
+    [1] "numeric" 
+    [1] "integer" 
+    
+    > mode(factor(c("a","b"))); class(factor(c("a","b"))) 
+    [1] "numeric" 
+    [1] "factor" 
+    
+    > mode(matrix(0,2,2)); class(matrix(0,2,2)) 
+    [1] "numeric" 
+    [1] "matrix"
+    
+    ```
 
 ## **Special values**
 

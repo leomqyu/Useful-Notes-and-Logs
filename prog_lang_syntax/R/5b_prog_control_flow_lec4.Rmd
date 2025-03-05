@@ -1,0 +1,130 @@
+---
+title: "5b_prog_control_flow_lec4"
+output: 
+  html_notebook:
+    toc: true
+    toc_float: true
+---
+
+# ***Control flow***
+
+## 1. if
+
+1. Syntax
+
+    ```
+    if (condition) {
+        commands when TRUE # do if TRUE
+    } else {
+        commands when FALSE # do if FALSE
+    }
+    ```
+    
+    
+1. notes:
+    1. if only 1 command, can omit `{}`
+    1. `else` part is optional
+    
+1. vectorized version if-else
+
+    1. syntax
+
+        ```
+        ifelse(test, yes_expr, no_expr)
+        ```
+    
+    1. eg
+        if x is a vector, can compare each element and do things
+        ```
+        x<-ifelse(x>0, 1, ifelse(x<0, -1, 0))
+        ```
+
+    
+## 2. loop 
+
+### 2.1. loop special syntax
+
+1. `break`, `next` (`next` causes control to return immediately to the top of the loop)
+
+### 2.2. for loop
+
+1. syntax:
+
+    ```
+    for (x in v) { commands }
+    ```
+    
+1. notes:
+    1. if only 1 command, can omit `{}`
+    1. Like python, the x is passed by value, modifying x won't change v
+    1. If change v in the loop:  
+        v in the for loop is evaluated at the start of the loop, changing it subsequently does not affect the loop.
+        
+### 2.3. while loop
+
+1. syntax:
+
+    ```
+    while (condition) {statements}
+    ```
+    
+1. notes:
+
+        
+### 3. repeat loop
+
+1. syntax:
+
+    ```
+    repeat { statements
+      ...
+      if (condition) break
+    }
+    ```
+    
+1. notes:
+    1.Idea: loop forever, only until receice break
+
+## 3. switch
+
+1. Syntax
+
+    ```
+    switch(expression, case1, case2, case3....)
+    ```
+    
+1. eg
+    1. basic
+    
+        ```
+        switch(
+           4,
+           "Geeks1",
+           "Geeks2",
+           "Geeks3",
+           "Geeks4",
+           "Geeks5",
+           "Geeks6"
+        )
+        [1] "Geeks4"
+        ```
+    
+    1. string as match
+    
+        ```
+        my.ran2 <- function(n, dist="norm"){
+            # default value of dist is "norm"
+            # version 2: using switch
+            switch(dist, "norm"=rnorm(n), "uniform"=runif(n),
+            stop("Unknown distribution"))
+        }
+        ```
+    
+1.notes 
+
+    1. An expression type with character string always matched to the listed cases.
+    1. An expression which is not a character string then this exp is coerced to integer.
+    1. For multiple matches, the first match element will be used.
+    1. No default argument case is available there in R switch case.
+    1. An unnamed case can be used, if there is no matched case (see eg2).
+  

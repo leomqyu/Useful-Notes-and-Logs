@@ -3,5 +3,59 @@ title: "6_file_IO"
 output: html_notebook
 ---
 
-# Exploratory data analysis: an eg of File I/O in interactive mode
-Lec2 P32+
+# ***input***
+
+1. `readline`
+
+    1.syntax
+    
+        ```
+        readline(prompt = "")
+        ```
+        return the string from the console
+
+# ***output***
+
+1. `print`
+
+    Just give a var and print.
+
+1. `sprintf`
+    
+    1. syntax: like the C printf, and the return is a string (in console, just print the return string on the console)
+    
+    1. detailed formats
+    
+        1. float
+            
+            ```
+            > sprintf("Pi is %f", pi)
+            # output real number with default option = 6 decimal places
+            [1] “Pi is 3.141593"
+            > sprintf("%.3f", pi) # with 3 decimal places
+            [1] "3.142"
+            > sprintf("%5.1f", pi) # fixed width=5 with 1 decimal places
+            [1] " 3.1"
+            > sprintf("%-10f", pi) # left justified with fixed width=10
+            [1] "3.141593 "
+            > sprintf("%e", pi) # scientific notation
+            [1] "3.141593e+00“
+            ```
+
+1. `cat`
+
+    1. idea: just input multiple string, concatenate them together with auto coersion. No automatic space.
+    
+    1. eg
+    
+        ```
+        > cat("iteration = ", 7, "\n")
+        iteration =  7 
+        ```
+
+
+
+# ***Useful eg***
+
+1. Exploratory data analysis: an eg of File I/O in interactive mode
+    Lec2 P32+
