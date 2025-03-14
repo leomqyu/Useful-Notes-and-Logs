@@ -1,0 +1,35 @@
+---
+title: "5c_run_prog"
+output: 
+  html_notebook:
+    toc: true
+    toc_float: true
+---
+
+1. Open a file to edit
+    1. use IDE
+    1. in R console: `edit(file="ch2-apply.r")`: invoke the built‐in text editor and open an ASCII file
+    
+    
+1. Run commands in file
+
+    1. `source`
+    
+        1. syntax: 
+    
+            ```
+            source(<file_path>, echo=T)
+            ```
+            
+            1. `echo=T` will echo these commands to the screen
+            
+        1. idea: is similar with running the same command in console. Can still use the variables in the file 
+        
+        
+1. debugging:
+
+    See tut5
+
+    1. `browser()`, breakpoints
+    1. `message()` and `sink()`
+

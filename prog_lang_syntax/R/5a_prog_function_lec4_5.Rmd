@@ -47,6 +47,7 @@ output:
         1. A variable with the same name could be created in a different function but there is no risk of a clash
       
     1. super assignment 
+        1. ***!!!*** In functions to modify global variable, always use super assignment
         1. syntax: use `<<-`
         1. eg  
         
@@ -63,17 +64,65 @@ output:
             
 1. default value of function arguments
 
-    same with python (?)
+    1. If not specified below, is same with python
     
+    1. the default valued arguments don't have to go after the arguments w/0 default value
+    
+    1. will receive keyword first, then do it by order
+    
+        ```
+        f<-function(a,b=2,c)
+        
+        f(1, 3)   # error
+        f(a=1, c=3)   # a, b, c: 1, 2, 3
+        f(1, a=0, 3)  # a, b, c: 0, 2, 3
+        ```
+    
+1. flexible num of arguments
+
+Use `...`
+
+eg.
+
+```
+maxlen <- function (...) { # allow flexible arguments
+  arg <- list(...) # save the argument list to arg
+  mx <- 0 # initialize mx
+  for (x in arg) mx <-max(mx,length(x)) # find max length
+  return(mx)
+}
+
+# indexing `...`
+s<-function(multiplier,...){ 
+    print(..1)    # first element
+}
+```
+
+
 # ***recursive functions***
 
 1. syntax
 
     eg
+    
     ```
     fac<-function(n){
         if (n<=2) return(n)
         else return(n*fac(n-1))
+    }
+    ```
+    
+1. template
+
+    ```
+    function() {
+    
+    if (base_case) {
+        return
+    }
+    
+    # non base case
+    
     }
     ```
   
@@ -87,44 +136,44 @@ output:
 
     eg. ```warning("W1")```
     
+    
 # ***"rename" functions***
 
 1. User defined operator
 
-    eg.
+    1. note: name must naming starts and ends with `%`
+
+    2. eg.
     
-    ```
-    > "%+-%" <- function(x,s) { c(x-s,x+s) }
-    > 3 %+-% 5
-    [1] -2 8
-    ```
+        ```
+        > "%+-%" <- function(x,s) { c(x-s,x+s) }
+        > 3 %+-% 5    # way 1
+        [1] -2 8
+        > "%+-%"(3, 5)  # way 2
+        [1] -2  8
+        ```
 
 1. Replacement functions
-    1. idea: similar to `names()`
-    1. eg
+    1. syntax: 
+        1. the fun name must end with `<-`
+        1. the value is a keyword argument, cannot change its name
+    1. explain on eg
     
         ```
         > "modify<-" <- function(x, position, value) {
               x[position] <- value
+              x
           }
         > x <- 1:10
         > modify(x,2) <- 5L
         > x
-        [1] 5
+        [1]  1  5  3  4  5  6  7  8  9 10
+        ```
+        
+        which is equivalent to
+        
+        ```
+        x <- "modify<-"(x, 2, 5L)
         ```
 
-# ***flexible num of arguments***
-
-Use `...`
-
-eg.
-
-    ```
-    maxlen <- function (...) { # allow flexible arguments
-        arg <- list(...) # save the argument list to arg
-        mx <- 0 # initialize mx
-        for (x in arg) mx <-max(mx,length(x)) # find max length
-        return(mx)
-    }
-    ```
 

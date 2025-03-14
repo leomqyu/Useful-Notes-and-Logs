@@ -433,6 +433,55 @@ Just waited for one night and becomes OK
 
 ---
 
+#  <span style="color:blue"> Other tools and packages </span>
+
+---
+
+## <span style="color:green"> 25-03-05 executing mysql on WSL gets error </span>
+
+### error message 
+```
+ERROR 2002 (HY000): Can't connect to local MySQL server through socket '/tmp/mysql.sock' (2)
+```
+
+### brief analysis
+
+This is because running on WSL. The places of mysql cannot be find in 'default' (?)
+
+### full trace back
+
+After installing mysql, when try to access, it has the error.
+
+```
+mysql -u root -p
+Enter password:
+ERROR 2002 (HY000): Can't connect to local MySQL server through socket '/tmp/mysql.sock' (2)
+```
+
+### solution
+
+Details follow [this link](https://stackoverflow.com/questions/64883580/wsl-cant-connect-to-local-mysql-server-through-socket-var-run-mysqld-mysqld).
+
+1. First do this
+
+    ![](log_imgs/image.png)
+
+    Note: use `sudo vim` not `vim`
+
+1. Then do this
+
+    ![](log_imgs/image2.png)
+
+    The line hidden is ```ALTER USER 'root'@'localhost' IDENTIFIED WITH caching_sha2_password BY  INSERT_PASSWORD_HERE';```
+
+1. Note: everytime to restart, need to do
+  ```
+  sudo /etc/init.d/mysql start
+  ```
+
+---
+
+
 #  <span style="color:blue"> Others </span>
 
 ---

@@ -1752,26 +1752,6 @@ display: none;
 
 
 <!-- rnb-text-begin -->
-<div id="vectorization" class="section level1">
-<h1><strong><em>vectorization</em></strong></h1>
-<ol style="list-style-type: decimal">
-<li><p><code>ifelse()</code> is a vectorization tool</p></li>
-<li><p>generally <code>vapply()</code></p>
-<ol style="list-style-type: decimal">
-<li><p>idea: can use the vapply() function to vectorize the operation of
-a function that does not support vectorization.</p></li>
-<li><p>syntax</p>
-<pre><code>vapply(X, FUN, FUN.VALUE, ...)</code></pre></li>
-<li><p>eg</p>
-<pre><code>vapply(x,is.positive,FUN.VALUE=numeric(1))</code></pre>
-<ol style="list-style-type: decimal">
-<li>note:<br />
-numeric(1) indicating floating point format. Other possible output
-format includes: logical(1), integer(1), character(1)</li>
-</ol></li>
-</ol></li>
-</ol>
-</div>
 <div id="misc-built-in-tools" class="section level1">
 <h1><strong><em>misc built-in tools</em></strong></h1>
 <ol style="list-style-type: decimal">
@@ -1780,13 +1760,25 @@ format includes: logical(1), integer(1), character(1)</li>
 <ol style="list-style-type: decimal">
 <li>Im()</li>
 </ol></li>
-<li><p>Fit a straight line <code>lsfit()</code> or
-<code>lm()</code></p></li>
+<li><p>Fit a straight line <code>lsfit()</code> or <code>lm()</code></p>
+<ol style="list-style-type: decimal">
+<li><p>syntax</p>
+<pre><code>lsfit(x, y, wt = NULL, intercept = TRUE, tolerance = 1e-07,
+      yname = NULL)
+
+lm(formula, data, subset, weights, na.action,
+   method = &quot;qr&quot;, model = TRUE, x = FALSE, y = FALSE, qr = TRUE,
+   singular.ok = TRUE, contrasts = NULL, offset, ...)</code></pre></li>
+</ol>
+<pre><code>abline(lsfit(xs, ys))
+
+abline(lm(circumference~age, data = Orange, subset = Tree == &quot;1&quot;))</code></pre></li>
+<li><p><code>choose(n, k)</code>: C(n, k)</p></li>
 </ol>
 <!-- rnb-text-end -->
 </div>
 
-<div id="rmd-source-code">LS0tDQp0aXRsZTogIjNiX21pc2NfdG9vbHMiDQpvdXRwdXQ6IGh0bWxfbm90ZWJvb2sNCi0tLQ0KDQojICoqKnZlY3Rvcml6YXRpb24qKioNCg0KMS4gYGlmZWxzZSgpYCBpcyBhIHZlY3Rvcml6YXRpb24gdG9vbA0KDQoxLiBnZW5lcmFsbHkgYHZhcHBseSgpYA0KDQogICAgMS4gaWRlYTogY2FuIHVzZSB0aGUgdmFwcGx5KCkgZnVuY3Rpb24gdG8gdmVjdG9yaXplIHRoZSBvcGVyYXRpb24gb2YgYSBmdW5jdGlvbiB0aGF0IGRvZXMgbm90IHN1cHBvcnQgdmVjdG9yaXphdGlvbi4NCiAgICANCiAgICAxLiBzeW50YXgNCiAgICANCiAgICAgICAgYGBgDQogICAgICAgIHZhcHBseShYLCBGVU4sIEZVTi5WQUxVRSwgLi4uKQ0KICAgICAgICBgYGANCiAgICAxLiBlZw0KICAgICAgICANCiAgICAgICAgYGBgDQogICAgICAgIHZhcHBseSh4LGlzLnBvc2l0aXZlLEZVTi5WQUxVRT1udW1lcmljKDEpKQ0KICAgICAgICBgYGANCiAgICAgICAgDQogICAgICAgIDEuIG5vdGU6ICANCiAgICAgICAgICAgIG51bWVyaWMoMSkgaW5kaWNhdGluZyBmbG9hdGluZyBwb2ludCBmb3JtYXQuDQogICAgICAgICAgICBPdGhlciBwb3NzaWJsZSBvdXRwdXQgZm9ybWF0IGluY2x1ZGVzOiBsb2dpY2FsKDEpLCBpbnRlZ2VyKDEpLCBjaGFyYWN0ZXIoMSkNCg0KIyAqKiptaXNjIGJ1aWx0LWluIHRvb2xzKioqDQoNCjEuIHBvbHlyb290KCkgIA0KDQoxLiBpbWFnaW5hcnkgbnVtYmVyDQogICAgMS4gSW0oKQ0KICAgIA0KMS4gRml0IGEgc3RyYWlnaHQgbGluZQ0KICAgIGBsc2ZpdCgpYCBvciBgbG0oKWANCiAgICANCg==</div>
+<div id="rmd-source-code">LS0tDQp0aXRsZTogIjNiX21pc2NfdG9vbHMiDQpvdXRwdXQ6IGh0bWxfbm90ZWJvb2sNCi0tLQ0KDQojICoqKm1pc2MgYnVpbHQtaW4gdG9vbHMqKioNCg0KMS4gcG9seXJvb3QoKSAgDQoNCjEuIGltYWdpbmFyeSBudW1iZXINCiAgICAxLiBJbSgpDQogICAgDQoxLiBGaXQgYSBzdHJhaWdodCBsaW5lDQogICAgYGxzZml0KClgIG9yIGBsbSgpYA0KICAgIA0KICAgIDEuIHN5bnRheA0KICAgICAgICANCiAgICAgICAgYGBgDQogICAgICAgIGxzZml0KHgsIHksIHd0ID0gTlVMTCwgaW50ZXJjZXB0ID0gVFJVRSwgdG9sZXJhbmNlID0gMWUtMDcsDQogICAgICAgICAgICAgIHluYW1lID0gTlVMTCkNCiAgICAgICAgDQogICAgICAgIGxtKGZvcm11bGEsIGRhdGEsIHN1YnNldCwgd2VpZ2h0cywgbmEuYWN0aW9uLA0KICAgICAgICAgICBtZXRob2QgPSAicXIiLCBtb2RlbCA9IFRSVUUsIHggPSBGQUxTRSwgeSA9IEZBTFNFLCBxciA9IFRSVUUsDQogICAgICAgICAgIHNpbmd1bGFyLm9rID0gVFJVRSwgY29udHJhc3RzID0gTlVMTCwgb2Zmc2V0LCAuLi4pDQogICAgICAgIGBgYA0KICAgIA0KICAgIGBgYA0KICAgIGFibGluZShsc2ZpdCh4cywgeXMpKQ0KICAgIA0KICAgIGFibGluZShsbShjaXJjdW1mZXJlbmNlfmFnZSwgZGF0YSA9IE9yYW5nZSwgc3Vic2V0ID0gVHJlZSA9PSAiMSIpKQ0KICAgIGBgYA0KICAgIA0KMS4gYGNob29zZShuLCBrKWA6IEMobiwgaykNCiAgICANCg==</div>
 
 
 

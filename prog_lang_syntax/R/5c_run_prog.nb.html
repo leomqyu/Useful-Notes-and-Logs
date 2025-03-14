@@ -11,7 +11,7 @@
 
 
 
-<title>5b_prog_control_flow_lec4</title>
+<title>5c_run_prog</title>
 
 <script>// Pandoc 2.9 adds attributes on both header and div. We remove the former (to
 // be compatible with the behavior of Pandoc < 2.8).
@@ -2875,137 +2875,42 @@ border-radius: 0px;
 
 
 
-<h1 class="title toc-ignore">5b_prog_control_flow_lec4</h1>
+<h1 class="title toc-ignore">5c_run_prog</h1>
 
 </div>
 
 
 <!-- rnb-text-begin -->
-<div id="control-flow" class="section level1">
-<h1><strong><em>Control flow</em></strong></h1>
-<div id="if-exactly-same-with-c" class="section level2">
-<h2>1. if (exactly same with C)</h2>
 <ol style="list-style-type: decimal">
-<li><p>Syntax</p>
-<pre><code>if (condition) {
-    commands when TRUE # do if TRUE
-} else {
-    commands when FALSE # do if FALSE
-}</code></pre></li>
-<li><p>notes:</p>
+<li><p>Open a file to edit</p>
 <ol style="list-style-type: decimal">
-<li>if only 1 command, can omit <code>{}</code></li>
-<li><code>else</code> part is optional</li>
+<li>use IDE</li>
+<li>in R console: <code>edit(file=&quot;ch2-apply.r&quot;)</code>: invoke the
+built‐in text editor and open an ASCII file</li>
 </ol></li>
-<li><p>vectorized version if-else</p>
+<li><p>Run commands in file</p>
 <ol style="list-style-type: decimal">
-<li><p>syntax</p>
-<pre><code>ifelse(test, yes_expr, no_expr)</code></pre></li>
-<li><p>eg if x is a vector, can compare each element and do things</p>
-<pre><code>&gt; x &lt;- -5:5
-&gt; ifelse(x&lt;0, x, -x)
- [1] -5 -4 -3 -2 -1  0 -1 -2 -3 -4 -5
-
-&gt; ifelse(x&lt;0, 100, x)   # expression can be scalar /  vector
-[1] 100 100 100 100 100   0   1   2   3   4   5</code></pre></li>
-<li><p>Note</p>
-<ol style="list-style-type: decimal">
-<li>if meet NA in an element of a vector, won’t have error and will
-result in NA</li>
-</ol></li>
-</ol></li>
-</ol>
-</div>
-<div id="loop" class="section level2">
-<h2>2. loop</h2>
-<div id="loop-special-syntax" class="section level3">
-<h3>2.1. loop special syntax</h3>
-<ol style="list-style-type: decimal">
-<li><code>break</code>, <code>next</code> (<code>next</code> causes
-control to return immediately to the top of the loop)</li>
-</ol>
-</div>
-<div id="for-loop" class="section level3">
-<h3>2.2. for loop</h3>
+<li><p><code>source</code></p>
 <ol style="list-style-type: decimal">
 <li><p>syntax:</p>
-<pre><code>for (x in v) { commands }</code></pre></li>
-<li><p>notes:</p>
+<pre><code>source(&lt;file_path&gt;, echo=T)</code></pre>
 <ol style="list-style-type: decimal">
-<li><code>v</code> is usually a vector but also could be a list</li>
-<li>if only 1 command, can omit <code>{}</code></li>
-<li>Like python, the x is passed by value, modifying x won’t change
-v</li>
-<li>If change v in the loop:<br />
-v in the for loop is evaluated at the start of the loop, changing it
-subsequently does not affect the loop.</li>
-<li>The variables defined in the loop body can still be used when the
-loop ends</li>
+<li><code>echo=T</code> will echo these commands to the screen</li>
 </ol></li>
-</ol>
-</div>
-<div id="while-loop-exactly-same-with-c" class="section level3">
-<h3>2.3. while loop (exactly same with C)</h3>
-<ol style="list-style-type: decimal">
-<li><p>syntax:</p>
-<pre><code>while (condition) {statements}</code></pre></li>
-<li><p>notes:</p></li>
-</ol>
-</div>
-<div id="repeat-loop" class="section level3">
-<h3>3. repeat loop</h3>
-<ol style="list-style-type: decimal">
-<li><p>syntax:</p>
-<pre><code>repeat { statements
-  ...
-  if (condition) break
-}</code></pre></li>
-<li><p>notes: 1.Idea: loop forever, only until receice break</p></li>
-</ol>
-</div>
-</div>
-<div id="switch" class="section level2">
-<h2>3. switch</h2>
-<ol style="list-style-type: decimal">
-<li><p>Syntax</p>
-<pre><code>switch(expression, case1, case2, case3....)</code></pre></li>
-<li><p>eg</p>
-<ol style="list-style-type: decimal">
-<li><p>basic</p>
-<pre><code># chars
-&gt; switch(&#39;b&#39;,&#39;a&#39;=&quot;red&quot;,&#39;b&#39;=&quot;green&quot;,&#39;c&#39;=&quot;blue&quot;)
-[1] &quot;green&quot;
-&gt; switch(’a’,a=&quot;red&quot;,b=&quot;green&quot;,c=&quot;blue&quot;)    # without single quote also can
-[1] &quot;red&quot;
-
-# integer
-switch(4, &quot;Geeks1&quot;, &quot;Geeks2&quot;, &quot;Geeks3&quot;, &quot;Geeks4&quot;, &quot;Geeks5&quot;, &quot;Geeks6&quot;)
-[1] &quot;Geeks4&quot;</code></pre></li>
-<li><p>string as match</p>
-<pre><code>my.ran2 &lt;- function(n, dist=&quot;norm&quot;){
-    # default value of dist is &quot;norm&quot;
-    # version 2: using switch
-    switch(dist, &quot;norm&quot;=rnorm(n), &quot;uniform&quot;=runif(n),
-    stop(&quot;Unknown distribution&quot;))
-}</code></pre></li>
+<li><p>idea: is similar with running the same command in console. Can
+still use the variables in the file</p></li>
 </ol></li>
-<li><p>notes:</p>
+</ol></li>
+<li><p>debugging:</p>
+<p>See tut5</p>
 <ol style="list-style-type: decimal">
-<li>An expression type with character string always matched to the
-listed cases.</li>
-<li>An expression which is not a character string then this exp is
-coerced to integer.</li>
-<li>For multiple matches, the first match element will be used.</li>
-<li>No default argument case is available there in R switch case.</li>
-<li>An unnamed case can be used, if there is no matched case (see
-eg2).</li>
+<li><code>browser()</code>, breakpoints</li>
+<li><code>message()</code> and <code>sink()</code></li>
 </ol></li>
 </ol>
 <!-- rnb-text-end -->
-</div>
-</div>
 
-<div id="rmd-source-code">LS0tDQp0aXRsZTogIjViX3Byb2dfY29udHJvbF9mbG93X2xlYzQiDQpvdXRwdXQ6IA0KICBodG1sX25vdGVib29rOg0KICAgIHRvYzogdHJ1ZQ0KICAgIHRvY19mbG9hdDogdHJ1ZQ0KLS0tDQoNCiMgKioqQ29udHJvbCBmbG93KioqDQoNCiMjIDEuIGlmIChleGFjdGx5IHNhbWUgd2l0aCBDKQ0KDQoxLiBTeW50YXgNCg0KICAgIGBgYA0KICAgIGlmIChjb25kaXRpb24pIHsNCiAgICAgICAgY29tbWFuZHMgd2hlbiBUUlVFICMgZG8gaWYgVFJVRQ0KICAgIH0gZWxzZSB7DQogICAgICAgIGNvbW1hbmRzIHdoZW4gRkFMU0UgIyBkbyBpZiBGQUxTRQ0KICAgIH0NCiAgICBgYGANCiAgICANCiAgICANCjEuIG5vdGVzOg0KICAgIDEuIGlmIG9ubHkgMSBjb21tYW5kLCBjYW4gb21pdCBge31gDQogICAgMS4gYGVsc2VgIHBhcnQgaXMgb3B0aW9uYWwNCiAgICANCjEuIHZlY3Rvcml6ZWQgdmVyc2lvbiBpZi1lbHNlDQoNCiAgICAxLiBzeW50YXgNCg0KICAgICAgICBgYGANCiAgICAgICAgaWZlbHNlKHRlc3QsIHllc19leHByLCBub19leHByKQ0KICAgICAgICBgYGANCiAgICANCiAgICAxLiBlZw0KICAgICAgICBpZiB4IGlzIGEgdmVjdG9yLCBjYW4gY29tcGFyZSBlYWNoIGVsZW1lbnQgYW5kIGRvIHRoaW5ncw0KICAgICAgICANCiAgICAgICAgYGBgDQogICAgICAgID4geCA8LSAtNTo1DQogICAgICAgID4gaWZlbHNlKHg8MCwgeCwgLXgpDQogICAgICAgICBbMV0gLTUgLTQgLTMgLTIgLTEgIDAgLTEgLTIgLTMgLTQgLTUNCiAgICAgICAgIA0KICAgICAgICA+IGlmZWxzZSh4PDAsIDEwMCwgeCkgICAjIGV4cHJlc3Npb24gY2FuIGJlIHNjYWxhciAvICB2ZWN0b3INCiAgICAgICAgWzFdIDEwMCAxMDAgMTAwIDEwMCAxMDAgICAwICAgMSAgIDIgICAzICAgNCAgIDUNCiAgICAgICAgYGBgDQogICAgICAgIA0KICAgIDEuIE5vdGUNCiAgICAgICAgMS4gaWYgbWVldCBOQSBpbiBhbiBlbGVtZW50IG9mIGEgdmVjdG9yLCB3b24ndCBoYXZlIGVycm9yIGFuZCB3aWxsIHJlc3VsdCBpbiBOQQ0KDQogICAgDQojIyAyLiBsb29wIA0KDQojIyMgMi4xLiBsb29wIHNwZWNpYWwgc3ludGF4DQoNCjEuIGBicmVha2AsIGBuZXh0YCAoYG5leHRgIGNhdXNlcyBjb250cm9sIHRvIHJldHVybiBpbW1lZGlhdGVseSB0byB0aGUgdG9wIG9mIHRoZSBsb29wKQ0KDQojIyMgMi4yLiBmb3IgbG9vcA0KDQoxLiBzeW50YXg6DQoNCiAgICBgYGANCiAgICBmb3IgKHggaW4gdikgeyBjb21tYW5kcyB9DQogICAgYGBgDQogICAgDQoxLiBub3RlczoNCiAgICAxLiBgdmAgaXMgdXN1YWxseSBhIHZlY3RvciBidXQgYWxzbyBjb3VsZCBiZSBhIGxpc3QNCiAgICAxLiBpZiBvbmx5IDEgY29tbWFuZCwgY2FuIG9taXQgYHt9YA0KICAgIDEuIExpa2UgcHl0aG9uLCB0aGUgeCBpcyBwYXNzZWQgYnkgdmFsdWUsIG1vZGlmeWluZyB4IHdvbid0IGNoYW5nZSB2DQogICAgMS4gSWYgY2hhbmdlIHYgaW4gdGhlIGxvb3A6ICANCiAgICAgICAgdiBpbiB0aGUgZm9yIGxvb3AgaXMgZXZhbHVhdGVkIGF0IHRoZSBzdGFydCBvZiB0aGUgbG9vcCwgY2hhbmdpbmcgaXQgc3Vic2VxdWVudGx5IGRvZXMgbm90IGFmZmVjdCB0aGUgbG9vcC4NCiAgICAxLiBUaGUgdmFyaWFibGVzIGRlZmluZWQgaW4gdGhlIGxvb3AgYm9keSBjYW4gc3RpbGwgYmUgdXNlZCB3aGVuIHRoZSBsb29wIGVuZHMNCiAgICAgICAgDQojIyMgMi4zLiB3aGlsZSBsb29wIChleGFjdGx5IHNhbWUgd2l0aCBDKQ0KDQoxLiBzeW50YXg6DQoNCiAgICBgYGANCiAgICB3aGlsZSAoY29uZGl0aW9uKSB7c3RhdGVtZW50c30NCiAgICBgYGANCiAgICANCjEuIG5vdGVzOg0KDQogICAgICAgIA0KIyMjIDMuIHJlcGVhdCBsb29wDQoNCjEuIHN5bnRheDoNCg0KICAgIGBgYA0KICAgIHJlcGVhdCB7IHN0YXRlbWVudHMNCiAgICAgIC4uLg0KICAgICAgaWYgKGNvbmRpdGlvbikgYnJlYWsNCiAgICB9DQogICAgYGBgDQogICAgDQoxLiBub3RlczoNCiAgICAxLklkZWE6IGxvb3AgZm9yZXZlciwgb25seSB1bnRpbCByZWNlaWNlIGJyZWFrDQoNCiMjIDMuIHN3aXRjaA0KDQoxLiBTeW50YXgNCg0KICAgIGBgYA0KICAgIHN3aXRjaChleHByZXNzaW9uLCBjYXNlMSwgY2FzZTIsIGNhc2UzLi4uLikNCiAgICBgYGANCiAgICANCjEuIGVnDQogICAgMS4gYmFzaWMNCiAgICANCiAgICAgICAgYGBgDQogICAgICAgICMgY2hhcnMNCiAgICAgICAgPiBzd2l0Y2goJ2InLCdhJz0icmVkIiwnYic9ImdyZWVuIiwnYyc9ImJsdWUiKQ0KICAgICAgICBbMV0gImdyZWVuIg0KICAgICAgICA+IHN3aXRjaCjigJlh4oCZLGE9InJlZCIsYj0iZ3JlZW4iLGM9ImJsdWUiKSAgICAjIHdpdGhvdXQgc2luZ2xlIHF1b3RlIGFsc28gY2FuDQogICAgICAgIFsxXSAicmVkIg0KICAgICAgICANCiAgICAgICAgIyBpbnRlZ2VyDQogICAgICAgIHN3aXRjaCg0LCAiR2Vla3MxIiwgIkdlZWtzMiIsICJHZWVrczMiLCAiR2Vla3M0IiwgIkdlZWtzNSIsICJHZWVrczYiKQ0KICAgICAgICBbMV0gIkdlZWtzNCINCiAgICAgICAgYGBgDQogICAgDQogICAgMS4gc3RyaW5nIGFzIG1hdGNoDQogICAgDQogICAgICAgIGBgYA0KICAgICAgICBteS5yYW4yIDwtIGZ1bmN0aW9uKG4sIGRpc3Q9Im5vcm0iKXsNCiAgICAgICAgICAgICMgZGVmYXVsdCB2YWx1ZSBvZiBkaXN0IGlzICJub3JtIg0KICAgICAgICAgICAgIyB2ZXJzaW9uIDI6IHVzaW5nIHN3aXRjaA0KICAgICAgICAgICAgc3dpdGNoKGRpc3QsICJub3JtIj1ybm9ybShuKSwgInVuaWZvcm0iPXJ1bmlmKG4pLA0KICAgICAgICAgICAgc3RvcCgiVW5rbm93biBkaXN0cmlidXRpb24iKSkNCiAgICAgICAgfQ0KICAgICAgICBgYGANCiAgICANCjEuIG5vdGVzOg0KICAgIDEuIEFuIGV4cHJlc3Npb24gdHlwZSB3aXRoIGNoYXJhY3RlciBzdHJpbmcgYWx3YXlzIG1hdGNoZWQgdG8gdGhlIGxpc3RlZCBjYXNlcy4NCiAgICAxLiBBbiBleHByZXNzaW9uIHdoaWNoIGlzIG5vdCBhIGNoYXJhY3RlciBzdHJpbmcgdGhlbiB0aGlzIGV4cCBpcyBjb2VyY2VkIHRvIGludGVnZXIuDQogICAgMS4gRm9yIG11bHRpcGxlIG1hdGNoZXMsIHRoZSBmaXJzdCBtYXRjaCBlbGVtZW50IHdpbGwgYmUgdXNlZC4NCiAgICAxLiBObyBkZWZhdWx0IGFyZ3VtZW50IGNhc2UgaXMgYXZhaWxhYmxlIHRoZXJlIGluIFIgc3dpdGNoIGNhc2UuDQogICAgMS4gQW4gdW5uYW1lZCBjYXNlIGNhbiBiZSB1c2VkLCBpZiB0aGVyZSBpcyBubyBtYXRjaGVkIGNhc2UgKHNlZSBlZzIpLg0KICANCg==</div>
+<div id="rmd-source-code">LS0tDQp0aXRsZTogIjVjX3J1bl9wcm9nIg0Kb3V0cHV0OiANCiAgaHRtbF9ub3RlYm9vazoNCiAgICB0b2M6IHRydWUNCiAgICB0b2NfZmxvYXQ6IHRydWUNCi0tLQ0KDQoxLiBPcGVuIGEgZmlsZSB0byBlZGl0DQogICAgMS4gdXNlIElERQ0KICAgIDEuIGluIFIgY29uc29sZTogYGVkaXQoZmlsZT0iY2gyLWFwcGx5LnIiKWA6IGludm9rZSB0aGUgYnVpbHTigJBpbiB0ZXh0IGVkaXRvciBhbmQgb3BlbiBhbiBBU0NJSSBmaWxlDQogICAgDQogICAgDQoxLiBSdW4gY29tbWFuZHMgaW4gZmlsZQ0KDQogICAgMS4gYHNvdXJjZWANCiAgICANCiAgICAgICAgMS4gc3ludGF4OiANCiAgICANCiAgICAgICAgICAgIGBgYA0KICAgICAgICAgICAgc291cmNlKDxmaWxlX3BhdGg+LCBlY2hvPVQpDQogICAgICAgICAgICBgYGANCiAgICAgICAgICAgIA0KICAgICAgICAgICAgMS4gYGVjaG89VGAgd2lsbCBlY2hvIHRoZXNlIGNvbW1hbmRzIHRvIHRoZSBzY3JlZW4NCiAgICAgICAgICAgIA0KICAgICAgICAxLiBpZGVhOiBpcyBzaW1pbGFyIHdpdGggcnVubmluZyB0aGUgc2FtZSBjb21tYW5kIGluIGNvbnNvbGUuIENhbiBzdGlsbCB1c2UgdGhlIHZhcmlhYmxlcyBpbiB0aGUgZmlsZSANCiAgICAgICAgDQogICAgICAgIA0KMS4gZGVidWdnaW5nOg0KDQogICAgU2VlIHR1dDUNCg0KICAgIDEuIGBicm93c2VyKClgLCBicmVha3BvaW50cw0KICAgIDEuIGBtZXNzYWdlKClgIGFuZCBgc2luaygpYA0KDQo=</div>
 
 
 </div>
@@ -3054,7 +2959,7 @@ $(document).ready(function () {
 <!-- code folding -->
 <script>
 $(document).ready(function () {
-  window.initializeSourceEmbed("5b_prog_control_flow_lec4.Rmd");
+  window.initializeSourceEmbed("5c_run_prog.Rmd");
   window.initializeCodeFolding("show" === "show");
 });
 </script>

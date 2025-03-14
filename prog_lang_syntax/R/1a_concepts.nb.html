@@ -1771,23 +1771,32 @@ vector.</p></li>
 <h1><strong><em>datatype</em></strong></h1>
 <div id="data-type-intro" class="section level2">
 <h2><strong>1. data type intro</strong></h2>
-<p>common data type: numeric, logical, character<br />
-1. numeric represents both int and float<br />
-Note: to explicitly name integer, use suffix <code>L</code>, eg
-<code>1L</code> means integer 1 1. character is string or character like
-python, denoted by double quote ” or single quote no diff 1. logical is
-<code>TRUE</code> and <code>FALSE</code>, you write can also
-<code>T</code> and <code>F</code></p>
+<p>common data type: numeric, logical, character</p>
+<ol style="list-style-type: decimal">
+<li><p>numeric<br />
+Includes both both int and float (they have different classes like
+<code>integer</code> or <code>numeric</code> (which is double), but the
+mode is all <code>numeric</code>) Note: to explicitly name integer, use
+suffix <code>L</code>, eg <code>1L</code> means integer 1</p></li>
+<li><p>character<br />
+String or character (like python), denoted by double quote
+<code>&quot;</code> or single quote <code>&#39;</code> no diff</p></li>
+<li><p>logical<br />
+<code>TRUE</code> and <code>FALSE</code>, can also <code>T</code> and
+<code>F</code></p></li>
+</ol>
 </div>
 <div id="inspect-data-type" class="section level2">
 <h2><strong>2. Inspect data type</strong></h2>
 <ol style="list-style-type: decimal">
 <li><p><code>mode()</code><br />
-describe the data type used for storage, e.g., numeric, logical,
-character, etc.</p></li>
+describe the data type used for storage.<br />
+Only(?) have: <code>numeric, logical, character</code>, etc.</p></li>
 <li><p><code>class()</code><br />
-describe the object class of the input variable, e.g., numeric, integer,
-list, matrix, factor, etc.</p></li>
+describe the object class of the input variable<br />
+e.g., <code>numeric</code> (here numeric is “double”, differen),
+<code>integer</code>, <code>list</code>, <code>matrix</code>,
+<code>factor</code>, etc.</p></li>
 <li><p>egs</p>
 <pre><code>&gt; mode(1L); class(1L) 
 [1] &quot;numeric&quot; 
@@ -1800,6 +1809,22 @@ list, matrix, factor, etc.</p></li>
 &gt; mode(matrix(0,2,2)); class(matrix(0,2,2)) 
 [1] &quot;numeric&quot; 
 [1] &quot;matrix&quot;
+
+# the class of basic vectors (only the numeric has a difference)
+&gt; class(1)
+[1] &quot;numeric&quot;
+&gt; class(1L)
+[1] &quot;integer&quot;
+&gt; class(T)
+[1] &quot;logical&quot;
+&gt; class(&quot;a&quot;)
+[1] &quot;character&quot;
+
+# the return class of both mode and class is &quot;character&quot;
+&gt; class(mode(1))
+[1] &quot;character&quot;
+&gt; class(class(1))
+[1] &quot;character&quot;
 </code></pre></li>
 </ol>
 </div>
@@ -1821,7 +1846,7 @@ can also arise because of the way calculations are performed.</p></li>
 </div>
 </div>
 
-<div id="rmd-source-code">LS0tDQp0aXRsZTogImNvbmNlcHRzIg0Kb3V0cHV0OiBodG1sX25vdGVib29rDQotLS0NCg0KIyAqKipSIGJhc2ljIGNvbmNlcHQqKioNCg0KMS4gaW5kZXhpbmcgIA0KICBhbGwgaW5kZXhpbmcgaW4gUiBpcyBmcm9tIDEgbm90IDAgIA0KICB0aGUgc2xpY2luZyAoZWcgMTozKTogc3RhcnQgYW5kIGVuZCBhcmUgaW5jbHVkZWQNCg0KMS4gUiBsYW5ndWFnZSBpcyBjYXNlIHNlbnNpdGl2ZS4NCg0KMS4gUiBvcGVyYXRpb25zIGFyZSB2ZWN0b3IgYmFzZWQsIHBlcmZvcm1zIG9uIGVhY2ggZWxlbWVudCBvZiB2ZWN0b3IuDQoNCiMgKioqVmFyaWFibGUgbmFtaW5nIENvbnZlbnRpb25zKioqDQoNCiFbXSguL2ltYWdlcy9TY3JlZW5zaG90IDIwMjUtMDItMTYgMTMyMzMwLnBuZyl7d2lkdGg9NzAlfQ0KDQojICoqKmRhdGF0eXBlKioqIA0KDQojIyAqKjEuIGRhdGEgdHlwZSBpbnRybyoqDQogIGNvbW1vbiBkYXRhIHR5cGU6IG51bWVyaWMsIGxvZ2ljYWwsIGNoYXJhY3RlciAgDQogICAgMS4gbnVtZXJpYyByZXByZXNlbnRzIGJvdGggaW50IGFuZCBmbG9hdCAgDQogICAgICAgIE5vdGU6IHRvIGV4cGxpY2l0bHkgbmFtZSBpbnRlZ2VyLCB1c2Ugc3VmZml4IGBMYCwgZWcgYDFMYCBtZWFucyBpbnRlZ2VyIDENCiAgICAxLiBjaGFyYWN0ZXIgaXMgc3RyaW5nIG9yIGNoYXJhY3RlciBsaWtlIHB5dGhvbiwgZGVub3RlZCBieSBkb3VibGUgcXVvdGUgIiBvciBzaW5nbGUgcXVvdGUgbm8gZGlmZiANCiAgICAxLiBsb2dpY2FsIGlzIGBUUlVFYCBhbmQgYEZBTFNFYCwgeW91IHdyaXRlIGNhbiBhbHNvIGBUYCBhbmQgYEZgDQogIA0KIyMgKioyLiBJbnNwZWN0IGRhdGEgdHlwZSoqDQoNCjEuIGBtb2RlKClgICANCiAgICAgICAgZGVzY3JpYmUgdGhlIGRhdGEgdHlwZSB1c2VkIGZvciBzdG9yYWdlLCBlLmcuLCBudW1lcmljLCBsb2dpY2FsLCBjaGFyYWN0ZXIsIGV0Yy4NCjEuIGBjbGFzcygpYCAgDQogICAgICAgIGRlc2NyaWJlIHRoZSBvYmplY3QgY2xhc3Mgb2YgdGhlIGlucHV0IHZhcmlhYmxlLCBlLmcuLCBudW1lcmljLCBpbnRlZ2VyLCBsaXN0LCBtYXRyaXgsIGZhY3RvciwgZXRjLg0KMS4gZWdzDQoNCiAgICBgYGANCiAgICA+IG1vZGUoMUwpOyBjbGFzcygxTCkgDQogICAgWzFdICJudW1lcmljIiANCiAgICBbMV0gImludGVnZXIiIA0KICAgIA0KICAgID4gbW9kZShmYWN0b3IoYygiYSIsImIiKSkpOyBjbGFzcyhmYWN0b3IoYygiYSIsImIiKSkpIA0KICAgIFsxXSAibnVtZXJpYyIgDQogICAgWzFdICJmYWN0b3IiIA0KICAgIA0KICAgID4gbW9kZShtYXRyaXgoMCwyLDIpKTsgY2xhc3MobWF0cml4KDAsMiwyKSkgDQogICAgWzFdICJudW1lcmljIiANCiAgICBbMV0gIm1hdHJpeCINCiAgICANCiAgICBgYGANCg0KIyMgKipTcGVjaWFsIHZhbHVlcyoqDQoNCiMjIyBNaXNzaW5nIHZhbHVlIGBOQWAgDQoNCjEuIEludHJvDQpNaXNzaW5nIHZhbHVlcyBvZnRlbiBhcmlzZSBpbiByZWFsIGRhdGEgcHJvYmxlbXMsIGJ1dCB0aGV5IGNhbiBhbHNvIGFyaXNlIGJlY2F1c2Ugb2YgdGhlIHdheSBjYWxjdWxhdGlvbnMgYXJlIHBlcmZvcm1lZC4gIA0KDQoxLiBJbnNwZWN0OiBgaXMubmEoKWANCg0KIyMgKipUZWNobmljYWw6IHN0b3JhZ2Ugb2YgbnVtYmVycyoqDQpsZWMxIDQ5LTUwDQo=</div>
+<div id="rmd-source-code">LS0tDQp0aXRsZTogImNvbmNlcHRzIg0Kb3V0cHV0OiBodG1sX25vdGVib29rDQotLS0NCg0KIyAqKipSIGJhc2ljIGNvbmNlcHQqKioNCg0KMS4gaW5kZXhpbmcgIA0KICBhbGwgaW5kZXhpbmcgaW4gUiBpcyBmcm9tIDEgbm90IDAgIA0KICB0aGUgc2xpY2luZyAoZWcgMTozKTogc3RhcnQgYW5kIGVuZCBhcmUgaW5jbHVkZWQNCg0KMS4gUiBsYW5ndWFnZSBpcyBjYXNlIHNlbnNpdGl2ZS4NCg0KMS4gUiBvcGVyYXRpb25zIGFyZSB2ZWN0b3IgYmFzZWQsIHBlcmZvcm1zIG9uIGVhY2ggZWxlbWVudCBvZiB2ZWN0b3IuDQoNCiMgKioqVmFyaWFibGUgbmFtaW5nIENvbnZlbnRpb25zKioqDQoNCiFbXSguL2ltYWdlcy9TY3JlZW5zaG90IDIwMjUtMDItMTYgMTMyMzMwLnBuZyl7d2lkdGg9NzAlfQ0KDQojICoqKmRhdGF0eXBlKioqIA0KDQojIyAqKjEuIGRhdGEgdHlwZSBpbnRybyoqDQpjb21tb24gZGF0YSB0eXBlOiBudW1lcmljLCBsb2dpY2FsLCBjaGFyYWN0ZXIgIA0KICANCjEuIG51bWVyaWMgIA0KICAgIEluY2x1ZGVzIGJvdGggYm90aCBpbnQgYW5kIGZsb2F0ICh0aGV5IGhhdmUgZGlmZmVyZW50IGNsYXNzZXMgbGlrZSBgaW50ZWdlcmAgb3IgYG51bWVyaWNgICh3aGljaCBpcyBkb3VibGUpLCBidXQgdGhlIG1vZGUgaXMgYWxsIGBudW1lcmljYCkgDQogICAgTm90ZTogdG8gZXhwbGljaXRseSBuYW1lIGludGVnZXIsIHVzZSBzdWZmaXggYExgLCBlZyBgMUxgIG1lYW5zIGludGVnZXIgMQ0KICAgIA0KMS4gY2hhcmFjdGVyICANCiAgICBTdHJpbmcgb3IgY2hhcmFjdGVyIChsaWtlIHB5dGhvbiksIGRlbm90ZWQgYnkgZG91YmxlIHF1b3RlIGAiYCBvciBzaW5nbGUgcXVvdGUgYCdgIG5vIGRpZmYgDQoNCjEuIGxvZ2ljYWwgIA0KICAgIGBUUlVFYCBhbmQgYEZBTFNFYCwgY2FuIGFsc28gYFRgIGFuZCBgRmANCiAgDQojIyAqKjIuIEluc3BlY3QgZGF0YSB0eXBlKioNCg0KMS4gYG1vZGUoKWAgIA0KICAgICAgICBkZXNjcmliZSB0aGUgZGF0YSB0eXBlIHVzZWQgZm9yIHN0b3JhZ2UuICANCiAgICAgICAgT25seSg/KSBoYXZlOiBgbnVtZXJpYywgbG9naWNhbCwgY2hhcmFjdGVyYCwgZXRjLg0KICAgICAgICANCjEuIGBjbGFzcygpYCAgDQogICAgICAgIGRlc2NyaWJlIHRoZSBvYmplY3QgY2xhc3Mgb2YgdGhlIGlucHV0IHZhcmlhYmxlICANCiAgICAgICAgZS5nLiwgYG51bWVyaWNgIChoZXJlIG51bWVyaWMgaXMgImRvdWJsZSIsIGRpZmZlcmVuKSwgYGludGVnZXJgLCBgbGlzdGAsIGBtYXRyaXhgLCBgZmFjdG9yYCwgZXRjLg0KICANCjEuIGVncw0KDQogICAgYGBgDQogICAgPiBtb2RlKDFMKTsgY2xhc3MoMUwpIA0KICAgIFsxXSAibnVtZXJpYyIgDQogICAgWzFdICJpbnRlZ2VyIiANCiAgICANCiAgICA+IG1vZGUoZmFjdG9yKGMoImEiLCJiIikpKTsgY2xhc3MoZmFjdG9yKGMoImEiLCJiIikpKSANCiAgICBbMV0gIm51bWVyaWMiIA0KICAgIFsxXSAiZmFjdG9yIiANCiAgICANCiAgICA+IG1vZGUobWF0cml4KDAsMiwyKSk7IGNsYXNzKG1hdHJpeCgwLDIsMikpIA0KICAgIFsxXSAibnVtZXJpYyIgDQogICAgWzFdICJtYXRyaXgiDQogICAgDQogICAgIyB0aGUgY2xhc3Mgb2YgYmFzaWMgdmVjdG9ycyAob25seSB0aGUgbnVtZXJpYyBoYXMgYSBkaWZmZXJlbmNlKQ0KICAgID4gY2xhc3MoMSkNCiAgICBbMV0gIm51bWVyaWMiDQogICAgPiBjbGFzcygxTCkNCiAgICBbMV0gImludGVnZXIiDQogICAgPiBjbGFzcyhUKQ0KICAgIFsxXSAibG9naWNhbCINCiAgICA+IGNsYXNzKCJhIikNCiAgICBbMV0gImNoYXJhY3RlciINCiAgICANCiAgICAjIHRoZSByZXR1cm4gY2xhc3Mgb2YgYm90aCBtb2RlIGFuZCBjbGFzcyBpcyAiY2hhcmFjdGVyIg0KICAgID4gY2xhc3MobW9kZSgxKSkNCiAgICBbMV0gImNoYXJhY3RlciINCiAgICA+IGNsYXNzKGNsYXNzKDEpKQ0KICAgIFsxXSAiY2hhcmFjdGVyIg0KICAgIA0KICAgIGBgYA0KDQojIyAqKlNwZWNpYWwgdmFsdWVzKioNCg0KIyMjIE1pc3NpbmcgdmFsdWUgYE5BYCANCg0KMS4gSW50cm8NCk1pc3NpbmcgdmFsdWVzIG9mdGVuIGFyaXNlIGluIHJlYWwgZGF0YSBwcm9ibGVtcywgYnV0IHRoZXkgY2FuIGFsc28gYXJpc2UgYmVjYXVzZSBvZiB0aGUgd2F5IGNhbGN1bGF0aW9ucyBhcmUgcGVyZm9ybWVkLiAgDQoNCjEuIEluc3BlY3Q6IGBpcy5uYSgpYA0KDQojIyAqKlRlY2huaWNhbDogc3RvcmFnZSBvZiBudW1iZXJzKioNCmxlYzEgNDktNTANCg==</div>
 
 
 

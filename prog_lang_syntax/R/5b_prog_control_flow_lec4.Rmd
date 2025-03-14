@@ -8,7 +8,7 @@ output:
 
 # ***Control flow***
 
-## 1. if
+## 1. if (exactly same with C)
 
 1. Syntax
 
@@ -35,9 +35,18 @@ output:
     
     1. eg
         if x is a vector, can compare each element and do things
+        
         ```
-        x<-ifelse(x>0, 1, ifelse(x<0, -1, 0))
+        > x <- -5:5
+        > ifelse(x<0, x, -x)
+         [1] -5 -4 -3 -2 -1  0 -1 -2 -3 -4 -5
+         
+        > ifelse(x<0, 100, x)   # expression can be scalar /  vector
+        [1] 100 100 100 100 100   0   1   2   3   4   5
         ```
+        
+    1. Note
+        1. if meet NA in an element of a vector, won't have error and will result in NA
 
     
 ## 2. loop 
@@ -55,12 +64,14 @@ output:
     ```
     
 1. notes:
+    1. `v` is usually a vector but also could be a list
     1. if only 1 command, can omit `{}`
     1. Like python, the x is passed by value, modifying x won't change v
     1. If change v in the loop:  
         v in the for loop is evaluated at the start of the loop, changing it subsequently does not affect the loop.
+    1. The variables defined in the loop body can still be used when the loop ends
         
-### 2.3. while loop
+### 2.3. while loop (exactly same with C)
 
 1. syntax:
 
@@ -97,15 +108,14 @@ output:
     1. basic
     
         ```
-        switch(
-           4,
-           "Geeks1",
-           "Geeks2",
-           "Geeks3",
-           "Geeks4",
-           "Geeks5",
-           "Geeks6"
-        )
+        # chars
+        > switch('b','a'="red",'b'="green",'c'="blue")
+        [1] "green"
+        > switch(’a’,a="red",b="green",c="blue")    # without single quote also can
+        [1] "red"
+        
+        # integer
+        switch(4, "Geeks1", "Geeks2", "Geeks3", "Geeks4", "Geeks5", "Geeks6")
         [1] "Geeks4"
         ```
     
@@ -120,8 +130,7 @@ output:
         }
         ```
     
-1.notes 
-
+1. notes:
     1. An expression type with character string always matched to the listed cases.
     1. An expression which is not a character string then this exp is coerced to integer.
     1. For multiple matches, the first match element will be used.

@@ -20,18 +20,28 @@ output: html_notebook
 # ***datatype*** 
 
 ## **1. data type intro**
-  common data type: numeric, logical, character  
-    1. numeric represents both int and float  
-        Note: to explicitly name integer, use suffix `L`, eg `1L` means integer 1
-    1. character is string or character like python, denoted by double quote " or single quote no diff 
-    1. logical is `TRUE` and `FALSE`, you write can also `T` and `F`
+common data type: numeric, logical, character  
+  
+1. numeric  
+    Includes both both int and float (they have different classes like `integer` or `numeric` (which is double), but the mode is all `numeric`) 
+    Note: to explicitly name integer, use suffix `L`, eg `1L` means integer 1
+    
+1. character  
+    String or character (like python), denoted by double quote `"` or single quote `'` no diff 
+
+1. logical  
+    `TRUE` and `FALSE`, can also `T` and `F`
   
 ## **2. Inspect data type**
 
 1. `mode()`  
-        describe the data type used for storage, e.g., numeric, logical, character, etc.
+        describe the data type used for storage.  
+        Only(?) have: `numeric, logical, character`, etc.
+        
 1. `class()`  
-        describe the object class of the input variable, e.g., numeric, integer, list, matrix, factor, etc.
+        describe the object class of the input variable  
+        e.g., `numeric` (here numeric is "double", differen), `integer`, `list`, `matrix`, `factor`, etc.
+  
 1. egs
 
     ```
@@ -46,6 +56,22 @@ output: html_notebook
     > mode(matrix(0,2,2)); class(matrix(0,2,2)) 
     [1] "numeric" 
     [1] "matrix"
+    
+    # the class of basic vectors (only the numeric has a difference)
+    > class(1)
+    [1] "numeric"
+    > class(1L)
+    [1] "integer"
+    > class(T)
+    [1] "logical"
+    > class("a")
+    [1] "character"
+    
+    # the return class of both mode and class is "character"
+    > class(mode(1))
+    [1] "character"
+    > class(class(1))
+    [1] "character"
     
     ```
 

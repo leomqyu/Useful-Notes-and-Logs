@@ -2897,20 +2897,34 @@ border-radius: 0px;
 <div id="create-vector" class="section level3">
 <h3>1.1 create vector</h3>
 <ol style="list-style-type: decimal">
-<li>basic</li>
-</ol>
-<p><code>v = c(0, 1, 2)</code></p>
-<ol style="list-style-type: decimal">
-<li>declare with name</li>
-</ol>
+<li><p>basic</p>
+<p><code>v = c(0, 1, 2)</code></p></li>
+<li><p>declare with name</p>
 <pre><code>c(mean=1,stdev=2,median=3,min=4,max=5)</code></pre>
-<ol style="list-style-type: decimal">
+<p>note: can use double quote can don’t use</p></li>
 <li><p>other functions</p>
 <ol style="list-style-type: decimal">
-<li><code>seq():</code><br />
-params: seq(from = 1, to = 1, by = ((to - from)/(length.out - 1))<br />
-note:<br />
-i start and end are both included</li>
+<li><p><code>seq():</code></p>
+<ol style="list-style-type: decimal">
+<li>syntax:
+<code>seq(from = 1, to = 1, by = ((to - from)/(length.out - 1))</code><br />
+</li>
+<li>note:<br />
+i start and end are both included<br />
+can also specify by parameter <code>length.out</code>: what is the
+length of the output</li>
+</ol></li>
+<li><p><code>:</code><br />
+Similar to the basics of <code>seq</code></p>
+<pre><code>1:5 gets 1 2 3 4 5
+5:1 gets 5 4 3 2 1</code></pre></li>
+<li><p>create by the mode type:</p>
+<pre><code>&gt; numeric(12)
+ [1] 0 0 0 0 0 0 0 0 0 0 0 0
+&gt; character(10)
+ [1] &quot;&quot; &quot;&quot; &quot;&quot; &quot;&quot; &quot;&quot; &quot;&quot; &quot;&quot; &quot;&quot; &quot;&quot; &quot;&quot;
+&gt; logical(10)
+ [1] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE</code></pre></li>
 </ol></li>
 </ol>
 </div>
@@ -2926,38 +2940,57 @@ x[c(-1, -2)]
 x[c(-1, -2, 3)]   # results in error
 x[-6]   # even if length of x is 5, no error</code></pre>
 </div>
+<div id="modify-elements" class="section level3">
+<h3>1.25 modify elements</h3>
+<p>Idea: just how to access, assign the expression with a new value then
+is OK. Also work for other data objects.</p>
+<pre><code># change the value of an exising element
+&gt; v &lt;- 1:3
+&gt; v[1] &lt;- 0
+&gt; v
+[1] 0 2 3
+
+# can use a less values to change more
+&gt; c &lt;- 1:5
+&gt; c[1:3] &lt;- 0
+&gt; c
+[1] 0 0 0 4 5
+
+&gt; c &lt;- 1:10   # recycles with warning
+&gt; c[1:5] &lt;- 1:2
+警告信息:
+In c[1:5] &lt;- 1:2 : 被替换的项目不是替换值长度的倍数
+&gt; c
+ [1]  1  2  1  2  1  6  7  8  9 10
+
+# add a new element previously not existed:
+&gt; x &lt;- 1
+&gt; (x[3] &lt;- 3)
+[1]  1 NA  
+
+# quick change
+v[v&gt;0] &lt;- v[v&gt;0] * 2
+v &lt;- factor(v); levels(v) &lt;- c(&quot;a&quot;, &quot;b&quot;)</code></pre>
+</div>
 <div id="calculation" class="section level3">
 <h3>1.3 calculation</h3>
-<ol style="list-style-type: decimal">
-<li>directly use math symbols:</li>
-</ol>
-<pre><code>x=5:1
-
-x &gt; 2   # a vector of TRUE and FALSE
-x * 2   # elewise, same with other op</code></pre>
-<ol style="list-style-type: decimal">
-<li>diff(v)<br />
-return the diff <code>v[i+1]-v[i]</code><br />
-</li>
-</ol>
-<pre><code>&gt; diff(c(1, 2, 4))
-[1] 1 2</code></pre>
+<p>see section 2a</p>
 </div>
 <div id="misc-operations" class="section level3">
 <h3>1.4 misc operations</h3>
 <ol style="list-style-type: decimal">
-<li><p><code>:</code><br />
-Similar to the basics of <code>seq</code></p>
-<pre><code>1:5 gets 1 2 3 4 5
-5:1 gets 5 4 3 2 1</code></pre></li>
-<li><p>length()</p></li>
+<li><p>get name: <code>names()</code> Also work for other objects. Can
+also change in this way following the modification principal</p></li>
+<li><p>get length: <code>length()</code><br />
+Also work for other objects.</p></li>
 <li><p>combination of vectors<br />
 use <code>c()</code>. Can combine diff datatype, but will convert to the
 same:<br />
 1. numeric + logical: logical F -&gt; 0, T -&gt; 1 1. character +
 numerical/logical: numerical/logical -&gt; char</p></li>
-<li><p>explicit conversion of data type <code>as.numeric(v)</code>: eg
-characters that cannot be converted will be <code>NA</code></p></li>
+<li><p>explicit conversion of data type (also in section 2a)</p>
+<p><code>as.numeric(v)</code>: eg characters that cannot be converted
+will be <code>NA</code></p></li>
 <li><p>unique()<br />
 return unique elements as a list</p>
 <pre><code>&gt; unique(c(&quot;C&quot;, &quot;D&quot;, &quot;H&quot;, &quot;D&quot;, &quot;H&quot;))
@@ -2979,14 +3012,10 @@ $c
 <pre><code># repeat a number: rep(x, times)
 rep(3, 12)
 
-
 # repeat a vector:
 rep(seq(1,3), 2)        # 1, 2, 3, 1, 2, 3 
 rep(c(1,2,3), c(1,2,3)) # 1, 2, 2, 3, 3, 3; note: if num not match, error
-rep(c(1,2,3), each=2)   # 1, 1, 2, 2, 3, 3
-
-
-rep(seq(1,3), each=2)        # 1, 2, 3, 1, 2, 3 </code></pre></li>
+rep(c(1,2,3), each=2)   # 1, 1, 2, 2, 3, 3</code></pre></li>
 <li><p><code>tapply</code></p>
 <ol style="list-style-type: decimal">
 <li><p>Intro: Apply a function to subsets of a vector or array, split by
@@ -3009,42 +3038,87 @@ tapply(scores, grades, mean)
 </ol></li>
 <li><p><code>outer(X, Y, FUN = &quot;*&quot;, ...)</code></p>
 <p>The outer product of the arrays X and Y is the array A with dimension
-c(dim(X), dim(Y)) where element A[c(arrayindex.x, arrayindex.y)] =
-FUN(X[arrayindex.x], Y[arrayindex.y], …). <code>FUN</code> can also be
-<code>+</code>, …</p></li>
+c(dim(X), dim(Y)) where element
+<code>A[i, j] = FUN(X[i], Y[j], ...)</code>. <code>FUN</code> can also
+be <code>+</code>, …</p>
+<pre><code>&gt; outer(c(1, 2, 3), c(0.1, 0.2), &quot;+&quot;)
+       [,1] [,2]
+  [1,]  1.1  1.2
+  [2,]  2.1  2.2
+  [3,]  3.1  3.2</code></pre>
+<p>Note: the function’s return value must be the same length with the
+first (and second) when is a vector. (Therefore, just use simple ones
+like “+”, “-”, …)</p></li>
+<li><p><code>table()</code></p>
+<ol style="list-style-type: decimal">
+<li><p>desc: return a contingency table (which is of class table) of the
+counts at each combination of factor levels.</p></li>
+<li><p>eg</p>
+<ol style="list-style-type: decimal">
+<li><p>basic use as counter</p>
+<pre><code>grades &lt;- c(&quot;A&quot;, &quot;A&quot;, &quot;B&quot;, &quot;A&quot;, &quot;B&quot;, &quot;C&quot;, &quot;B&quot;, &quot;A&quot;, &quot;A&quot;, &quot;B&quot;)
+names &lt;- c(&#39;Alice&#39;, &#39;Alice&#39;, &#39;Alice&#39;, &#39;Alice&#39;, &#39;Bob&#39;, &#39;Bob&#39;, &#39;Bob&#39;, &#39;Bob&#39;, &#39;Bob&#39;)
+&gt; table(g)
+g
+a b c 
+4 3 2 </code></pre></li>
+<li><p>2-way table</p>
+<pre><code>&gt; names = c(&#39;Alice&#39;, &#39;Alice&#39;, &#39;Alice&#39;, &#39;Alice&#39;, &#39;Bob&#39;, &#39;Bob&#39;, &#39;Bob&#39;, &#39;Bob&#39;, &#39;Bob&#39;)
+&gt; table(names, grades)
+       grades
+names   a b c
+  Alice 2 1 1
+  Bob   2 2 1</code></pre></li>
+</ol></li>
+</ol></li>
 </ol>
 </div>
 </div>
 <div id="matrix-multi-dimensional-arrays" class="section level2">
 <h2>2. <strong>matrix (&amp; multi dimensional arrays)</strong></h2>
 <div id="intro-1" class="section level3">
-<h3>0. intro</h3>
+<h3>2.0. intro</h3>
 <p>n by m means n rows m cols</p>
 </div>
 <div id="creation" class="section level3">
-<h3>1. creation</h3>
-<p><code>matrix(data = NA, nrow = 1, ncol = 1, byrow = FALSE,dimnames = NULL)</code></p>
+<h3>2.1. creation</h3>
+<ol style="list-style-type: decimal">
+<li><p>Syntax<br />
+<code>matrix(data = NA, nrow = 1, ncol = 1, byrow = FALSE,dimnames = NULL)</code></p></li>
+<li><p>eg</p>
 <pre><code># col-wise fill in by default
 &gt; m&lt;-matrix(1:12,nrow=3,ncol=4)
 &gt; m
      [,1] [,2] [,3] [,4]
 [1,]    1    4    7   10
 [2,]    2    5    8   11
-[3,]    3    6    9   12
-
-matrix(1:9, nrow=3) # no error
-matrix(1:9, nrow=3) # no error
-matrix(1:10, nrow=3) # error
-</code></pre>
+[3,]    3    6    9   12</code></pre></li>
+<li><p>Notes</p>
+<ol style="list-style-type: decimal">
+<li><p>if can’t match</p>
+<pre><code>&gt; matrix(1:9, nrow=3) # no error
+&gt; matrix(1:10, nrow=3)    # no error but warning
+     [,1] [,2] [,3] [,4]
+[1,]    1    4    7   10
+[2,]    2    5    8    1
+[3,]    3    6    9    2
+警告信息:
+In matrix(1:10, nrow = 3) :
+  data length [10] is not a sub-multiple or multiple of the number of rows [3]</code></pre></li>
+</ol></li>
+</ol>
 </div>
 <div id="inspection" class="section level3">
-<h3>2. inspection</h3>
-<pre><code>dim(m)
-nrow(m)
-ncol(m)</code></pre>
+<h3>2.2. inspection</h3>
+<pre><code>&gt; dim(m)
+[1] 3 4
+&gt; nrow(m)
+[1] 3
+&gt; ncol(m)
+[1] 4</code></pre>
 </div>
 <div id="access" class="section level3">
-<h3>3. access</h3>
+<h3>2.3. access</h3>
 <pre><code>m[2,3]    # element, slicing, -1 ... same with vector
 m[2,]     # select row (result is vector)
 m[,3]     # select col (result is vector)
@@ -3052,15 +3126,24 @@ m[,3]     # select col (result is vector)
 m[1:2, 3:4]   # (result is a matrix)
 </code></pre>
 </div>
+<div id="change" class="section level3">
+<h3>2.35 change</h3>
+<p>follow the change of vector how to access how to change</p>
+</div>
 <div id="misc-op" class="section level3">
-<h3>4. misc op</h3>
+<h3>2.4. misc op</h3>
 <ol style="list-style-type: decimal">
 <li><p>combine:</p>
-<pre><code>m = cbind(m1, m2)   # bind in axis of col. If m1 is axb, m2 is cxb, then m is (a+c)xb
-m = rbind(m1, m2)   # similarly
-</code></pre></li>
+<pre><code>m = cbind(mab, mac)   # bind diff cols. If mab is axb, mac is axc, then m is ax(b+c)
+m = rbind(mac, mbc)   # similarly</code></pre>
+<ol style="list-style-type: decimal">
+<li>Note
+<ol style="list-style-type: decimal">
+<li>can also be used in dataframe, see dataframe section</li>
+</ol></li>
+</ol></li>
 <li><p>transpose: <code>t()</code></p></li>
-<li><p><code>prop.table(rs,margin=1)</code>: along axis=margin (1 for
+<li><p><code>prop.table(rs, margin=1)</code>: along axis=margin (1 for
 row, 2 for col), return the proportion (percentage)</p></li>
 <li><p><code>col()</code>, <code>row()</code><br />
 Returns a matrix of integers indicating their row number in a
@@ -3069,10 +3152,64 @@ matrix-like object, or a factor indicating the row labels.</p>
      [,1] [,2] [,3]
 [1,]    1    1    1
 [2,]    2    2    2</code></pre></li>
+<li><p><code>apply</code>:</p>
+<ol style="list-style-type: decimal">
+<li><p>description: apply a function to margins of an array or matrix,
+return a vector or array or list of values.</p></li>
+<li><p>syntax</p>
+<pre><code>apply(X, MARGIN, FUN, ..., simplify = TRUE)</code></pre>
+<ol style="list-style-type: decimal">
+<li>MARGIN: a vector giving the subscripts which the function will be
+applied over. E.g., for a matrix 1 indicates rows, 2 indicates columns,
+3 indicates the 3rd axis for 3D matrix … c(1, 2) indicates rows and
+columns.</li>
+</ol></li>
+<li><p>eg</p>
+<pre><code># apply for a single dim
+&gt; y&lt;-matrix(runif(500,0,20), ncol=5)
+&gt; m&lt;-apply(y,2,mean)    # find mean along the 5 cols separately
+&gt; m
+[1] 10.528686  9.941802  9.340321  9.888169 10.840206
+
+
+# for mul-dim array, along multiple dimesions
+# how to interpret: the result array `ap`&#39;s (i, j) element: the mean of array `z`&#39;s element in both i for dim1 and j for dim3
+&gt; (z=array(rep(seq(20,by=-2,length=12),2), dim=c(3,4,2)))
+, , 1
+
+     [,1] [,2] [,3] [,4]
+[1,]   20   14    8    2
+[2,]   18   12    6    0
+[3,]   16   10    4   -2
+
+, , 2
+
+     [,1] [,2] [,3] [,4]
+[1,]   20   14    8    2
+[2,]   18   12    6    0
+[3,]   16   10    4   -2
+
+&gt; (ap=apply(z, c(1,3), mean))
+     [,1] [,2]
+[1,]   11   11
+[2,]    9    9
+[3,]    7    7
+</code></pre></li>
+</ol></li>
+<li><p>col/row stats</p>
+<ol style="list-style-type: decimal">
+<li><p>desc: Form row and column sums and means for numeric arrays (or
+data frames)</p></li>
+<li><p>syntax</p>
+<pre><code>colSums (x, na.rm = FALSE, dims = 1)
+rowSums (x, na.rm = FALSE, dims = 1)
+colMeans(x, na.rm = FALSE, dims = 1)
+rowMeans(x, na.rm = FALSE, dims = 1)</code></pre></li>
+</ol></li>
 </ol>
 </div>
-<div id="z.-side-track-mul-dim-array" class="section level3">
-<h3>z. side track: mul-dim array</h3>
+<div id="side-track-mul-dim-array" class="section level3">
+<h3>2.5. side track: mul-dim array</h3>
 <ol style="list-style-type: decimal">
 <li><p>create<br />
 <code>array(data = NA, dim = length(data), dimnames = NULL)</code><br />
@@ -3107,6 +3244,8 @@ type of obj</p>
 </div>
 <div id="creation-1" class="section level3">
 <h3>3.1. creation</h3>
+<ol style="list-style-type: decimal">
+<li><p>normal creation</p>
 <pre><code>&gt; w&lt;-list(1:3,c(&quot;a&quot;,&quot;b&quot;),T)
 [[1]]
 [1] 1 2 3
@@ -3115,7 +3254,14 @@ type of obj</p>
 [1] &quot;a&quot; &quot;b&quot;
 
 [[3]]
-[1] TRUE</code></pre>
+[1] TRUE</code></pre></li>
+<li><p>create with name</p>
+<pre><code>w&lt;-list(&quot;ab&quot;=1:3, &quot;y&quot;=c(&quot;a&quot;,&quot;b&quot;), &quot;z&quot;=T)
+
+w&lt;-list(ab=1:3, y=c(&quot;a&quot;,&quot;b&quot;), z=T)    # OK
+w&lt;-list(ab=1:3, y=c(&quot;a&quot;,&quot;b&quot;), 1=T)    # error
+w&lt;-list(ab=1:3, y=c(&quot;a&quot;,&quot;b&quot;), &quot;1&quot;=T)  # OK</code></pre></li>
+</ol>
 </div>
 <div id="name" class="section level3">
 <h3>3.2. name</h3>
@@ -3132,36 +3278,121 @@ $z
 </div>
 <div id="access-1" class="section level3">
 <h3>3.3. access</h3>
-<p>2 subscript. first (double [] denot component of the list, single []:
-ele in the component)</p>
 <ol style="list-style-type: decimal">
-<li>names are access with $; index are accessed with [[]]</li>
-</ol>
+<li><p>single square bracket <code>[]</code>: return value is still a
+list. Can both access index or name.</p>
+<ol style="list-style-type: decimal">
+<li><p>eg</p>
+<pre><code>&gt; w[c(1, 3)]
+[[1]]
+[1] 1 2 3
+
+[[2]]
+[1] TRUE</code></pre></li>
+<li><p>Notes</p>
+<ol style="list-style-type: decimal">
+<li><p>Access name: still write in bracket. But cannot partially
+write</p>
+<pre><code>names(w) = c(&quot;ab&quot; ,&quot;y&quot;, &quot;z&quot;)
+
+&gt; w[&quot;x&quot;]
+$x
+[1] 1 2 3
+
+# using `[]`, cannot (in dataframe, is error)
+&gt; w[&quot;a&quot;]
+$&lt;NA&gt;
+NULL</code></pre></li>
+</ol></li>
+</ol></li>
+<li><p>double square bracket <code>[[]]</code>: return is the element of
+the list. Can also be accessed with <code>$</code> if named.</p>
+<ol style="list-style-type: decimal">
+<li>Note:
+<ol style="list-style-type: decimal">
+<li><p>In this way, can only return 1 element, can’t do slicing.<br />
+eg. This is actually <code>w[[1]][2]</code> but strangly no error</p>
+<pre><code>&gt; w[[c(1, 2)]]
+[1] 2</code></pre></li>
+<li><p>names are access with $; index are accessed with [[]]</p>
+<ol style="list-style-type: decimal">
+<li><p>basic eg</p>
 <pre><code>w[[2]]  # OK
 w$x     # OK
 w$&quot;x&quot;   # OK
 
 w[[&quot;x&quot;]]    # error
-w$1         # error</code></pre>
-<ol style="list-style-type: decimal">
-<li>special case 1: access name with <code>[]</code></li>
-</ol>
-<pre><code>&gt; w[&quot;x&quot;]
-$x
-[1] 1 2 3</code></pre>
-<ol style="list-style-type: decimal">
-<li>special case 2: partially write out the name</li>
-</ol>
+w$1         # error</code></pre></li>
+<li><p>special case: partially write out the name</p>
 <pre><code>names(w) = c(&quot;ab&quot; ,&quot;y&quot;, &quot;z&quot;)
 
 # using `$`, can partially
 &gt; w$a
+[1] 1 2 3</code></pre></li>
+</ol></li>
+</ol></li>
+</ol></li>
+</ol>
+</div>
+<div id="a-change" class="section level3">
+<h3>3.3a change</h3>
+<p>follow the change of how to access how to change</p>
+<pre><code># change the value of an existing element
+&gt; (w&lt;-list(&quot;ab&quot;=1:3, &quot;y&quot;=c(&quot;a&quot;,&quot;b&quot;), &quot;z&quot;=T))
+$ab
+[1] 1 2 3
+$y
+[1] &quot;a&quot; &quot;b&quot;
+$z
+[1] TRUE
+&gt; w$y &lt;- c(1, 2)
+&gt; w
+$ab
+[1] 1 2 3
+$y
+[1] 1 2
+$z
+[1] TRUE
+
+# add an element that previously not existed
+&gt; w&lt;-list(&quot;ab&quot;=1:3, &quot;y&quot;=c(&quot;a&quot;,&quot;b&quot;), &quot;z&quot;=T)
+&gt; w$new = c(T, T, F)
+&gt; w
+$ab
+[1] 1 2 3
+$y
+[1] &quot;a&quot; &quot;b&quot;
+$z
+[1] TRUE
+$new
+[1]  TRUE  TRUE FALSE</code></pre>
+<p>strange case</p>
+<pre><code>&gt; (w&lt;-list(&quot;ab&quot;=1:3, &quot;y&quot;=c(&quot;a&quot;,&quot;b&quot;), &quot;z&quot;=T))
+$ab
 [1] 1 2 3
 
-# using `[]`, cannot
-&gt; w[&quot;a&quot;]
-$&lt;NA&gt;
-NULL</code></pre>
+$y
+[1] &quot;a&quot; &quot;b&quot;
+
+$z
+[1] TRUE
+
+&gt; w[2]
+$y
+[1] &quot;a&quot; &quot;b&quot;
+
+&gt; w[2] &lt;- c(1, 2)
+警告信息:
+In w[2] &lt;- c(1, 2) : 被替换的项目不是替换值长度的倍数
+&gt; w
+$ab
+[1] 1 2 3
+
+$y
+[1] 1
+
+$z
+[1] TRUE</code></pre>
 </div>
 <div id="misc-op-1" class="section level3">
 <h3>3.4 misc op</h3>
@@ -3189,54 +3420,185 @@ called a <strong>variable</strong></p>
 </div>
 <div id="create-dataframe" class="section level3">
 <h3>4.2 create dataframe</h3>
+<ol style="list-style-type: decimal">
+<li><p>basic</p>
 <pre><code>member &lt;- data.frame( 
   name = c(&quot;Tom&quot;, &quot;May&quot;), 
   age = c(22, 20) 
-)</code></pre>
+)</code></pre></li>
+<li><p>Convert from matrix</p>
+<pre><code>&gt; m &lt;- matrix(1:6, nrow=2)
+&gt; data.frame(m)
+  X1 X2 X3
+1  1  3  5
+2  2  4  6</code></pre></li>
+</ol>
 </div>
 <div id="access-2" class="section level3">
-<h3>2.3 access</h3>
-<p>Can only access columns first as it is a “list”</p>
+<h3>4.3 access</h3>
 <ol style="list-style-type: decimal">
-<li>Similar to list, <code>[[]]</code> or <code>$</code>: return as a
-vector</li>
-</ol>
+<li><p>Access with column first: as it is a “list”</p>
+<ol style="list-style-type: decimal">
+<li><p>Similar to list, <code>[[]]</code> or <code>$</code>: return as a
+vector</p>
 <pre><code>&gt; women$weight
  [1] 115 117 120 123 126 129 132 135 139 142 146 150 154 159 164
 &gt; women[[2]]
- [1] 115 117 120 123 126 129 132 135 139 142 146 150 154 159 164</code></pre>
-<ol style="list-style-type: decimal">
-<li><code>with()</code>: directly access columns w/o using $:</li>
+ [1] 115 117 120 123 126 129 132 135 139 142 146 150 154 159 164</code></pre></li>
+</ol></li>
+<li><p>Access like an array</p>
+<p>Just do <code>[1, c(2, 3)]</code> …</p>
+<pre><code>&gt; women[c(1, 2),]   # still return a dataframe
+  height weight
+  1     58    115
+  2     59    117
+
+&gt; women[c(1, 2),1]  # return a vector
+[1] 58 59</code></pre></li>
+<li><p><code>with()</code>: directly access columns w/o using
+$:</p></li>
 </ol>
 <pre><code>with(women, weight/height)
 # gives out a vector: [1] 1.982759 1.983051 2.000000 2.016393 ...</code></pre>
 </div>
-<div id="vector-wise-operations" class="section level3">
-<h3>2.4 vector-wise operations</h3>
+<div id="change-1" class="section level3">
+<h3>4.4 change</h3>
 <ol style="list-style-type: decimal">
-<li><code>by()</code>: similar to <code>tapply()</code>, but the return
-obj class is “by”
+<li><p>modify existing: just how to access, assign new to the
+expression</p></li>
+<li><p>add new col:</p>
 <ol style="list-style-type: decimal">
-<li>Syntax:<br />
-<code>by(data, INDICES, FUN)</code></li>
+<li><p><code>df$new_row &lt;- c(&#39;new&#39;, &#39;row&#39;, &#39;info&#39;)</code></p></li>
+<li><p>use <code>cbind</code></p>
+<pre><code>&gt; (rand6 &lt;- sample(6))
+[1] 5 6 4 1 2 3
+&gt; cbind(head(women), rand6)
+  height weight rand6
+1     58    115     5
+2     59    117     6
+3     60    120     4
+4     61    123     1
+5     62    126     2
+6     63    129     3</code></pre></li>
 </ol></li>
 </ol>
 </div>
-<div id="common-untrivial-operations" class="section level3">
-<h3>2.5 common untrivial operations</h3>
+<div id="inspect" class="section level3">
+<h3>4.5 inspect</h3>
+<p>Note: some methods can also be used in list, matrix, …</p>
 <ol style="list-style-type: decimal">
-<li><p>Find the elements that satisfy some rule</p>
-<pre><code>&gt; women$height[women$weight &gt; 140]    
-[1] 67 68 69 70 71 72  </code></pre>
-<p>explain: <code>women$weight &gt; 140</code> is vector operation and
-result is a vector of T and F<br />
-then use this T F vector to find elements</p></li>
+<li><p><code>names()</code> ~</p></li>
+<li><p><code>head()</code> and <code>tail()</code></p>
+<ol style="list-style-type: decimal">
+<li><p>syntax</p>
+<pre><code>head(x, n = 6L, ...)
+tail(x, n = 6L, keepnums = FALSE, addrownums, ...)</code></pre>
+<ol style="list-style-type: decimal">
+<li><code>n</code> number of lines to display. By default is 6</li>
+</ol></li>
+</ol></li>
 </ol>
 </div>
 <div id="misc-methods" class="section level3">
-<h3>2.4 misc methods</h3>
+<h3>4.7 misc methods</h3>
 <ol style="list-style-type: decimal">
-<li><code>summary(df)</code>: provides the mean max …</li>
+<li><p><code>summary(df)</code>: provides the mean max …</p></li>
+<li><p><code>by()</code>: similar to <code>tapply()</code>, for
+dataframe</p>
+<ol style="list-style-type: decimal">
+<li><p>Syntax:<br />
+<code>by(data, INDICES, FUN)</code></p></li>
+<li><p>eg</p>
+<pre><code>&gt; data &lt;- data.frame(
+    Class = c(&quot;A&quot;, &quot;A&quot;, &quot;B&quot;, &quot;B&quot;, &quot;C&quot;, &quot;C&quot;),
+    Student = c(&quot;John&quot;, &quot;Alice&quot;, &quot;Bob&quot;, &quot;Eve&quot;, &quot;Charlie&quot;, &quot;David&quot;),
+    Score = c(85, 90, 78, 88, 92, 95),
+    Score2 = c(80, 92, 74, 82, 93, 96)
+  )
+
+&gt; by(data$Score, data$Class, mean)
+data$Class: A
+[1] 87.5
+--------------------------------------
+data$Class: B
+[1] 83
+--------------------------------------
+data$Class: C
+[1] 93.5
+
+&gt; by(data[, c(3, 4)], data$Class, colMeans)   # multiple col
+data$Class: A
+ Score Score2 
+  87.5   86.0 
+--------------------------------------
+data$Class: B
+ Score Score2 
+    83     78 
+--------------------------------------
+data$Class: C
+ Score Score2 
+  93.5   94.5 </code></pre></li>
+</ol></li>
+<li><p><code>aggregate()</code>: apply a function to dataframe separated
+by something</p>
+<ol style="list-style-type: decimal">
+<li><p>syntax Note: also have syntax for other objects, here only list
+for dataframe</p>
+<pre><code>aggregate(x, data, FUN, ..., subset, na.action = na.omit)</code></pre>
+<p>x is the name of the columns to apply function / be separated by;
+separated by <code>~</code> data is the dataframe number FUN is the
+function to apply to. eg <code>mean</code>.</p></li>
+<li><p>eg</p>
+<pre><code># one ~ one
+aggregate(weight ~ feed, data = chickwts, mean)
+
+# one ~ many: just use + don&#39;t ask why
+aggregate(breaks ~ wool + tension, data = warpbreaks, mean)
+
+# many ~ one: just use cbind don&#39;t ask why
+aggregate(cbind(Ozone, Temp) ~ Month, data = airquality, mean)
+
+# many ~ many
+aggregate(cbind(ncases, ncontrols) ~ alcgp + tobgp, data = esoph, sum)
+
+## full eg of last
+&gt; head(esoph)
+  agegp     alcgp    tobgp ncases ncontrols
+1 25-34 0-39g/day 0-9g/day      0        40
+2 25-34 0-39g/day    10-19      0        10
+3 25-34 0-39g/day    20-29      0         6
+4 25-34 0-39g/day      30+      0         5
+5 25-34     40-79 0-9g/day      0        27
+6 25-34     40-79    10-19      0         7
+
+&gt; aggregate(weight ~ feed, data = chickwts, mean)
+       feed   weight
+1    casein 323.5833
+2 horsebean 160.2000
+3   linseed 218.7500
+4  meatmeal 276.9091
+5   soybean 246.4286
+6 sunflower 328.9167
+
+&gt; aggregate(cbind(ncases, ncontrols) ~ alcgp + tobgp, data = esoph, sum)
+       alcgp    tobgp ncases ncontrols
+1  0-39g/day 0-9g/day      9       252
+2      40-79 0-9g/day     34       145
+3     80-119 0-9g/day     19        42
+4       120+ 0-9g/day     16         8
+5  0-39g/day    10-19     10        74
+6      40-79    10-19     17        68 
+7     80-119    10-19     19        30
+8       120+    10-19     12         6
+9  0-39g/day    20-29      5        37
+10     40-79    20-29     15        47
+11    80-119    20-29      6        10
+12      120+    20-29      7         5
+13 0-39g/day      30+      5        23
+14     40-79      30+      9        20
+15    80-119      30+      7         5
+16      120+      30+     10         3</code></pre></li>
+</ol></li>
 </ol>
 </div>
 </div>
@@ -3247,32 +3609,28 @@ then use this T F vector to find elements</p></li>
 <p>Is effective when there are a lot of same elements: categorize the
 data, represent &amp; store it on multiple levels.<br />
 A level is the representation of a kind of element. Name of levels are
-string. Levels coded (stored) as integers (so effective to store data
-with repeated element).</p>
+string. Levels coded as integers (so effective to store data with
+repeated element).</p>
 </div>
-<div id="create" class="section level3">
-<h3>create</h3>
-<!-- rnb-text-end -->
-<!-- rnb-chunk-begin -->
-<!-- rnb-output-begin eyJkYXRhIjoiXG48IS0tIHJuYi1zb3VyY2UtYmVnaW4gZXlKa1lYUmhJam9pWUdCZ2NseHVJeUJqY21WaGRHVWdabkp2YlNCc2FYTjBYRzQrSUdkeWNDQThMU0JtWVdOMGIzSW9ZeWhjSW1OdmJuUnliMnhjSWl3Z1hDSjBjbVZoZEcxbGJuUmNJaXdnWENKamIyNTBjbTlzWENJc0lGd2lkSEpsWVhSdFpXNTBYQ0lwS1Z4dVBpQm5jbkJjYmxzeFhTQmpiMjUwY205c0lDQWdkSEpsWVhSdFpXNTBJR052Ym5SeWIyd2dJQ0IwY21WaGRHMWxiblJjYmt4bGRtVnNjem9nWTI5dWRISnZiQ0IwY21WaGRHMWxiblJjYm1CZ1lDSjkgLS0+XG5cbmBgYHJcbiMgY3JlYXRlIGZyb20gbGlzdFxuPiBncnAgPC0gZmFjdG9yKGMoXCJjb250cm9sXCIsIFwidHJlYXRtZW50XCIsIFwiY29udHJvbFwiLCBcInRyZWF0bWVudFwiKSlcbj4gZ3JwXG5bMV0gY29udHJvbCAgIHRyZWF0bWVudCBjb250cm9sICAgdHJlYXRtZW50XG5MZXZlbHM6IGNvbnRyb2wgdHJlYXRtZW50XG5gYGBcblxuPCEtLSBybmItc291cmNlLWVuZCAtLT5cbiJ9 -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyBjcmVhdGUgZnJvbSBsaXN0XG4+IGdycCA8LSBmYWN0b3IoYyhcImNvbnRyb2xcIiwgXCJ0cmVhdG1lbnRcIiwgXCJjb250cm9sXCIsIFwidHJlYXRtZW50XCIpKVxuPiBncnBcblsxXSBjb250cm9sICAgdHJlYXRtZW50IGNvbnRyb2wgICB0cmVhdG1lbnRcbkxldmVsczogY29udHJvbCB0cmVhdG1lbnRcbmBgYCJ9 -->
-<pre class="r"><code># create from list
-&gt; grp &lt;- factor(c(&quot;control&quot;, &quot;treatment&quot;, &quot;control&quot;, &quot;treatment&quot;))
-&gt; grp
-[1] control   treatment control   treatment
-Levels: control treatment</code></pre>
-<!-- rnb-source-end -->
-<!-- rnb-output-end -->
-<!-- rnb-chunk-end -->
-<!-- rnb-text-begin -->
-</div>
-<div id="inspect" class="section level3">
-<h3>inspect</h3>
-<!-- rnb-text-end -->
-<!-- rnb-chunk-begin -->
-<!-- rnb-output-begin eyJkYXRhIjoiXG48IS0tIHJuYi1zb3VyY2UtYmVnaW4gZXlKa1lYUmhJam9pWUdCZ2NseHVJeUJ6WldVZ2RHaGxJR052WkdVZ0tHbHVkQ0J5WlhCeVpYTmxiblJoZEdsdmJpa2diMllnYkdWMlpXeHpYRzQrSUdGekxtbHVkR1ZuWlhJb1ozSndLU0JjYmxzeFhTQXhJRElnTVNBeVhHNWNiaU1nYVc1emNHVmpkQ0JzWlhabGJITmNiajRnYkdWMlpXeHpLR2R5Y0NrZ1hHNWJNVjBnWENKamIyNTBjbTlzWENJZ1hDSjBjbVZoZEcxbGJuUmNJbHh1WEc0K0lHeGxkbVZzY3lobmNuQXBXMkZ6TG1sdWRHVm5aWElvWjNKd0tWMGdYRzViTVYwZ1hDSmpiMjUwY205c1hDSWdYQ0owY21WaGRHMWxiblJjSWlCY0ltTnZiblJ5YjJ4Y0lpQmNJblJ5WldGMGJXVnVkRndpWEc1Z1lHQWlmUT09IC0tPlxuXG5gYGByXG4jIHNlZSB0aGUgY29kZSAoaW50IHJlcHJlc2VudGF0aW9uKSBvZiBsZXZlbHNcbj4gYXMuaW50ZWdlcihncnApIFxuWzFdIDEgMiAxIDJcblxuIyBpbnNwZWN0IGxldmVsc1xuPiBsZXZlbHMoZ3JwKSBcblsxXSBcImNvbnRyb2xcIiBcInRyZWF0bWVudFwiXG5cbj4gbGV2ZWxzKGdycClbYXMuaW50ZWdlcihncnApXSBcblsxXSBcImNvbnRyb2xcIiBcInRyZWF0bWVudFwiIFwiY29udHJvbFwiIFwidHJlYXRtZW50XCJcbmBgYFxuXG48IS0tIHJuYi1zb3VyY2UtZW5kIC0tPlxuIn0= -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyBzZWUgdGhlIGNvZGUgKGludCByZXByZXNlbnRhdGlvbikgb2YgbGV2ZWxzXG4+IGFzLmludGVnZXIoZ3JwKSBcblsxXSAxIDIgMSAyXG5cbiMgaW5zcGVjdCBsZXZlbHNcbj4gbGV2ZWxzKGdycCkgXG5bMV0gXCJjb250cm9sXCIgXCJ0cmVhdG1lbnRcIlxuXG4+IGxldmVscyhncnApW2FzLmludGVnZXIoZ3JwKV0gXG5bMV0gXCJjb250cm9sXCIgXCJ0cmVhdG1lbnRcIiBcImNvbnRyb2xcIiBcInRyZWF0bWVudFwiXG5gYGAifQ== -->
-<pre class="r"><code># see the code (int representation) of levels
+<div id="notes" class="section level3">
+<h3>Notes</h3>
+<ol style="list-style-type: decimal">
+<li><p>Storage issues Levels are internally coded as intergers, and the
+levels are stored as strings (even if original is numeric or
+logical).</p>
+<ol style="list-style-type: decimal">
+<li><p>eg1: logical expressions should be all expressed in character
+from (since is stored as strings) (but not exactly the case?)</p>
+<pre><code>&gt; nums &lt;- factor(c(3, 2, 2, 2, 3))
+&gt; nums == &quot;3&quot;   # expected
+[1]  TRUE FALSE FALSE FALSE  TRUE
+&gt; nums == 3     # ? don&#39;t know why but don&#39;t do this
+[1]  TRUE FALSE FALSE FALSE  TRUE</code></pre></li>
+<li><p>eg2: <code>mode(factor(c(&quot;a&quot;,&quot;b&quot;)))</code> gets “numeric”;<br />
+but <code>class(factor(c(&quot;a&quot;,&quot;b&quot;)))</code> gets “factor” not
+“numeric”.</p></li>
+<li><p>eg3: illustration of how is it coded in integer</p>
+<pre><code># see the code (int representation) of levels
 &gt; as.integer(grp) 
 [1] 1 2 1 2
 
@@ -3281,19 +3639,21 @@ Levels: control treatment</code></pre>
 [1] &quot;control&quot; &quot;treatment&quot;
 
 &gt; levels(grp)[as.integer(grp)] 
-[1] &quot;control&quot; &quot;treatment&quot; &quot;control&quot; &quot;treatment&quot;</code></pre>
-<!-- rnb-source-end -->
-<!-- rnb-output-end -->
-<!-- rnb-chunk-end -->
-<!-- rnb-text-begin -->
+[1] &quot;control&quot; &quot;treatment&quot; &quot;control&quot; &quot;treatment&quot;</code></pre></li>
+</ol></li>
+</ol>
+</div>
+<div id="create" class="section level3">
+<h3>create</h3>
+<pre><code># create from list
+&gt; grp &lt;- factor(c(&quot;control&quot;, &quot;treatment&quot;, &quot;control&quot;, &quot;treatment&quot;))
+&gt; grp
+[1] control   treatment control   treatment
+Levels: control treatment</code></pre>
 </div>
 <div id="operations" class="section level3">
 <h3>operations</h3>
-<!-- rnb-text-end -->
-<!-- rnb-chunk-begin -->
-<!-- rnb-output-begin eyJkYXRhIjoiXG48IS0tIHJuYi1zb3VyY2UtYmVnaW4gZXlKa1lYUmhJam9pWUdCZ2NseHVJeUJ5Wld4aFltVnNYRzQrSUd4bGRtVnNjeWhuY25BcElEd3RJR01vWENJeFhDSXNYQ0l5WENJcElGeHVQaUJuY25BZ1hHNWJNVjBnTVNBeUlERWdNaUJjYmt4bGRtVnNjem9nTVNBeVhHNWNiaU1nWTI5dGNHRnlaU0F2SUdacGJtUWdkMkZ1ZEdWa0lHVnNaVzFsYm5SY2JpTWdUbTkwWlRvZ2JtVmxaQ0IwYnlCamIyMXdZWEpsSUdGeklITjBjbWx1WjF4dVBpQm5jbkFnUFQwZ1hDSXhYQ0lnWEc1Yk1WMGdJRlJTVlVVZ1JrRk1VMFVnSUZSU1ZVVWdSa0ZNVTBWY2JtQmdZQ0o5IC0tPlxuXG5gYGByXG4jIHJlbGFiZWxcbj4gbGV2ZWxzKGdycCkgPC0gYyhcIjFcIixcIjJcIikgXG4+IGdycCBcblsxXSAxIDIgMSAyIFxuTGV2ZWxzOiAxIDJcblxuIyBjb21wYXJlIC8gZmluZCB3YW50ZWQgZWxlbWVudFxuIyBOb3RlOiBuZWVkIHRvIGNvbXBhcmUgYXMgc3RyaW5nXG4+IGdycCA9PSBcIjFcIiBcblsxXSAgVFJVRSBGQUxTRSAgVFJVRSBGQUxTRVxuYGBgXG5cbjwhLS0gcm5iLXNvdXJjZS1lbmQgLS0+XG4ifQ== -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyByZWxhYmVsXG4+IGxldmVscyhncnApIDwtIGMoXCIxXCIsXCIyXCIpIFxuPiBncnAgXG5bMV0gMSAyIDEgMiBcbkxldmVsczogMSAyXG5cbiMgY29tcGFyZSAvIGZpbmQgd2FudGVkIGVsZW1lbnRcbiMgTm90ZTogbmVlZCB0byBjb21wYXJlIGFzIHN0cmluZ1xuPiBncnAgPT0gXCIxXCIgXG5bMV0gIFRSVUUgRkFMU0UgIFRSVUUgRkFMU0VcbmBgYCJ9 -->
-<pre class="r"><code># relabel
+<pre><code># relabel
 &gt; levels(grp) &lt;- c(&quot;1&quot;,&quot;2&quot;) 
 &gt; grp 
 [1] 1 2 1 2 
@@ -3302,17 +3662,22 @@ Levels: 1 2
 # compare / find wanted element
 # Note: need to compare as string
 &gt; grp == &quot;1&quot; 
-[1]  TRUE FALSE  TRUE FALSE</code></pre>
-<!-- rnb-source-end -->
-<!-- rnb-output-end -->
-<!-- rnb-chunk-end -->
-<!-- rnb-text-begin -->
+[1]  TRUE FALSE  TRUE FALSE
+
+# common use: rename a repeating section
+participants &lt;- data.frame(
+    destination = c(&quot;Austria&quot;,&quot;Korea&quot;,&quot;Japan&quot;,&quot;Austria&quot;,&quot;Sweden&quot;),
+    age = c(18,20,22,NA,20)
+)
+
+participants$destination &lt;- factor(participants$destination)
+levels(participants$destination) &lt;- c(&quot;Australia&quot;,&quot;Japan&quot;,&quot;Korea&quot;,&quot;Sweden&quot;)</code></pre>
 <!-- rnb-text-end -->
 </div>
 </div>
 </div>
 
-<div id="rmd-source-code">LS0tDQp0aXRsZTogIjJiX2RhdGFfc3RydWN0Ig0Kb3V0cHV0OiANCiAgaHRtbF9ub3RlYm9vazoNCiAgICB0b2M6IHRydWUNCiAgICB0b2NfZmxvYXQ6IHRydWUNCi0tLQ0KDQojICoqKmRhdGEgb2JqZWN0cyoqKg0KZGF0YSBhcmUgc3RvcmVkIGFzIG9iamVjdHMuDQoNCiMjIDEuICoqdmVjdG9yKioNCg0KIyMjIDEuMCBJbnRybw0KMS4gb25lIGRpbSBhcnJheTogYSBzeXN0ZW1hdGljIGFycmFuZ2VtZW50IG9mIHNpbWlsYXIgb2JqZWN0cw0KMS4gdmVjdG9yIGlzIHRoZSBzaW1wbGVzdC4gYSBzY2Fsb3IgaXMgYSB2ZWN0b3Igd2l0aCBsZW49MQ0KMS4gT25lIHZlY3RvciBzaW5nbGUgZGF0YSB0eXBlDQoNCiMjIyAxLjEgY3JlYXRlIHZlY3Rvcg0KDQoxLiBiYXNpYyAgDQoNCmBgYHYgPSBjKDAsIDEsIDIpYGBgDQoNCjEuIGRlY2xhcmUgd2l0aCBuYW1lDQoNCiAgYGBgDQogIGMobWVhbj0xLHN0ZGV2PTIsbWVkaWFuPTMsbWluPTQsbWF4PTUpDQogIGBgYA0KDQoxLiBvdGhlciBmdW5jdGlvbnMNCg0KICAgICgxKSBgc2VxKCk6YCAgDQogICAgcGFyYW1zOiBzZXEoZnJvbSA9IDEsIHRvID0gMSwgYnkgPSAoKHRvIC0gZnJvbSkvKGxlbmd0aC5vdXQgLSAxKSkgIA0KICAgIG5vdGU6ICANCiAgICAgIGkgc3RhcnQgYW5kIGVuZCBhcmUgYm90aCBpbmNsdWRlZA0KICANCiMjIyAxLjIgYWNjZXNzaW5nIGVsZW1lbnRzDQoNCmBgYA0KeFsxXQ0KeFsxOjNdDQp4W2MoMSwgMywgNSldDQp4W3g+M10gICAgIyBhbGwgZWxlbWVudHMgdGhhdCA+IDMgaW4geA0KDQp4Wy0xXSAgICMgZXhjbHVkZSBmaXJzdA0KeFtjKC0xLCAtMildDQp4W2MoLTEsIC0yLCAzKV0gICAjIHJlc3VsdHMgaW4gZXJyb3INCnhbLTZdICAgIyBldmVuIGlmIGxlbmd0aCBvZiB4IGlzIDUsIG5vIGVycm9yDQpgYGANCiAgDQojIyMgMS4zIGNhbGN1bGF0aW9uDQoNCjEuIGRpcmVjdGx5IHVzZSBtYXRoIHN5bWJvbHM6DQoNCmBgYA0KeD01OjENCg0KeCA+IDIgICAjIGEgdmVjdG9yIG9mIFRSVUUgYW5kIEZBTFNFDQp4ICogMiAgICMgZWxld2lzZSwgc2FtZSB3aXRoIG90aGVyIG9wDQpgYGANCg0KMS4gZGlmZih2KSAgDQpyZXR1cm4gdGhlIGRpZmYgYHZbaSsxXS12W2ldYCAgDQpgYGANCj4gZGlmZihjKDEsIDIsIDQpKQ0KWzFdIDEgMg0KYGBgDQoNCiMjIyAxLjQgbWlzYyBvcGVyYXRpb25zDQoNCjEuIGA6YCAgDQogICAgU2ltaWxhciB0byB0aGUgYmFzaWNzIG9mIGBzZXFgICANCiAgICANCiAgICBgYGANCiAgICAxOjUgZ2V0cyAxIDIgMyA0IDUNCiAgICA1OjEgZ2V0cyA1IDQgMyAyIDENCiAgICBgYGANCg0KMS4gbGVuZ3RoKCkgIA0KDQoxLiBjb21iaW5hdGlvbiBvZiB2ZWN0b3JzICANCiAgICB1c2UgYGMoKWAuIENhbiBjb21iaW5lIGRpZmYgZGF0YXR5cGUsIGJ1dCB3aWxsIGNvbnZlcnQgdG8gdGhlIHNhbWU6ICANCiAgICAgICAgMS4gbnVtZXJpYyArIGxvZ2ljYWw6IGxvZ2ljYWwgRiAtPiAwLCBUIC0+IDENCiAgICAgICAgMS4gY2hhcmFjdGVyICsgbnVtZXJpY2FsL2xvZ2ljYWw6IG51bWVyaWNhbC9sb2dpY2FsIC0+IGNoYXINCg0KMS4gZXhwbGljaXQgY29udmVyc2lvbiBvZiBkYXRhIHR5cGUNCiAgICBgYXMubnVtZXJpYyh2KWA6IGVnIGNoYXJhY3RlcnMgdGhhdCBjYW5ub3QgYmUgY29udmVydGVkIHdpbGwgYmUgYE5BYA0KDQoxLiB1bmlxdWUoKSAgDQogICAgcmV0dXJuIHVuaXF1ZSBlbGVtZW50cyBhcyBhIGxpc3QgIA0KICAgIA0KICAgIGBgYA0KICAgID4gdW5pcXVlKGMoIkMiLCAiRCIsICJIIiwgIkQiLCAiSCIpKQ0KICAgIFsxXSAiQyIgIkQiICJIIg0KICAgIGBgYA0KDQoxLiBzcGxpdCgpICANCiAgICBzcGxpdCB0aGUgdmVjdG9yIHRvIHNldmVyYWwgdmVjdG9ycyBhbmQgcmV0dXJuIGFzIGEgbGlzdCAgDQogICAgDQogICAgYGBgDQogICAgPiBnID0gYygnYScsICdiJywgJ2MnLCAnYScsICdiJywgJ2MnLCAnYScsICdiJywgJ2MnKQ0KICAgID4geCA9IGMoMSwgMiwgMywgNCwgNSwgIDYsIDcsIDgsIDkpDQogICAgPiBzcGxpdCh4LCBnKQ0KICAgICRhDQogICAgWzFdIDEgNCA3DQogICAgDQogICAgJGINCiAgICBbMV0gMiA1IDgNCiAgICANCiAgICAkYw0KICAgIFsxXSAzIDYgOQ0KICAgIGBgYA0KICAgIA0KMS4gcmVwZWF0ICANCg0KICAgIGBgYA0KICAgICMgcmVwZWF0IGEgbnVtYmVyOiByZXAoeCwgdGltZXMpDQogICAgcmVwKDMsIDEyKQ0KICAgIA0KICAgIA0KICAgICMgcmVwZWF0IGEgdmVjdG9yOg0KICAgIHJlcChzZXEoMSwzKSwgMikgICAgICAgICMgMSwgMiwgMywgMSwgMiwgMyANCiAgICByZXAoYygxLDIsMyksIGMoMSwyLDMpKSAjIDEsIDIsIDIsIDMsIDMsIDM7IG5vdGU6IGlmIG51bSBub3QgbWF0Y2gsIGVycm9yDQogICAgcmVwKGMoMSwyLDMpLCBlYWNoPTIpICAgIyAxLCAxLCAyLCAyLCAzLCAzDQogICAgDQogICAgDQogICAgcmVwKHNlcSgxLDMpLCBlYWNoPTIpICAgICAgICAjIDEsIDIsIDMsIDEsIDIsIDMgDQogICAgYGBgDQogICAgDQoxLiBgdGFwcGx5YA0KICAgIDEuIEludHJvOiBBcHBseSBhIGZ1bmN0aW9uIHRvIHN1YnNldHMgb2YgYSB2ZWN0b3Igb3IgYXJyYXksIHNwbGl0IGJ5IGZhY3RvcnMNCiAgICANCiAgICAxLiBTeW50YXgNCiAgICAgICAgYHRhcHBseShkYXRhLCBJTkRFWCwgRlVOLCAuLi4pYA0KDQogICAgICAgIGRhdGE6IFRoZSB2ZWN0b3Igb3IgYXJyYXkgeW91IHdhbnQgdG8gc3VtbWFyaXplLiAgDQogICAgICAgIElOREVYOiBBIGxpc3Qgb2YgZmFjdG9ycyBvciBncm91cGluZyB2YXJpYWJsZXMgdXNlZCB0byBzcGxpdCB0aGUgZGF0YS4gIA0KICAgICAgICBGVU46IFRoZSBmdW5jdGlvbiB5b3Ugd2FudCB0byBhcHBseSB0byBlYWNoIHN1YnNldC4gIA0KICAgIDEuIEVnLiAgDQogICAgDQogICAgICAgIGBgYA0KICAgICAgICBzY29yZXMgPC0gYyg4NSwgOTAsIDc4LCA5MiwgODgsIDc2LCA4NCwgOTIsIDk1LCA4OSkNCiAgICAgICAgZ3JhZGVzIDwtIGMoIkEiLCAiQSIsICJCIiwgIkEiLCAiQiIsICJDIiwgIkIiLCAiQSIsICJBIiwgIkIiKQ0KDQogICAgICAgICMgVXNpbmcgdGFwcGx5KCkgdG8gY2FsY3VsYXRlIHRoZSBhdmVyYWdlIHNjb3JlIGZvciBlYWNoIGdyYWRlDQogICAgICAgIHRhcHBseShzY29yZXMsIGdyYWRlcywgbWVhbikNCiAgICAgICAgDQogICAgICAgICAgICBBICAgICBCICAgICBDIA0KICAgICAgICA5MC44MCA4NC43NSA3Ni4wMCANCiAgICAgICAgYGBgDQoxLiBgb3V0ZXIoWCwgWSwgRlVOID0gIioiLCAuLi4pYA0KDQogICAgICBUaGUgb3V0ZXIgcHJvZHVjdCBvZiB0aGUgYXJyYXlzIFggYW5kIFkgaXMgdGhlIGFycmF5IEEgd2l0aCBkaW1lbnNpb24gYyhkaW0oWCksIGRpbShZKSkgd2hlcmUgZWxlbWVudCBBW2MoYXJyYXlpbmRleC54LCBhcnJheWluZGV4LnkpXSA9IEZVTihYW2FycmF5aW5kZXgueF0sIFlbYXJyYXlpbmRleC55XSwgLi4uKS4NCiAgICAgIGBGVU5gIGNhbiBhbHNvIGJlIGArYCwgLi4uDQoNCg0KIyMgMi4gKiptYXRyaXggKCYgbXVsdGkgZGltZW5zaW9uYWwgYXJyYXlzKSoqDQoNCiMjIyAwLiBpbnRybw0KDQpuIGJ5IG0gbWVhbnMgbiByb3dzIG0gY29scw0KDQojIyMgMS4gY3JlYXRpb24NCmBtYXRyaXgoZGF0YSA9IE5BLCBucm93ID0gMSwgbmNvbCA9IDEsIGJ5cm93ID0gRkFMU0UsZGltbmFtZXMgPSBOVUxMKWANCmBgYA0KIyBjb2wtd2lzZSBmaWxsIGluIGJ5IGRlZmF1bHQNCj4gbTwtbWF0cml4KDE6MTIsbnJvdz0zLG5jb2w9NCkNCj4gbQ0KICAgICBbLDFdIFssMl0gWywzXSBbLDRdDQpbMSxdICAgIDEgICAgNCAgICA3ICAgMTANClsyLF0gICAgMiAgICA1ICAgIDggICAxMQ0KWzMsXSAgICAzICAgIDYgICAgOSAgIDEyDQoNCm1hdHJpeCgxOjksIG5yb3c9MykgIyBubyBlcnJvcg0KbWF0cml4KDE6OSwgbnJvdz0zKSAjIG5vIGVycm9yDQptYXRyaXgoMToxMCwgbnJvdz0zKSAjIGVycm9yDQoNCmBgYA0KIyMjIDIuIGluc3BlY3Rpb24NCmBgYA0KZGltKG0pDQpucm93KG0pDQpuY29sKG0pDQpgYGANCg0KIyMjIDMuIGFjY2Vzcw0KDQpgYGANCm1bMiwzXSAgICAjIGVsZW1lbnQsIHNsaWNpbmcsIC0xIC4uLiBzYW1lIHdpdGggdmVjdG9yDQptWzIsXSAgICAgIyBzZWxlY3Qgcm93IChyZXN1bHQgaXMgdmVjdG9yKQ0KbVssM10gICAgICMgc2VsZWN0IGNvbCAocmVzdWx0IGlzIHZlY3RvcikNCg0KbVsxOjIsIDM6NF0gICAjIChyZXN1bHQgaXMgYSBtYXRyaXgpDQoNCmBgYA0KIyMjIDQuIG1pc2Mgb3ANCg0KMS4gY29tYmluZTogIA0KDQogICAgICBgYGANCiAgICAgIG0gPSBjYmluZChtMSwgbTIpICAgIyBiaW5kIGluIGF4aXMgb2YgY29sLiBJZiBtMSBpcyBheGIsIG0yIGlzIGN4YiwgdGhlbiBtIGlzIChhK2MpeGINCiAgICAgIG0gPSByYmluZChtMSwgbTIpICAgIyBzaW1pbGFybHkNCiAgICAgIA0KICAgICAgYGBgDQoNCjEuIHRyYW5zcG9zZTogYHQoKWANCg0KMS4gYHByb3AudGFibGUocnMsbWFyZ2luPTEpYDogYWxvbmcgYXhpcz1tYXJnaW4gKDEgZm9yIHJvdywgMiBmb3IgY29sKSwgcmV0dXJuIHRoZSBwcm9wb3J0aW9uIChwZXJjZW50YWdlKQ0KDQoxLiBgY29sKClgLCBgcm93KClgICANCiAgICBSZXR1cm5zIGEgbWF0cml4IG9mIGludGVnZXJzIGluZGljYXRpbmcgdGhlaXIgcm93IG51bWJlciBpbiBhIG1hdHJpeC1saWtlIG9iamVjdCwgb3IgYSBmYWN0b3IgaW5kaWNhdGluZyB0aGUgcm93IGxhYmVscy4NCiAgICANCiAgICBgYGANCiAgICA+IHJvdyhtYXRyaXgoMCwgMiwgMykpDQogICAgICAgICBbLDFdIFssMl0gWywzXQ0KICAgIFsxLF0gICAgMSAgICAxICAgIDENCiAgICBbMixdICAgIDIgICAgMiAgICAyDQogICAgYGBgDQogIA0KDQojIyMgei4gc2lkZSB0cmFjazogbXVsLWRpbSBhcnJheQ0KDQoxLiBjcmVhdGUgIA0KICAgIGBhcnJheShkYXRhID0gTkEsIGRpbSA9IGxlbmd0aChkYXRhKSwgZGltbmFtZXMgPSBOVUxMKWAgIA0KICAgIG1pbmQgdGhlIGRpbSEgZmlyc3QgMiBkaW0gaXMgdGhlIGFycmF5LCB0aGVuIGlzIHRoZSB0aGlyZCBkaW0gIA0KICAgIGFsc28gbWluZCBmb3IgZmlsbGluZyAgDQogICAgDQogICAgYGBgDQogICAgPiBhcnJheShkYXRhPTE6MjQsIGRpbT1jKDQsIDMsIDIpKQ0KICAgICwgLCAxDQogICAgDQogICAgICAgICBbLDFdIFssMl0gWywzXQ0KICAgIFsxLF0gICAgMSAgICA1ICAgIDkNCiAgICBbMixdICAgIDIgICAgNiAgIDEwDQogICAgWzMsXSAgICAzICAgIDcgICAxMQ0KICAgIFs0LF0gICAgNCAgICA4ICAgMTINCiAgICANCiAgICAsICwgMg0KICAgIA0KICAgICAgICAgWywxXSBbLDJdIFssM10NCiAgICBbMSxdICAgMTMgICAxNyAgIDIxDQogICAgWzIsXSAgIDE0ICAgMTggICAyMg0KICAgIFszLF0gICAxNSAgIDE5ICAgMjMNCiAgICBbNCxdICAgMTYgICAyMCAgIDI0DQogICAgDQogICAgYGBgDQoNCiMjIDMuICoqbGlzdCoqDQoNCiMjIyAzLjAuIGludHJvDQptb3N0IGdlbmVyYWwgb2JqLiBjb21wYXJlZCB0byB2ZWN0b3JzIGFuZCBtYXRyaWNlczogY2FuIGhvbGQgZGlmZiB0eXBlIG9mIG9iag0KDQojIyMgMy4xLiBjcmVhdGlvbg0KYGBgDQo+IHc8LWxpc3QoMTozLGMoImEiLCJiIiksVCkNCltbMV1dDQpbMV0gMSAyIDMNCg0KW1syXV0NClsxXSAiYSIgImIiDQoNCltbM11dDQpbMV0gVFJVRQ0KYGBgDQoNCiMjIyAzLjIuIG5hbWUNCg0KYGBgDQphc3NpZ24gbmFtZTogDQo+IG5hbWVzKHcpID0gYygieCIsICJ5IiwgInoiKQ0KJHgNClsxXSAxIDIgMw0KDQokeQ0KWzFdICJhIiAiYiINCg0KJHoNClsxXSBUUlVFDQpgYGANCg0KIyMjIDMuMy4gYWNjZXNzDQoyIHN1YnNjcmlwdC4gZmlyc3QgKGRvdWJsZSBbXSBkZW5vdCBjb21wb25lbnQgb2YgdGhlIGxpc3QsIHNpbmdsZSBbXTogZWxlIGluIHRoZSBjb21wb25lbnQpICANCg0KMS4gbmFtZXMgYXJlIGFjY2VzcyB3aXRoICQ7IGluZGV4IGFyZSBhY2Nlc3NlZCB3aXRoIFtbXV0NCg0KYGBgDQp3W1syXV0gICMgT0sNCnckeCAgICAgIyBPSw0KdyQieCIgICAjIE9LDQoNCndbWyJ4Il1dICAgICMgZXJyb3INCnckMSAgICAgICAgICMgZXJyb3INCmBgYA0KDQoxLiBzcGVjaWFsIGNhc2UgMTogYWNjZXNzIG5hbWUgd2l0aCBgW11gDQpgYGANCj4gd1sieCJdDQokeA0KWzFdIDEgMiAzDQpgYGANCg0KMS4gc3BlY2lhbCBjYXNlIDI6IHBhcnRpYWxseSB3cml0ZSBvdXQgdGhlIG5hbWUNCmBgYA0KbmFtZXModykgPSBjKCJhYiIgLCJ5IiwgInoiKQ0KDQojIHVzaW5nIGAkYCwgY2FuIHBhcnRpYWxseQ0KPiB3JGENClsxXSAxIDIgMw0KDQojIHVzaW5nIGBbXWAsIGNhbm5vdA0KPiB3WyJhIl0NCiQ8TkE+DQpOVUxMDQpgYGANCg0KDQojIyMgMy40IG1pc2Mgb3ANCg0KMS4gYHVubGlzdCgpYDogY2hhbmdlIHRoZSBsaXN0IG9iaiB0byBhIGxvbmcgdmVjdG9yLCB1c2luZyBzaW1pbGFyIGRhdGEgdHlwZSBjYXN0aW5nIHJ1bGUNCg0KDQojIyA0LiAqKmRhdGFmcmFtZSoqDQoNCiMjIyA0LjEuIGludHJvDQoNCmRhdGEgZnJhbWUgaXMgYSBzcGVjaWFsIGtpbmQgb2YgbGlzdCB3aGVyZSBlYWNoIG1lbWJlciAoY29sLCBidXQgbm90IHJvdykgYXJlIHZlY3RvcnMgb2YgZXF1YWwgbGVuZ3RoICANCg0KYGBgDQo+IHdvbWVuICAgIyBidWlsdC1pbiBkYXRhZnJhbWUgaW4gUg0KICAgaGVpZ2h0IHdlaWdodA0KMSAgICAgIDU4ICAgIDExNQ0KMiAgICAgIDU5ICAgIDExNw0KMyAgICAgIDYwICAgIDEyMA0KNCAgICAgIDYxICAgIDEyMw0KNSAgICAgIDYyICAgIDEyMg0KYGBgDQoNCkVhY2ggcm93IGlzIGNhbGxlZCBhbiAqKm9ic2VydmF0aW9uKiogYW5kIGVhY2ggY29sdW1uIGlzIGNhbGxlZCBhICoqdmFyaWFibGUqKiAgDQoNCiMjIyA0LjIgY3JlYXRlIGRhdGFmcmFtZQ0KYGBgDQptZW1iZXIgPC0gZGF0YS5mcmFtZSggDQogIG5hbWUgPSBjKCJUb20iLCAiTWF5IiksIA0KICBhZ2UgPSBjKDIyLCAyMCkgDQopDQpgYGANCg0KIyMjIDIuMyBhY2Nlc3MNCkNhbiBvbmx5IGFjY2VzcyBjb2x1bW5zIGZpcnN0IGFzIGl0IGlzIGEgImxpc3QiICANCg0KMS4gU2ltaWxhciB0byBsaXN0LCBgW1tdXWAgb3IgYCRgOiByZXR1cm4gYXMgYSB2ZWN0b3INCmBgYA0KPiB3b21lbiR3ZWlnaHQNCiBbMV0gMTE1IDExNyAxMjAgMTIzIDEyNiAxMjkgMTMyIDEzNSAxMzkgMTQyIDE0NiAxNTAgMTU0IDE1OSAxNjQNCj4gd29tZW5bWzJdXQ0KIFsxXSAxMTUgMTE3IDEyMCAxMjMgMTI2IDEyOSAxMzIgMTM1IDEzOSAxNDIgMTQ2IDE1MCAxNTQgMTU5IDE2NA0KYGBgDQoNCjEuIGB3aXRoKClgOiBkaXJlY3RseSBhY2Nlc3MgY29sdW1ucyB3L28gdXNpbmcgJDoNCmBgYA0Kd2l0aCh3b21lbiwgd2VpZ2h0L2hlaWdodCkNCiMgZ2l2ZXMgb3V0IGEgdmVjdG9yOiBbMV0gMS45ODI3NTkgMS45ODMwNTEgMi4wMDAwMDAgMi4wMTYzOTMgLi4uDQpgYGANCg0KIyMjIDIuNCB2ZWN0b3Itd2lzZSBvcGVyYXRpb25zDQoNCjEuIGBieSgpYDogDQogICAgc2ltaWxhciB0byBgdGFwcGx5KClgLCBidXQgdGhlIHJldHVybiBvYmogY2xhc3MgaXMgImJ5Ig0KICAgIDEuIFN5bnRheDogIA0KICAgICAgICBgYnkoZGF0YSwgSU5ESUNFUywgRlVOKWANCg0KIyMjIDIuNSBjb21tb24gdW50cml2aWFsIG9wZXJhdGlvbnMNCjEuIEZpbmQgdGhlIGVsZW1lbnRzIHRoYXQgc2F0aXNmeSBzb21lIHJ1bGUNCg0KICAgIGBgYA0KICAgID4gd29tZW4kaGVpZ2h0W3dvbWVuJHdlaWdodCA+IDE0MF0gICAgDQogICAgWzFdIDY3IDY4IDY5IDcwIDcxIDcyICANCiAgICBgYGANCiAgICANCiAgICBleHBsYWluOiANCiAgICBgd29tZW4kd2VpZ2h0ID4gMTQwYCBpcyB2ZWN0b3Igb3BlcmF0aW9uIGFuZCByZXN1bHQgaXMgYSB2ZWN0b3Igb2YgVCBhbmQgRiAgDQogICAgIHRoZW4gdXNlIHRoaXMgVCBGIHZlY3RvciB0byBmaW5kIGVsZW1lbnRzDQoNCiMjIyAyLjQgbWlzYyBtZXRob2RzDQoNCjEuIGBzdW1tYXJ5KGRmKWA6IHByb3ZpZGVzIHRoZSBtZWFuIG1heCAuLi4NCg0KIyMgNS4gKipmYWN0b3IqKg0KDQojIyMgSW50cm8NCg0KSXMgZWZmZWN0aXZlIHdoZW4gdGhlcmUgYXJlIGEgbG90IG9mIHNhbWUgZWxlbWVudHM6IGNhdGVnb3JpemUgdGhlIGRhdGEsIHJlcHJlc2VudCAmIHN0b3JlIGl0IG9uIG11bHRpcGxlIGxldmVscy4gIA0KQSBsZXZlbCBpcyB0aGUgcmVwcmVzZW50YXRpb24gb2YgYSBraW5kIG9mIGVsZW1lbnQuIE5hbWUgb2YgbGV2ZWxzIGFyZSBzdHJpbmcuIExldmVscyBjb2RlZCAoc3RvcmVkKSBhcyBpbnRlZ2VycyAoc28gZWZmZWN0aXZlIHRvIHN0b3JlIGRhdGEgd2l0aCByZXBlYXRlZCBlbGVtZW50KS4NCg0KIyMjIGNyZWF0ZQ0KDQpgYGB7cn0NCiMgY3JlYXRlIGZyb20gbGlzdA0KPiBncnAgPC0gZmFjdG9yKGMoImNvbnRyb2wiLCAidHJlYXRtZW50IiwgImNvbnRyb2wiLCAidHJlYXRtZW50IikpDQo+IGdycA0KWzFdIGNvbnRyb2wgICB0cmVhdG1lbnQgY29udHJvbCAgIHRyZWF0bWVudA0KTGV2ZWxzOiBjb250cm9sIHRyZWF0bWVudA0KYGBgDQoNCiMjIyBpbnNwZWN0DQpgYGB7cn0NCiMgc2VlIHRoZSBjb2RlIChpbnQgcmVwcmVzZW50YXRpb24pIG9mIGxldmVscw0KPiBhcy5pbnRlZ2VyKGdycCkgDQpbMV0gMSAyIDEgMg0KDQojIGluc3BlY3QgbGV2ZWxzDQo+IGxldmVscyhncnApIA0KWzFdICJjb250cm9sIiAidHJlYXRtZW50Ig0KDQo+IGxldmVscyhncnApW2FzLmludGVnZXIoZ3JwKV0gDQpbMV0gImNvbnRyb2wiICJ0cmVhdG1lbnQiICJjb250cm9sIiAidHJlYXRtZW50Ig0KYGBgDQoNCiMjIyBvcGVyYXRpb25zDQpgYGB7cn0NCiMgcmVsYWJlbA0KPiBsZXZlbHMoZ3JwKSA8LSBjKCIxIiwiMiIpIA0KPiBncnAgDQpbMV0gMSAyIDEgMiANCkxldmVsczogMSAyDQoNCiMgY29tcGFyZSAvIGZpbmQgd2FudGVkIGVsZW1lbnQNCiMgTm90ZTogbmVlZCB0byBjb21wYXJlIGFzIHN0cmluZw0KPiBncnAgPT0gIjEiIA0KWzFdICBUUlVFIEZBTFNFICBUUlVFIEZBTFNFDQpgYGANCg0KDQo=</div>
+<div id="rmd-source-code">LS0tDQp0aXRsZTogIjJiX2RhdGFfc3RydWN0Ig0Kb3V0cHV0OiANCiAgaHRtbF9ub3RlYm9vazoNCiAgICB0b2M6IHRydWUNCiAgICB0b2NfZmxvYXQ6IHRydWUNCi0tLQ0KDQojICoqKmRhdGEgb2JqZWN0cyoqKg0KZGF0YSBhcmUgc3RvcmVkIGFzIG9iamVjdHMuDQoNCiMjIDEuICoqdmVjdG9yKioNCg0KIyMjIDEuMCBJbnRybw0KMS4gb25lIGRpbSBhcnJheTogYSBzeXN0ZW1hdGljIGFycmFuZ2VtZW50IG9mIHNpbWlsYXIgb2JqZWN0cw0KMS4gdmVjdG9yIGlzIHRoZSBzaW1wbGVzdC4gYSBzY2Fsb3IgaXMgYSB2ZWN0b3Igd2l0aCBsZW49MQ0KMS4gT25lIHZlY3RvciBzaW5nbGUgZGF0YSB0eXBlDQoNCiMjIyAxLjEgY3JlYXRlIHZlY3Rvcg0KDQoxLiBiYXNpYyAgDQoNCiAgICBgYGB2ID0gYygwLCAxLCAyKWBgYA0KDQoxLiBkZWNsYXJlIHdpdGggbmFtZQ0KDQogICAgYGBgDQogICAgYyhtZWFuPTEsc3RkZXY9MixtZWRpYW49MyxtaW49NCxtYXg9NSkNCiAgICBgYGANCiAgICANCiAgICBub3RlOiBjYW4gdXNlIGRvdWJsZSBxdW90ZSBjYW4gZG9uJ3QgdXNlDQoNCjEuIG90aGVyIGZ1bmN0aW9ucw0KDQogICAgMS4gYHNlcSgpOmAgIA0KICAgICAgICAxLiBzeW50YXg6IA0KICAgICAgICAgICAgYHNlcShmcm9tID0gMSwgdG8gPSAxLCBieSA9ICgodG8gLSBmcm9tKS8obGVuZ3RoLm91dCAtIDEpKWAgIA0KICAgICAgICAxLiBub3RlOiAgDQogICAgICAgICAgICBpIHN0YXJ0IGFuZCBlbmQgYXJlIGJvdGggaW5jbHVkZWQgIA0KICAgICAgICAgICAgY2FuIGFsc28gc3BlY2lmeSBieSBwYXJhbWV0ZXIgYGxlbmd0aC5vdXRgOiB3aGF0IGlzIHRoZSBsZW5ndGggb2YgdGhlIG91dHB1dA0KICAgICAgICAgIA0KICAgIDEuIGA6YCAgDQogICAgICAgIFNpbWlsYXIgdG8gdGhlIGJhc2ljcyBvZiBgc2VxYCAgDQogICAgDQogICAgICAgIGBgYA0KICAgICAgICAxOjUgZ2V0cyAxIDIgMyA0IDUNCiAgICAgICAgNToxIGdldHMgNSA0IDMgMiAxDQogICAgICAgIGBgYA0KICAgICAgICANCiAgICAxLiBjcmVhdGUgYnkgdGhlIG1vZGUgdHlwZToNCiAgICANCiAgICAgICAgYGBgDQogICAgICAgID4gbnVtZXJpYygxMikNCiAgICAgICAgIFsxXSAwIDAgMCAwIDAgMCAwIDAgMCAwIDAgMA0KICAgICAgICA+IGNoYXJhY3RlcigxMCkNCiAgICAgICAgIFsxXSAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIiAiIg0KICAgICAgICA+IGxvZ2ljYWwoMTApDQogICAgICAgICBbMV0gRkFMU0UgRkFMU0UgRkFMU0UgRkFMU0UgRkFMU0UgRkFMU0UgRkFMU0UgRkFMU0UgRkFMU0UgRkFMU0UNCiAgICAgICAgYGBgDQogICAgICANCiAgICAgICAgDQojIyMgMS4yIGFjY2Vzc2luZyBlbGVtZW50cw0KDQpgYGANCnhbMV0NCnhbMTozXQ0KeFtjKDEsIDMsIDUpXQ0KeFt4PjNdICAgICMgYWxsIGVsZW1lbnRzIHRoYXQgPiAzIGluIHgNCg0KeFstMV0gICAjIGV4Y2x1ZGUgZmlyc3QNCnhbYygtMSwgLTIpXQ0KeFtjKC0xLCAtMiwgMyldICAgIyByZXN1bHRzIGluIGVycm9yDQp4Wy02XSAgICMgZXZlbiBpZiBsZW5ndGggb2YgeCBpcyA1LCBubyBlcnJvcg0KYGBgDQoNCiMjIyAxLjI1IG1vZGlmeSBlbGVtZW50cw0KDQpJZGVhOiBqdXN0IGhvdyB0byBhY2Nlc3MsIGFzc2lnbiB0aGUgZXhwcmVzc2lvbiB3aXRoIGEgbmV3IHZhbHVlIHRoZW4gaXMgT0suIEFsc28gd29yayBmb3Igb3RoZXIgZGF0YSBvYmplY3RzLg0KDQpgYGANCiMgY2hhbmdlIHRoZSB2YWx1ZSBvZiBhbiBleGlzaW5nIGVsZW1lbnQNCj4gdiA8LSAxOjMNCj4gdlsxXSA8LSAwDQo+IHYNClsxXSAwIDIgMw0KDQojIGNhbiB1c2UgYSBsZXNzIHZhbHVlcyB0byBjaGFuZ2UgbW9yZQ0KPiBjIDwtIDE6NQ0KPiBjWzE6M10gPC0gMA0KPiBjDQpbMV0gMCAwIDAgNCA1DQoNCj4gYyA8LSAxOjEwICAgIyByZWN5Y2xlcyB3aXRoIHdhcm5pbmcNCj4gY1sxOjVdIDwtIDE6Mg0K6K2m5ZGK5L+h5oGvOg0KSW4gY1sxOjVdIDwtIDE6MiA6IOiiq+abv+aNoueahOmhueebruS4jeaYr+abv+aNouWAvOmVv+W6pueahOWAjeaVsA0KPiBjDQogWzFdICAxICAyICAxICAyICAxICA2ICA3ICA4ICA5IDEwDQoNCiMgYWRkIGEgbmV3IGVsZW1lbnQgcHJldmlvdXNseSBub3QgZXhpc3RlZDoNCj4geCA8LSAxDQo+ICh4WzNdIDwtIDMpDQpbMV0gIDEgTkEgIA0KDQojIHF1aWNrIGNoYW5nZQ0Kdlt2PjBdIDwtIHZbdj4wXSAqIDINCnYgPC0gZmFjdG9yKHYpOyBsZXZlbHModikgPC0gYygiYSIsICJiIikNCmBgYA0KICANCiMjIyAxLjMgY2FsY3VsYXRpb24NCg0Kc2VlIHNlY3Rpb24gMmENCg0KIyMjIDEuNCBtaXNjIG9wZXJhdGlvbnMNCg0KMS4gZ2V0IG5hbWU6IGBuYW1lcygpYA0KICAgIEFsc28gd29yayBmb3Igb3RoZXIgb2JqZWN0cy4NCiAgICBDYW4gYWxzbyBjaGFuZ2UgaW4gdGhpcyB3YXkgZm9sbG93aW5nIHRoZSBtb2RpZmljYXRpb24gcHJpbmNpcGFsDQoNCjEuIGdldCBsZW5ndGg6IGBsZW5ndGgoKWAgIA0KICAgIEFsc28gd29yayBmb3Igb3RoZXIgb2JqZWN0cy4NCg0KMS4gY29tYmluYXRpb24gb2YgdmVjdG9ycyAgDQogICAgdXNlIGBjKClgLiBDYW4gY29tYmluZSBkaWZmIGRhdGF0eXBlLCBidXQgd2lsbCBjb252ZXJ0IHRvIHRoZSBzYW1lOiAgDQogICAgICAgIDEuIG51bWVyaWMgKyBsb2dpY2FsOiBsb2dpY2FsIEYgLT4gMCwgVCAtPiAxDQogICAgICAgIDEuIGNoYXJhY3RlciArIG51bWVyaWNhbC9sb2dpY2FsOiBudW1lcmljYWwvbG9naWNhbCAtPiBjaGFyDQoNCjEuIGV4cGxpY2l0IGNvbnZlcnNpb24gb2YgZGF0YSB0eXBlIChhbHNvIGluIHNlY3Rpb24gMmEpDQoNCiAgICBgYXMubnVtZXJpYyh2KWA6IGVnIGNoYXJhY3RlcnMgdGhhdCBjYW5ub3QgYmUgY29udmVydGVkIHdpbGwgYmUgYE5BYA0KDQoxLiB1bmlxdWUoKSAgDQogICAgcmV0dXJuIHVuaXF1ZSBlbGVtZW50cyBhcyBhIGxpc3QgIA0KICAgIA0KICAgIGBgYA0KICAgID4gdW5pcXVlKGMoIkMiLCAiRCIsICJIIiwgIkQiLCAiSCIpKQ0KICAgIFsxXSAiQyIgIkQiICJIIg0KICAgIGBgYA0KDQoxLiBzcGxpdCgpICANCiAgICBzcGxpdCB0aGUgdmVjdG9yIHRvIHNldmVyYWwgdmVjdG9ycyBhbmQgcmV0dXJuIGFzIGEgbGlzdCAgDQogICAgDQogICAgYGBgDQogICAgPiBnID0gYygnYScsICdiJywgJ2MnLCAnYScsICdiJywgJ2MnLCAnYScsICdiJywgJ2MnKQ0KICAgID4geCA9IGMoMSwgMiwgMywgNCwgNSwgIDYsIDcsIDgsIDkpDQogICAgPiBzcGxpdCh4LCBnKQ0KICAgICRhDQogICAgWzFdIDEgNCA3DQogICAgDQogICAgJGINCiAgICBbMV0gMiA1IDgNCiAgICANCiAgICAkYw0KICAgIFsxXSAzIDYgOQ0KICAgIGBgYA0KDQoxLiByZXBlYXQgIA0KDQogICAgYGBgDQogICAgIyByZXBlYXQgYSBudW1iZXI6IHJlcCh4LCB0aW1lcykNCiAgICByZXAoMywgMTIpDQogICAgDQogICAgIyByZXBlYXQgYSB2ZWN0b3I6DQogICAgcmVwKHNlcSgxLDMpLCAyKSAgICAgICAgIyAxLCAyLCAzLCAxLCAyLCAzIA0KICAgIHJlcChjKDEsMiwzKSwgYygxLDIsMykpICMgMSwgMiwgMiwgMywgMywgMzsgbm90ZTogaWYgbnVtIG5vdCBtYXRjaCwgZXJyb3INCiAgICByZXAoYygxLDIsMyksIGVhY2g9MikgICAjIDEsIDEsIDIsIDIsIDMsIDMNCiAgICBgYGANCg0KDQoxLiBgdGFwcGx5YA0KICAgIDEuIEludHJvOiBBcHBseSBhIGZ1bmN0aW9uIHRvIHN1YnNldHMgb2YgYSB2ZWN0b3Igb3IgYXJyYXksIHNwbGl0IGJ5IGZhY3RvcnMNCiAgICANCiAgICAxLiBTeW50YXgNCiAgICAgICAgYHRhcHBseShkYXRhLCBJTkRFWCwgRlVOLCAuLi4pYA0KDQogICAgICAgIGRhdGE6IFRoZSB2ZWN0b3Igb3IgYXJyYXkgeW91IHdhbnQgdG8gc3VtbWFyaXplLiAgDQogICAgICAgIElOREVYOiBBIGxpc3Qgb2YgZmFjdG9ycyBvciBncm91cGluZyB2YXJpYWJsZXMgdXNlZCB0byBzcGxpdCB0aGUgZGF0YS4gIA0KICAgICAgICBGVU46IFRoZSBmdW5jdGlvbiB5b3Ugd2FudCB0byBhcHBseSB0byBlYWNoIHN1YnNldC4gIA0KICAgIDEuIEVnLiAgDQogICAgDQogICAgICAgIGBgYA0KICAgICAgICBzY29yZXMgPC0gYyg4NSwgOTAsIDc4LCA5MiwgODgsIDc2LCA4NCwgOTIsIDk1LCA4OSkNCiAgICAgICAgZ3JhZGVzIDwtIGMoIkEiLCAiQSIsICJCIiwgIkEiLCAiQiIsICJDIiwgIkIiLCAiQSIsICJBIiwgIkIiKQ0KDQogICAgICAgICMgVXNpbmcgdGFwcGx5KCkgdG8gY2FsY3VsYXRlIHRoZSBhdmVyYWdlIHNjb3JlIGZvciBlYWNoIGdyYWRlDQogICAgICAgIHRhcHBseShzY29yZXMsIGdyYWRlcywgbWVhbikNCiAgICAgICAgDQogICAgICAgICAgICBBICAgICBCICAgICBDIA0KICAgICAgICA5MC44MCA4NC43NSA3Ni4wMCANCiAgICAgICAgYGBgDQoxLiBgb3V0ZXIoWCwgWSwgRlVOID0gIioiLCAuLi4pYA0KDQogICAgICBUaGUgb3V0ZXIgcHJvZHVjdCBvZiB0aGUgYXJyYXlzIFggYW5kIFkgaXMgdGhlIGFycmF5IEEgd2l0aCBkaW1lbnNpb24gYyhkaW0oWCksIGRpbShZKSkgd2hlcmUgZWxlbWVudCBgQVtpLCBqXSA9IEZVTihYW2ldLCBZW2pdLCAuLi4pYC4NCiAgICAgIGBGVU5gIGNhbiBhbHNvIGJlIGArYCwgLi4uDQogICAgICANCiAgICAgIGBgYA0KICAgICAgPiBvdXRlcihjKDEsIDIsIDMpLCBjKDAuMSwgMC4yKSwgIisiKQ0KICAgICAgICAgICAgIFssMV0gWywyXQ0KICAgICAgICBbMSxdICAxLjEgIDEuMg0KICAgICAgICBbMixdICAyLjEgIDIuMg0KICAgICAgICBbMyxdICAzLjEgIDMuMg0KICAgICAgYGBgDQogICAgICANCiAgICAgIE5vdGU6IHRoZSBmdW5jdGlvbidzIHJldHVybiB2YWx1ZSBtdXN0IGJlIHRoZSBzYW1lIGxlbmd0aCB3aXRoIHRoZSBmaXJzdCAoYW5kIHNlY29uZCkgd2hlbiBpcyBhIHZlY3Rvci4gKFRoZXJlZm9yZSwganVzdCB1c2Ugc2ltcGxlIG9uZXMgbGlrZSAiKyIsICItIiwgLi4uKQ0KDQoxLiBgdGFibGUoKWANCg0KICAgIDEuIGRlc2M6IHJldHVybiBhIGNvbnRpbmdlbmN5IHRhYmxlICh3aGljaCBpcyBvZiBjbGFzcyB0YWJsZSkgb2YgdGhlIGNvdW50cyBhdCBlYWNoIGNvbWJpbmF0aW9uIG9mIGZhY3RvciBsZXZlbHMuDQogICAgDQogICAgMS4gZWcNCiAgICANCiAgICAgICAgMS4gYmFzaWMgdXNlIGFzIGNvdW50ZXINCiAgICANCiAgICAgICAgICAgIGBgYA0KICAgICAgICAgICAgZ3JhZGVzIDwtIGMoIkEiLCAiQSIsICJCIiwgIkEiLCAiQiIsICJDIiwgIkIiLCAiQSIsICJBIiwgIkIiKQ0KICAgICAgICAgICAgbmFtZXMgPC0gYygnQWxpY2UnLCAnQWxpY2UnLCAnQWxpY2UnLCAnQWxpY2UnLCAnQm9iJywgJ0JvYicsICdCb2InLCAnQm9iJywgJ0JvYicpDQogICAgICAgICAgICA+IHRhYmxlKGcpDQogICAgICAgICAgICBnDQogICAgICAgICAgICBhIGIgYyANCiAgICAgICAgICAgIDQgMyAyIA0KICAgICAgICAgICAgYGBgDQogICAgICAgIDEuIDItd2F5IHRhYmxlDQogICAgICAgIA0KICAgICAgICAgICAgYGBgDQogICAgICAgICAgICA+IG5hbWVzID0gYygnQWxpY2UnLCAnQWxpY2UnLCAnQWxpY2UnLCAnQWxpY2UnLCAnQm9iJywgJ0JvYicsICdCb2InLCAnQm9iJywgJ0JvYicpDQogICAgICAgICAgICA+IHRhYmxlKG5hbWVzLCBncmFkZXMpDQogICAgICAgICAgICAgICAgICAgZ3JhZGVzDQogICAgICAgICAgICBuYW1lcyAgIGEgYiBjDQogICAgICAgICAgICAgIEFsaWNlIDIgMSAxDQogICAgICAgICAgICAgIEJvYiAgIDIgMiAxDQogICAgICAgICAgICBgYGANCg0KIyMgMi4gKiptYXRyaXggKCYgbXVsdGkgZGltZW5zaW9uYWwgYXJyYXlzKSoqDQoNCiMjIyAyLjAuIGludHJvDQoNCm4gYnkgbSBtZWFucyBuIHJvd3MgbSBjb2xzDQoNCiMjIyAyLjEuIGNyZWF0aW9uDQoxLiBTeW50YXggIA0KICAgIGBtYXRyaXgoZGF0YSA9IE5BLCBucm93ID0gMSwgbmNvbCA9IDEsIGJ5cm93ID0gRkFMU0UsZGltbmFtZXMgPSBOVUxMKWANCg0KMi4gZWcNCg0KICAgIGBgYA0KICAgICMgY29sLXdpc2UgZmlsbCBpbiBieSBkZWZhdWx0DQogICAgPiBtPC1tYXRyaXgoMToxMixucm93PTMsbmNvbD00KQ0KICAgID4gbQ0KICAgICAgICAgWywxXSBbLDJdIFssM10gWyw0XQ0KICAgIFsxLF0gICAgMSAgICA0ICAgIDcgICAxMA0KICAgIFsyLF0gICAgMiAgICA1ICAgIDggICAxMQ0KICAgIFszLF0gICAgMyAgICA2ICAgIDkgICAxMg0KICAgIGBgYA0KDQozLiBOb3Rlcw0KDQogICAgMS4gaWYgY2FuJ3QgbWF0Y2gNCiAgICAgICAgDQogICAgICAgIGBgYA0KICAgICAgICA+IG1hdHJpeCgxOjksIG5yb3c9MykgIyBubyBlcnJvcg0KICAgICAgICA+IG1hdHJpeCgxOjEwLCBucm93PTMpICAgICMgbm8gZXJyb3IgYnV0IHdhcm5pbmcNCiAgICAgICAgICAgICBbLDFdIFssMl0gWywzXSBbLDRdDQogICAgICAgIFsxLF0gICAgMSAgICA0ICAgIDcgICAxMA0KICAgICAgICBbMixdICAgIDIgICAgNSAgICA4ICAgIDENCiAgICAgICAgWzMsXSAgICAzICAgIDYgICAgOSAgICAyDQogICAgICAgIOitpuWRiuS/oeaBrzoNCiAgICAgICAgSW4gbWF0cml4KDE6MTAsIG5yb3cgPSAzKSA6DQogICAgICAgICAgZGF0YSBsZW5ndGggWzEwXSBpcyBub3QgYSBzdWItbXVsdGlwbGUgb3IgbXVsdGlwbGUgb2YgdGhlIG51bWJlciBvZiByb3dzIFszXQ0KICAgICAgICBgYGANCg0KIyMjIDIuMi4gaW5zcGVjdGlvbg0KYGBgDQo+IGRpbShtKQ0KWzFdIDMgNA0KPiBucm93KG0pDQpbMV0gMw0KPiBuY29sKG0pDQpbMV0gNA0KYGBgDQoNCiMjIyAyLjMuIGFjY2Vzcw0KDQpgYGANCm1bMiwzXSAgICAjIGVsZW1lbnQsIHNsaWNpbmcsIC0xIC4uLiBzYW1lIHdpdGggdmVjdG9yDQptWzIsXSAgICAgIyBzZWxlY3Qgcm93IChyZXN1bHQgaXMgdmVjdG9yKQ0KbVssM10gICAgICMgc2VsZWN0IGNvbCAocmVzdWx0IGlzIHZlY3RvcikNCg0KbVsxOjIsIDM6NF0gICAjIChyZXN1bHQgaXMgYSBtYXRyaXgpDQoNCmBgYA0KDQojIyMgMi4zNSBjaGFuZ2UNCg0KZm9sbG93IHRoZSBjaGFuZ2Ugb2YgdmVjdG9yIGhvdyB0byBhY2Nlc3MgaG93IHRvIGNoYW5nZQ0KDQoNCiMjIyAyLjQuIG1pc2Mgb3ANCg0KMS4gY29tYmluZTogIA0KDQogICAgICBgYGANCiAgICAgIG0gPSBjYmluZChtYWIsIG1hYykgICAjIGJpbmQgZGlmZiBjb2xzLiBJZiBtYWIgaXMgYXhiLCBtYWMgaXMgYXhjLCB0aGVuIG0gaXMgYXgoYitjKQ0KICAgICAgbSA9IHJiaW5kKG1hYywgbWJjKSAgICMgc2ltaWxhcmx5DQogICAgICBgYGANCiAgICAgIA0KICAgICAgMS4gTm90ZQ0KICAgICAgICAgIDEuIGNhbiBhbHNvIGJlIHVzZWQgaW4gZGF0YWZyYW1lLCBzZWUgZGF0YWZyYW1lIHNlY3Rpb24gDQoNCjEuIHRyYW5zcG9zZTogYHQoKWANCg0KMS4gYHByb3AudGFibGUocnMsIG1hcmdpbj0xKWA6IGFsb25nIGF4aXM9bWFyZ2luICgxIGZvciByb3csIDIgZm9yIGNvbCksIHJldHVybiB0aGUgcHJvcG9ydGlvbiAocGVyY2VudGFnZSkNCg0KMS4gYGNvbCgpYCwgYHJvdygpYCAgDQogICAgUmV0dXJucyBhIG1hdHJpeCBvZiBpbnRlZ2VycyBpbmRpY2F0aW5nIHRoZWlyIHJvdyBudW1iZXIgaW4gYSBtYXRyaXgtbGlrZSBvYmplY3QsIG9yIGEgZmFjdG9yIGluZGljYXRpbmcgdGhlIHJvdyBsYWJlbHMuDQogICAgDQogICAgYGBgDQogICAgPiByb3cobWF0cml4KDAsIDIsIDMpKQ0KICAgICAgICAgWywxXSBbLDJdIFssM10NCiAgICBbMSxdICAgIDEgICAgMSAgICAxDQogICAgWzIsXSAgICAyICAgIDIgICAgMg0KICAgIGBgYA0KICANCjEuIGBhcHBseWA6IA0KICAgIDEuIGRlc2NyaXB0aW9uOiBhcHBseSBhIGZ1bmN0aW9uIHRvIG1hcmdpbnMgb2YgYW4gYXJyYXkgb3IgbWF0cml4LCByZXR1cm4gYSB2ZWN0b3Igb3IgYXJyYXkgb3IgbGlzdCBvZiB2YWx1ZXMuDQogICAgDQogICAgMS4gc3ludGF4DQogICAgDQogICAgICAgIGBgYA0KICAgICAgICBhcHBseShYLCBNQVJHSU4sIEZVTiwgLi4uLCBzaW1wbGlmeSA9IFRSVUUpDQogICAgICAgIGBgYA0KICAgICAgICANCiAgICAgICAgMS4gTUFSR0lOOiBhIHZlY3RvciBnaXZpbmcgdGhlIHN1YnNjcmlwdHMgd2hpY2ggdGhlIGZ1bmN0aW9uIHdpbGwgYmUgYXBwbGllZCBvdmVyLiANCiAgICAgICAgICAgIEUuZy4sIGZvciBhIG1hdHJpeCAxIGluZGljYXRlcyByb3dzLCAyIGluZGljYXRlcyBjb2x1bW5zLCAzIGluZGljYXRlcyB0aGUgM3JkIGF4aXMgZm9yIDNEIG1hdHJpeCAuLi4NCiAgICAgICAgICAgIGMoMSwgMikgaW5kaWNhdGVzIHJvd3MgYW5kIGNvbHVtbnMuIA0KICAgICAgICANCiAgICAxLiBlZw0KICAgICAgICANCiAgICAgICAgYGBgDQogICAgICAgICMgYXBwbHkgZm9yIGEgc2luZ2xlIGRpbQ0KICAgICAgICA+IHk8LW1hdHJpeChydW5pZig1MDAsMCwyMCksIG5jb2w9NSkNCiAgICAgICAgPiBtPC1hcHBseSh5LDIsbWVhbikgICAgIyBmaW5kIG1lYW4gYWxvbmcgdGhlIDUgY29scyBzZXBhcmF0ZWx5DQogICAgICAgID4gbQ0KICAgICAgICBbMV0gMTAuNTI4Njg2ICA5Ljk0MTgwMiAgOS4zNDAzMjEgIDkuODg4MTY5IDEwLjg0MDIwNg0KICAgICAgICANCiAgICAgICAgDQogICAgICAgICMgZm9yIG11bC1kaW0gYXJyYXksIGFsb25nIG11bHRpcGxlIGRpbWVzaW9ucw0KICAgICAgICAjIGhvdyB0byBpbnRlcnByZXQ6IHRoZSByZXN1bHQgYXJyYXkgYGFwYCdzIChpLCBqKSBlbGVtZW50OiB0aGUgbWVhbiBvZiBhcnJheSBgemAncyBlbGVtZW50IGluIGJvdGggaSBmb3IgZGltMSBhbmQgaiBmb3IgZGltMw0KICAgICAgICA+ICh6PWFycmF5KHJlcChzZXEoMjAsYnk9LTIsbGVuZ3RoPTEyKSwyKSwgZGltPWMoMyw0LDIpKSkNCiAgICAgICAgLCAsIDENCiAgICAgICAgDQogICAgICAgICAgICAgWywxXSBbLDJdIFssM10gWyw0XQ0KICAgICAgICBbMSxdICAgMjAgICAxNCAgICA4ICAgIDINCiAgICAgICAgWzIsXSAgIDE4ICAgMTIgICAgNiAgICAwDQogICAgICAgIFszLF0gICAxNiAgIDEwICAgIDQgICAtMg0KICAgICAgICANCiAgICAgICAgLCAsIDINCiAgICAgICAgDQogICAgICAgICAgICAgWywxXSBbLDJdIFssM10gWyw0XQ0KICAgICAgICBbMSxdICAgMjAgICAxNCAgICA4ICAgIDINCiAgICAgICAgWzIsXSAgIDE4ICAgMTIgICAgNiAgICAwDQogICAgICAgIFszLF0gICAxNiAgIDEwICAgIDQgICAtMg0KICAgICAgICANCiAgICAgICAgPiAoYXA9YXBwbHkoeiwgYygxLDMpLCBtZWFuKSkNCiAgICAgICAgICAgICBbLDFdIFssMl0NCiAgICAgICAgWzEsXSAgIDExICAgMTENCiAgICAgICAgWzIsXSAgICA5ICAgIDkNCiAgICAgICAgWzMsXSAgICA3ICAgIDcNCiAgICAgICAgDQogICAgICAgIGBgYA0KICAgICAgICAgIA0KMS4gY29sL3JvdyBzdGF0cw0KDQogICAgMS4gZGVzYzogRm9ybSByb3cgYW5kIGNvbHVtbiBzdW1zIGFuZCBtZWFucyBmb3IgbnVtZXJpYyBhcnJheXMgKG9yIGRhdGEgZnJhbWVzKQ0KICAgIA0KICAgIDEuIHN5bnRheA0KDQogICAgICAgIGBgYA0KICAgICAgICBjb2xTdW1zICh4LCBuYS5ybSA9IEZBTFNFLCBkaW1zID0gMSkNCiAgICAgICAgcm93U3VtcyAoeCwgbmEucm0gPSBGQUxTRSwgZGltcyA9IDEpDQogICAgICAgIGNvbE1lYW5zKHgsIG5hLnJtID0gRkFMU0UsIGRpbXMgPSAxKQ0KICAgICAgICByb3dNZWFucyh4LCBuYS5ybSA9IEZBTFNFLCBkaW1zID0gMSkNCiAgICAgICAgYGBgDQoNCiMjIyAyLjUuIHNpZGUgdHJhY2s6IG11bC1kaW0gYXJyYXkNCg0KMS4gY3JlYXRlICANCiAgICBgYXJyYXkoZGF0YSA9IE5BLCBkaW0gPSBsZW5ndGgoZGF0YSksIGRpbW5hbWVzID0gTlVMTClgICANCiAgICBtaW5kIHRoZSBkaW0hIGZpcnN0IDIgZGltIGlzIHRoZSBhcnJheSwgdGhlbiBpcyB0aGUgdGhpcmQgZGltICANCiAgICBhbHNvIG1pbmQgZm9yIGZpbGxpbmcgIA0KICAgIA0KICAgIGBgYA0KICAgID4gYXJyYXkoZGF0YT0xOjI0LCBkaW09Yyg0LCAzLCAyKSkNCiAgICAsICwgMQ0KICAgIA0KICAgICAgICAgWywxXSBbLDJdIFssM10NCiAgICBbMSxdICAgIDEgICAgNSAgICA5DQogICAgWzIsXSAgICAyICAgIDYgICAxMA0KICAgIFszLF0gICAgMyAgICA3ICAgMTENCiAgICBbNCxdICAgIDQgICAgOCAgIDEyDQogICAgDQogICAgLCAsIDINCiAgICANCiAgICAgICAgIFssMV0gWywyXSBbLDNdDQogICAgWzEsXSAgIDEzICAgMTcgICAyMQ0KICAgIFsyLF0gICAxNCAgIDE4ICAgMjINCiAgICBbMyxdICAgMTUgICAxOSAgIDIzDQogICAgWzQsXSAgIDE2ICAgMjAgICAyNA0KICAgIA0KICAgIGBgYA0KDQojIyAzLiAqKmxpc3QqKg0KDQojIyMgMy4wLiBpbnRybw0KbW9zdCBnZW5lcmFsIG9iai4gY29tcGFyZWQgdG8gdmVjdG9ycyBhbmQgbWF0cmljZXM6IGNhbiBob2xkIGRpZmYgdHlwZSBvZiBvYmoNCg0KIyMjIDMuMS4gY3JlYXRpb24NCjEuIG5vcm1hbCBjcmVhdGlvbg0KDQogICAgYGBgDQogICAgPiB3PC1saXN0KDE6MyxjKCJhIiwiYiIpLFQpDQogICAgW1sxXV0NCiAgICBbMV0gMSAyIDMNCiAgICANCiAgICBbWzJdXQ0KICAgIFsxXSAiYSIgImIiDQogICAgDQogICAgW1szXV0NCiAgICBbMV0gVFJVRQ0KICAgIGBgYA0KDQoxLiBjcmVhdGUgd2l0aCBuYW1lDQoNCiAgICBgYGANCiAgICB3PC1saXN0KCJhYiI9MTozLCAieSI9YygiYSIsImIiKSwgInoiPVQpDQogICAgDQogICAgdzwtbGlzdChhYj0xOjMsIHk9YygiYSIsImIiKSwgej1UKSAgICAjIE9LDQogICAgdzwtbGlzdChhYj0xOjMsIHk9YygiYSIsImIiKSwgMT1UKSAgICAjIGVycm9yDQogICAgdzwtbGlzdChhYj0xOjMsIHk9YygiYSIsImIiKSwgIjEiPVQpICAjIE9LDQogICAgYGBgDQoNCiMjIyAzLjIuIG5hbWUNCg0KYGBgDQphc3NpZ24gbmFtZTogDQo+IG5hbWVzKHcpID0gYygieCIsICJ5IiwgInoiKQ0KJHgNClsxXSAxIDIgMw0KDQokeQ0KWzFdICJhIiAiYiINCg0KJHoNClsxXSBUUlVFDQpgYGANCg0KIyMjIDMuMy4gYWNjZXNzDQoxLiBzaW5nbGUgc3F1YXJlIGJyYWNrZXQgYFtdYDogcmV0dXJuIHZhbHVlIGlzIHN0aWxsIGEgbGlzdC4gQ2FuIGJvdGggYWNjZXNzIGluZGV4IG9yIG5hbWUuDQoNCiAgICAxLiBlZw0KICAgIA0KICAgICAgICBgYGANCiAgICAgICAgPiB3W2MoMSwgMyldDQogICAgICAgIFtbMV1dDQogICAgICAgIFsxXSAxIDIgMw0KICAgICAgICANCiAgICAgICAgW1syXV0NCiAgICAgICAgWzFdIFRSVUUNCiAgICAgICAgYGBgDQogICAgICAgIA0KICAgIDEuIE5vdGVzDQogICAgICAgIDEuIEFjY2VzcyBuYW1lOiBzdGlsbCB3cml0ZSBpbiBicmFja2V0LiBCdXQgY2Fubm90IHBhcnRpYWxseSB3cml0ZQ0KICAgICAgICANCiAgICAgICAgICAgIGBgYA0KICAgICAgICAgICAgbmFtZXModykgPSBjKCJhYiIgLCJ5IiwgInoiKQ0KICAgICAgICAgICAgDQogICAgICAgICAgICA+IHdbIngiXQ0KICAgICAgICAgICAgJHgNCiAgICAgICAgICAgIFsxXSAxIDIgMw0KICAgICAgICAgICAgDQogICAgICAgICAgICAjIHVzaW5nIGBbXWAsIGNhbm5vdCAoaW4gZGF0YWZyYW1lLCBpcyBlcnJvcikNCiAgICAgICAgICAgID4gd1siYSJdDQogICAgICAgICAgICAkPE5BPg0KICAgICAgICAgICAgTlVMTA0KICAgICAgICAgICAgYGBgDQogICAgDQoxLiBkb3VibGUgc3F1YXJlIGJyYWNrZXQgYFtbXV1gOiByZXR1cm4gaXMgdGhlIGVsZW1lbnQgb2YgdGhlIGxpc3QuIENhbiBhbHNvIGJlIGFjY2Vzc2VkIHdpdGggYCRgIGlmIG5hbWVkLg0KDQogICAgMS4gTm90ZToNCiAgICAgICAgMS4gSW4gdGhpcyB3YXksIGNhbiBvbmx5IHJldHVybiAxIGVsZW1lbnQsIGNhbid0IGRvIHNsaWNpbmcuICANCiAgICAgICAgICAgIGVnLiBUaGlzIGlzIGFjdHVhbGx5IGB3W1sxXV1bMl1gIGJ1dCBzdHJhbmdseSBubyBlcnJvcg0KICAgICAgICAgICAgDQogICAgICAgICAgICBgYGANCiAgICAgICAgICAgID4gd1tbYygxLCAyKV1dDQogICAgICAgICAgICBbMV0gMg0KICAgICAgICAgICAgYGBgDQogICAgICAgIDEuIG5hbWVzIGFyZSBhY2Nlc3Mgd2l0aCAkOyBpbmRleCBhcmUgYWNjZXNzZWQgd2l0aCBbW11dDQoNCiAgICAgICAgICAgIDEuIGJhc2ljIGVnDQogICAgICAgICAgICANCiAgICAgICAgICAgICAgICBgYGANCiAgICAgICAgICAgICAgICB3W1syXV0gICMgT0sNCiAgICAgICAgICAgICAgICB3JHggICAgICMgT0sNCiAgICAgICAgICAgICAgICB3JCJ4IiAgICMgT0sNCiAgICAgICAgICAgICAgICANCiAgICAgICAgICAgICAgICB3W1sieCJdXSAgICAjIGVycm9yDQogICAgICAgICAgICAgICAgdyQxICAgICAgICAgIyBlcnJvcg0KICAgICAgICAgICAgICAgIGBgYA0KDQogICAgICAgICAgICAgICAgDQogICAgICAgICAgICAxLiBzcGVjaWFsIGNhc2U6IHBhcnRpYWxseSB3cml0ZSBvdXQgdGhlIG5hbWUNCiAgICAgICAgICAgIA0KICAgICAgICAgICAgICAgIGBgYA0KICAgICAgICAgICAgICAgIG5hbWVzKHcpID0gYygiYWIiICwieSIsICJ6IikNCiAgICAgICAgICAgICAgICANCiAgICAgICAgICAgICAgICAjIHVzaW5nIGAkYCwgY2FuIHBhcnRpYWxseQ0KICAgICAgICAgICAgICAgID4gdyRhDQogICAgICAgICAgICAgICAgWzFdIDEgMiAzDQogICAgICAgICAgICAgICAgYGBgDQoNCiMjIyAzLjNhIGNoYW5nZQ0KDQpmb2xsb3cgdGhlIGNoYW5nZSBvZiBob3cgdG8gYWNjZXNzIGhvdyB0byBjaGFuZ2UNCg0KYGBgDQojIGNoYW5nZSB0aGUgdmFsdWUgb2YgYW4gZXhpc3RpbmcgZWxlbWVudA0KPiAodzwtbGlzdCgiYWIiPTE6MywgInkiPWMoImEiLCJiIiksICJ6Ij1UKSkNCiRhYg0KWzFdIDEgMiAzDQokeQ0KWzFdICJhIiAiYiINCiR6DQpbMV0gVFJVRQ0KPiB3JHkgPC0gYygxLCAyKQ0KPiB3DQokYWINClsxXSAxIDIgMw0KJHkNClsxXSAxIDINCiR6DQpbMV0gVFJVRQ0KDQojIGFkZCBhbiBlbGVtZW50IHRoYXQgcHJldmlvdXNseSBub3QgZXhpc3RlZA0KPiB3PC1saXN0KCJhYiI9MTozLCAieSI9YygiYSIsImIiKSwgInoiPVQpDQo+IHckbmV3ID0gYyhULCBULCBGKQ0KPiB3DQokYWINClsxXSAxIDIgMw0KJHkNClsxXSAiYSIgImIiDQokeg0KWzFdIFRSVUUNCiRuZXcNClsxXSAgVFJVRSAgVFJVRSBGQUxTRQ0KYGBgDQoNCnN0cmFuZ2UgY2FzZQ0KDQpgYGANCj4gKHc8LWxpc3QoImFiIj0xOjMsICJ5Ij1jKCJhIiwiYiIpLCAieiI9VCkpDQokYWINClsxXSAxIDIgMw0KDQokeQ0KWzFdICJhIiAiYiINCg0KJHoNClsxXSBUUlVFDQoNCj4gd1syXQ0KJHkNClsxXSAiYSIgImIiDQoNCj4gd1syXSA8LSBjKDEsIDIpDQrorablkYrkv6Hmga86DQpJbiB3WzJdIDwtIGMoMSwgMikgOiDooqvmm7/mjaLnmoTpobnnm67kuI3mmK/mm7/mjaLlgLzplb/luqbnmoTlgI3mlbANCj4gdw0KJGFiDQpbMV0gMSAyIDMNCg0KJHkNClsxXSAxDQoNCiR6DQpbMV0gVFJVRQ0KYGBgDQoNCiMjIyAzLjQgbWlzYyBvcA0KDQoxLiBgdW5saXN0KClgOiBjaGFuZ2UgdGhlIGxpc3Qgb2JqIHRvIGEgbG9uZyB2ZWN0b3IsIHVzaW5nIHNpbWlsYXIgZGF0YSB0eXBlIGNhc3RpbmcgcnVsZQ0KDQoNCiMjIDQuICoqZGF0YWZyYW1lKioNCg0KIyMjIDQuMS4gaW50cm8NCg0KZGF0YSBmcmFtZSBpcyBhIHNwZWNpYWwga2luZCBvZiBsaXN0IHdoZXJlIGVhY2ggbWVtYmVyIChjb2wsIGJ1dCBub3Qgcm93KSBhcmUgdmVjdG9ycyBvZiBlcXVhbCBsZW5ndGggIA0KDQpgYGANCj4gd29tZW4gICAjIGJ1aWx0LWluIGRhdGFmcmFtZSBpbiBSDQogICBoZWlnaHQgd2VpZ2h0DQoxICAgICAgNTggICAgMTE1DQoyICAgICAgNTkgICAgMTE3DQozICAgICAgNjAgICAgMTIwDQo0ICAgICAgNjEgICAgMTIzDQo1ICAgICAgNjIgICAgMTIyDQpgYGANCg0KRWFjaCByb3cgaXMgY2FsbGVkIGFuICoqb2JzZXJ2YXRpb24qKiBhbmQgZWFjaCBjb2x1bW4gaXMgY2FsbGVkIGEgKip2YXJpYWJsZSoqICANCg0KIyMjIDQuMiBjcmVhdGUgZGF0YWZyYW1lDQoNCjEuIGJhc2ljDQoNCiAgICBgYGANCiAgICBtZW1iZXIgPC0gZGF0YS5mcmFtZSggDQogICAgICBuYW1lID0gYygiVG9tIiwgIk1heSIpLCANCiAgICAgIGFnZSA9IGMoMjIsIDIwKSANCiAgICApDQogICAgYGBgDQoNCjEuIENvbnZlcnQgZnJvbSBtYXRyaXgNCg0KICAgIGBgYA0KICAgID4gbSA8LSBtYXRyaXgoMTo2LCBucm93PTIpDQogICAgPiBkYXRhLmZyYW1lKG0pDQogICAgICBYMSBYMiBYMw0KICAgIDEgIDEgIDMgIDUNCiAgICAyICAyICA0ICA2DQogICAgYGBgDQoNCiMjIyA0LjMgYWNjZXNzDQoxLiBBY2Nlc3Mgd2l0aCBjb2x1bW4gZmlyc3Q6IGFzIGl0IGlzIGEgImxpc3QiICANCg0KICAgIDEuIFNpbWlsYXIgdG8gbGlzdCwgYFtbXV1gIG9yIGAkYDogcmV0dXJuIGFzIGEgdmVjdG9yDQogICAgDQogICAgICAgIGBgYA0KICAgICAgICA+IHdvbWVuJHdlaWdodA0KICAgICAgICAgWzFdIDExNSAxMTcgMTIwIDEyMyAxMjYgMTI5IDEzMiAxMzUgMTM5IDE0MiAxNDYgMTUwIDE1NCAxNTkgMTY0DQogICAgICAgID4gd29tZW5bWzJdXQ0KICAgICAgICAgWzFdIDExNSAxMTcgMTIwIDEyMyAxMjYgMTI5IDEzMiAxMzUgMTM5IDE0MiAxNDYgMTUwIDE1NCAxNTkgMTY0DQogICAgICAgIGBgYA0KICAgICAgICANCjEuIEFjY2VzcyBsaWtlIGFuIGFycmF5DQoNCiAgICBKdXN0IGRvIGBbMSwgYygyLCAzKV1gIC4uLg0KICAgIA0KICAgIGBgYA0KICAgID4gd29tZW5bYygxLCAyKSxdICAgIyBzdGlsbCByZXR1cm4gYSBkYXRhZnJhbWUNCiAgICAgIGhlaWdodCB3ZWlnaHQNCiAgICAgIDEgICAgIDU4ICAgIDExNQ0KICAgICAgMiAgICAgNTkgICAgMTE3DQogICAgICANCiAgICA+IHdvbWVuW2MoMSwgMiksMV0gICMgcmV0dXJuIGEgdmVjdG9yDQogICAgWzFdIDU4IDU5DQogICAgYGBgDQoNCjEuIGB3aXRoKClgOiBkaXJlY3RseSBhY2Nlc3MgY29sdW1ucyB3L28gdXNpbmcgJDoNCmBgYA0Kd2l0aCh3b21lbiwgd2VpZ2h0L2hlaWdodCkNCiMgZ2l2ZXMgb3V0IGEgdmVjdG9yOiBbMV0gMS45ODI3NTkgMS45ODMwNTEgMi4wMDAwMDAgMi4wMTYzOTMgLi4uDQpgYGANCg0KIyMjIDQuNCBjaGFuZ2UNCg0KMS4gbW9kaWZ5IGV4aXN0aW5nOiBqdXN0IGhvdyB0byBhY2Nlc3MsIGFzc2lnbiBuZXcgdG8gdGhlIGV4cHJlc3Npb24NCg0KMS4gYWRkIG5ldyBjb2w6IA0KICAgIDEuIGBkZiRuZXdfcm93IDwtIGMoJ25ldycsICdyb3cnLCAnaW5mbycpYA0KICAgIDEuIHVzZSBgY2JpbmRgDQogICAgICAgIA0KICAgICAgICBgYGANCiAgICAgICAgPiAocmFuZDYgPC0gc2FtcGxlKDYpKQ0KICAgICAgICBbMV0gNSA2IDQgMSAyIDMNCiAgICAgICAgPiBjYmluZChoZWFkKHdvbWVuKSwgcmFuZDYpDQogICAgICAgICAgaGVpZ2h0IHdlaWdodCByYW5kNg0KICAgICAgICAxICAgICA1OCAgICAxMTUgICAgIDUNCiAgICAgICAgMiAgICAgNTkgICAgMTE3ICAgICA2DQogICAgICAgIDMgICAgIDYwICAgIDEyMCAgICAgNA0KICAgICAgICA0ICAgICA2MSAgICAxMjMgICAgIDENCiAgICAgICAgNSAgICAgNjIgICAgMTI2ICAgICAyDQogICAgICAgIDYgICAgIDYzICAgIDEyOSAgICAgMw0KICAgICAgICBgYGANCg0KDQojIyMgNC41IGluc3BlY3QNCg0KTm90ZTogc29tZSBtZXRob2RzIGNhbiBhbHNvIGJlIHVzZWQgaW4gbGlzdCwgbWF0cml4LCAuLi4NCg0KMS4gYG5hbWVzKClgIH4NCjEuIGBoZWFkKClgIGFuZCBgdGFpbCgpYA0KDQogICAgMS4gc3ludGF4DQogICAgDQogICAgICAgIGBgYA0KICAgICAgICBoZWFkKHgsIG4gPSA2TCwgLi4uKQ0KICAgICAgICB0YWlsKHgsIG4gPSA2TCwga2VlcG51bXMgPSBGQUxTRSwgYWRkcm93bnVtcywgLi4uKQ0KICAgICAgICBgYGANCiAgICAgICAgDQogICAgICAgIDEuIGBuYCBudW1iZXIgb2YgbGluZXMgdG8gZGlzcGxheS4gQnkgZGVmYXVsdCBpcyA2DQoNCiMjIyA0LjcgbWlzYyBtZXRob2RzDQoNCjEuIGBzdW1tYXJ5KGRmKWA6IHByb3ZpZGVzIHRoZSBtZWFuIG1heCAuLi4NCg0KMS4gYGJ5KClgOiANCiAgICBzaW1pbGFyIHRvIGB0YXBwbHkoKWAsIGZvciBkYXRhZnJhbWUNCiAgICAxLiBTeW50YXg6ICANCiAgICAgICAgYGJ5KGRhdGEsIElORElDRVMsIEZVTilgDQogICAgDQogICAgMS4gZWcNCiAgICANCiAgICAgICAgYGBgDQogICAgICAgID4gZGF0YSA8LSBkYXRhLmZyYW1lKA0KICAgICAgICAgICAgQ2xhc3MgPSBjKCJBIiwgIkEiLCAiQiIsICJCIiwgIkMiLCAiQyIpLA0KICAgICAgICAgICAgU3R1ZGVudCA9IGMoIkpvaG4iLCAiQWxpY2UiLCAiQm9iIiwgIkV2ZSIsICJDaGFybGllIiwgIkRhdmlkIiksDQogICAgICAgICAgICBTY29yZSA9IGMoODUsIDkwLCA3OCwgODgsIDkyLCA5NSksDQogICAgICAgICAgICBTY29yZTIgPSBjKDgwLCA5MiwgNzQsIDgyLCA5MywgOTYpDQogICAgICAgICAgKQ0KICAgICAgICANCiAgICAgICAgPiBieShkYXRhJFNjb3JlLCBkYXRhJENsYXNzLCBtZWFuKQ0KICAgICAgICBkYXRhJENsYXNzOiBBDQogICAgICAgIFsxXSA4Ny41DQogICAgICAgIC0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tDQogICAgICAgIGRhdGEkQ2xhc3M6IEINCiAgICAgICAgWzFdIDgzDQogICAgICAgIC0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tDQogICAgICAgIGRhdGEkQ2xhc3M6IEMNCiAgICAgICAgWzFdIDkzLjUNCiAgICAgICAgDQogICAgICAgID4gYnkoZGF0YVssIGMoMywgNCldLCBkYXRhJENsYXNzLCBjb2xNZWFucykgICAjIG11bHRpcGxlIGNvbA0KICAgICAgICBkYXRhJENsYXNzOiBBDQogICAgICAgICBTY29yZSBTY29yZTIgDQogICAgICAgICAgODcuNSAgIDg2LjAgDQogICAgICAgIC0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tDQogICAgICAgIGRhdGEkQ2xhc3M6IEINCiAgICAgICAgIFNjb3JlIFNjb3JlMiANCiAgICAgICAgICAgIDgzICAgICA3OCANCiAgICAgICAgLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0NCiAgICAgICAgZGF0YSRDbGFzczogQw0KICAgICAgICAgU2NvcmUgU2NvcmUyIA0KICAgICAgICAgIDkzLjUgICA5NC41IA0KICAgICAgICBgYGANCg0KMS4gYGFnZ3JlZ2F0ZSgpYDogYXBwbHkgYSBmdW5jdGlvbiB0byBkYXRhZnJhbWUgc2VwYXJhdGVkIGJ5IHNvbWV0aGluZw0KDQogICAgMS4gc3ludGF4DQogICAgICAgIE5vdGU6IGFsc28gaGF2ZSBzeW50YXggZm9yIG90aGVyIG9iamVjdHMsIGhlcmUgb25seSBsaXN0IGZvciBkYXRhZnJhbWUNCiAgICAgICAgDQogICAgICAgIGBgYA0KICAgICAgICBhZ2dyZWdhdGUoeCwgZGF0YSwgRlVOLCAuLi4sIHN1YnNldCwgbmEuYWN0aW9uID0gbmEub21pdCkNCiAgICAgICAgYGBgDQogICAgICAgIA0KICAgICAgICB4IGlzIHRoZSBuYW1lIG9mIHRoZSBjb2x1bW5zIHRvIGFwcGx5IGZ1bmN0aW9uIC8gYmUgc2VwYXJhdGVkIGJ5OyBzZXBhcmF0ZWQgYnkgYH5gDQogICAgICAgIGRhdGEgaXMgdGhlIGRhdGFmcmFtZSBudW1iZXINCiAgICAgICAgRlVOIGlzIHRoZSBmdW5jdGlvbiB0byBhcHBseSB0by4gZWcgYG1lYW5gLg0KICAgIA0KICAgIDEuIGVnDQogICAgICANCiAgICAgICAgYGBgDQogICAgICAgICMgb25lIH4gb25lDQogICAgICAgIGFnZ3JlZ2F0ZSh3ZWlnaHQgfiBmZWVkLCBkYXRhID0gY2hpY2t3dHMsIG1lYW4pDQogICAgICAgIA0KICAgICAgICAjIG9uZSB+IG1hbnk6IGp1c3QgdXNlICsgZG9uJ3QgYXNrIHdoeQ0KICAgICAgICBhZ2dyZWdhdGUoYnJlYWtzIH4gd29vbCArIHRlbnNpb24sIGRhdGEgPSB3YXJwYnJlYWtzLCBtZWFuKQ0KICAgICAgICANCiAgICAgICAgIyBtYW55IH4gb25lOiBqdXN0IHVzZSBjYmluZCBkb24ndCBhc2sgd2h5DQogICAgICAgIGFnZ3JlZ2F0ZShjYmluZChPem9uZSwgVGVtcCkgfiBNb250aCwgZGF0YSA9IGFpcnF1YWxpdHksIG1lYW4pDQogICAgICAgIA0KICAgICAgICAjIG1hbnkgfiBtYW55DQogICAgICAgIGFnZ3JlZ2F0ZShjYmluZChuY2FzZXMsIG5jb250cm9scykgfiBhbGNncCArIHRvYmdwLCBkYXRhID0gZXNvcGgsIHN1bSkNCiAgICAgICAgDQogICAgICAgICMjIGZ1bGwgZWcgb2YgbGFzdA0KICAgICAgICA+IGhlYWQoZXNvcGgpDQogICAgICAgICAgYWdlZ3AgICAgIGFsY2dwICAgIHRvYmdwIG5jYXNlcyBuY29udHJvbHMNCiAgICAgICAgMSAyNS0zNCAwLTM5Zy9kYXkgMC05Zy9kYXkgICAgICAwICAgICAgICA0MA0KICAgICAgICAyIDI1LTM0IDAtMzlnL2RheSAgICAxMC0xOSAgICAgIDAgICAgICAgIDEwDQogICAgICAgIDMgMjUtMzQgMC0zOWcvZGF5ICAgIDIwLTI5ICAgICAgMCAgICAgICAgIDYNCiAgICAgICAgNCAyNS0zNCAwLTM5Zy9kYXkgICAgICAzMCsgICAgICAwICAgICAgICAgNQ0KICAgICAgICA1IDI1LTM0ICAgICA0MC03OSAwLTlnL2RheSAgICAgIDAgICAgICAgIDI3DQogICAgICAgIDYgMjUtMzQgICAgIDQwLTc5ICAgIDEwLTE5ICAgICAgMCAgICAgICAgIDcNCiAgICAgICAgDQogICAgICAgID4gYWdncmVnYXRlKHdlaWdodCB+IGZlZWQsIGRhdGEgPSBjaGlja3d0cywgbWVhbikNCiAgICAgICAgICAgICAgIGZlZWQgICB3ZWlnaHQNCiAgICAgICAgMSAgICBjYXNlaW4gMzIzLjU4MzMNCiAgICAgICAgMiBob3JzZWJlYW4gMTYwLjIwMDANCiAgICAgICAgMyAgIGxpbnNlZWQgMjE4Ljc1MDANCiAgICAgICAgNCAgbWVhdG1lYWwgMjc2LjkwOTENCiAgICAgICAgNSAgIHNveWJlYW4gMjQ2LjQyODYNCiAgICAgICAgNiBzdW5mbG93ZXIgMzI4LjkxNjcNCiAgICAgICAgDQogICAgICAgID4gYWdncmVnYXRlKGNiaW5kKG5jYXNlcywgbmNvbnRyb2xzKSB+IGFsY2dwICsgdG9iZ3AsIGRhdGEgPSBlc29waCwgc3VtKQ0KICAgICAgICAgICAgICAgYWxjZ3AgICAgdG9iZ3AgbmNhc2VzIG5jb250cm9scw0KICAgICAgICAxICAwLTM5Zy9kYXkgMC05Zy9kYXkgICAgICA5ICAgICAgIDI1Mg0KICAgICAgICAyICAgICAgNDAtNzkgMC05Zy9kYXkgICAgIDM0ICAgICAgIDE0NQ0KICAgICAgICAzICAgICA4MC0xMTkgMC05Zy9kYXkgICAgIDE5ICAgICAgICA0Mg0KICAgICAgICA0ICAgICAgIDEyMCsgMC05Zy9kYXkgICAgIDE2ICAgICAgICAgOA0KICAgICAgICA1ICAwLTM5Zy9kYXkgICAgMTAtMTkgICAgIDEwICAgICAgICA3NA0KICAgICAgICA2ICAgICAgNDAtNzkgICAgMTAtMTkgICAgIDE3ICAgICAgICA2OCANCiAgICAgICAgNyAgICAgODAtMTE5ICAgIDEwLTE5ICAgICAxOSAgICAgICAgMzANCiAgICAgICAgOCAgICAgICAxMjArICAgIDEwLTE5ICAgICAxMiAgICAgICAgIDYNCiAgICAgICAgOSAgMC0zOWcvZGF5ICAgIDIwLTI5ICAgICAgNSAgICAgICAgMzcNCiAgICAgICAgMTAgICAgIDQwLTc5ICAgIDIwLTI5ICAgICAxNSAgICAgICAgNDcNCiAgICAgICAgMTEgICAgODAtMTE5ICAgIDIwLTI5ICAgICAgNiAgICAgICAgMTANCiAgICAgICAgMTIgICAgICAxMjArICAgIDIwLTI5ICAgICAgNyAgICAgICAgIDUNCiAgICAgICAgMTMgMC0zOWcvZGF5ICAgICAgMzArICAgICAgNSAgICAgICAgMjMNCiAgICAgICAgMTQgICAgIDQwLTc5ICAgICAgMzArICAgICAgOSAgICAgICAgMjANCiAgICAgICAgMTUgICAgODAtMTE5ICAgICAgMzArICAgICAgNyAgICAgICAgIDUNCiAgICAgICAgMTYgICAgICAxMjArICAgICAgMzArICAgICAxMCAgICAgICAgIDMNCiAgICAgICAgYGBgDQoNCiMjIDUuICoqZmFjdG9yKioNCg0KIyMjIEludHJvDQoNCklzIGVmZmVjdGl2ZSB3aGVuIHRoZXJlIGFyZSBhIGxvdCBvZiBzYW1lIGVsZW1lbnRzOiBjYXRlZ29yaXplIHRoZSBkYXRhLCByZXByZXNlbnQgJiBzdG9yZSBpdCBvbiBtdWx0aXBsZSBsZXZlbHMuICANCkEgbGV2ZWwgaXMgdGhlIHJlcHJlc2VudGF0aW9uIG9mIGEga2luZCBvZiBlbGVtZW50LiBOYW1lIG9mIGxldmVscyBhcmUgc3RyaW5nLiBMZXZlbHMgY29kZWQgYXMgaW50ZWdlcnMgKHNvIGVmZmVjdGl2ZSB0byBzdG9yZSBkYXRhIHdpdGggcmVwZWF0ZWQgZWxlbWVudCkuDQoNCiMjIyBOb3Rlcw0KDQoxLiBTdG9yYWdlIGlzc3Vlcw0KICAgIExldmVscyBhcmUgaW50ZXJuYWxseSBjb2RlZCBhcyBpbnRlcmdlcnMsIGFuZCB0aGUgbGV2ZWxzIGFyZSBzdG9yZWQgYXMgc3RyaW5ncyAoZXZlbiBpZiBvcmlnaW5hbCBpcyBudW1lcmljIG9yIGxvZ2ljYWwpLg0KICAgIA0KICAgIDEuIGVnMTogbG9naWNhbCBleHByZXNzaW9ucyBzaG91bGQgYmUgYWxsIGV4cHJlc3NlZCBpbiBjaGFyYWN0ZXIgZnJvbSAoc2luY2UgaXMgc3RvcmVkIGFzIHN0cmluZ3MpIChidXQgbm90IGV4YWN0bHkgdGhlIGNhc2U/KQ0KICAgIA0KICAgICAgICBgYGANCiAgICAgICAgPiBudW1zIDwtIGZhY3RvcihjKDMsIDIsIDIsIDIsIDMpKQ0KICAgICAgICA+IG51bXMgPT0gIjMiICAgIyBleHBlY3RlZA0KICAgICAgICBbMV0gIFRSVUUgRkFMU0UgRkFMU0UgRkFMU0UgIFRSVUUNCiAgICAgICAgPiBudW1zID09IDMgICAgICMgPyBkb24ndCBrbm93IHdoeSBidXQgZG9uJ3QgZG8gdGhpcw0KICAgICAgICBbMV0gIFRSVUUgRkFMU0UgRkFMU0UgRkFMU0UgIFRSVUUNCiAgICAgICAgYGBgDQoNCiAgICAxLiBlZzI6DQogICAgICAgIGBtb2RlKGZhY3RvcihjKCJhIiwiYiIpKSlgIGdldHMgIm51bWVyaWMiOyAgDQogICAgICAgIGJ1dCBgY2xhc3MoZmFjdG9yKGMoImEiLCJiIikpKWAgZ2V0cyAiZmFjdG9yIiBub3QgIm51bWVyaWMiLg0KICAgICAgICANCg0KICAgICAgICANCiAgICAxLiBlZzM6IGlsbHVzdHJhdGlvbiBvZiBob3cgaXMgaXQgY29kZWQgaW4gaW50ZWdlcg0KICAgIA0KICAgICAgICBgYGANCiAgICAgICAgIyBzZWUgdGhlIGNvZGUgKGludCByZXByZXNlbnRhdGlvbikgb2YgbGV2ZWxzDQogICAgICAgID4gYXMuaW50ZWdlcihncnApIA0KICAgICAgICBbMV0gMSAyIDEgMg0KICAgICAgICANCiAgICAgICAgIyBpbnNwZWN0IGxldmVscw0KICAgICAgICA+IGxldmVscyhncnApIA0KICAgICAgICBbMV0gImNvbnRyb2wiICJ0cmVhdG1lbnQiDQogICAgICAgIA0KICAgICAgICA+IGxldmVscyhncnApW2FzLmludGVnZXIoZ3JwKV0gDQogICAgICAgIFsxXSAiY29udHJvbCIgInRyZWF0bWVudCIgImNvbnRyb2wiICJ0cmVhdG1lbnQiDQogICAgICAgIGBgYA0KDQojIyMgY3JlYXRlDQoNCmBgYA0KIyBjcmVhdGUgZnJvbSBsaXN0DQo+IGdycCA8LSBmYWN0b3IoYygiY29udHJvbCIsICJ0cmVhdG1lbnQiLCAiY29udHJvbCIsICJ0cmVhdG1lbnQiKSkNCj4gZ3JwDQpbMV0gY29udHJvbCAgIHRyZWF0bWVudCBjb250cm9sICAgdHJlYXRtZW50DQpMZXZlbHM6IGNvbnRyb2wgdHJlYXRtZW50DQpgYGANCg0KIyMjIG9wZXJhdGlvbnMNCg0KYGBgDQojIHJlbGFiZWwNCj4gbGV2ZWxzKGdycCkgPC0gYygiMSIsIjIiKSANCj4gZ3JwIA0KWzFdIDEgMiAxIDIgDQpMZXZlbHM6IDEgMg0KDQojIGNvbXBhcmUgLyBmaW5kIHdhbnRlZCBlbGVtZW50DQojIE5vdGU6IG5lZWQgdG8gY29tcGFyZSBhcyBzdHJpbmcNCj4gZ3JwID09ICIxIiANClsxXSAgVFJVRSBGQUxTRSAgVFJVRSBGQUxTRQ0KDQojIGNvbW1vbiB1c2U6IHJlbmFtZSBhIHJlcGVhdGluZyBzZWN0aW9uDQpwYXJ0aWNpcGFudHMgPC0gZGF0YS5mcmFtZSgNCglkZXN0aW5hdGlvbiA9IGMoIkF1c3RyaWEiLCJLb3JlYSIsIkphcGFuIiwiQXVzdHJpYSIsIlN3ZWRlbiIpLA0KCWFnZSA9IGMoMTgsMjAsMjIsTkEsMjApDQopDQoNCnBhcnRpY2lwYW50cyRkZXN0aW5hdGlvbiA8LSBmYWN0b3IocGFydGljaXBhbnRzJGRlc3RpbmF0aW9uKQ0KbGV2ZWxzKHBhcnRpY2lwYW50cyRkZXN0aW5hdGlvbikgPC0gYygiQXVzdHJhbGlhIiwiSmFwYW4iLCJLb3JlYSIsIlN3ZWRlbiIpDQpgYGANCg0KDQoNCg0K</div>
 
 
 </div>

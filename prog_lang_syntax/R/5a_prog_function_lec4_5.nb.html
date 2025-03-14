@@ -2928,6 +2928,8 @@ function but there is no risk of a clash</li>
 </ol></li>
 <li>super assignment
 <ol style="list-style-type: decimal">
+<li><p><strong><em>!!!</em></strong> In functions to modify global
+variable, always use super assignment</p></li>
 <li><p>syntax: use <code>&lt;&lt;-</code></p></li>
 <li><p>eg</p>
 <pre><code>f &lt;- function() {
@@ -2941,16 +2943,53 @@ function but there is no risk of a clash</li>
 </ol></li>
 </ol></li>
 <li><p>default value of function arguments</p>
-<p>same with python (?)</p></li>
+<ol style="list-style-type: decimal">
+<li><p>If not specified below, is same with python</p></li>
+<li><p>the default valued arguments don’t have to go after the arguments
+w/0 default value</p></li>
+<li><p>will receive keyword first, then do it by order</p>
+<pre><code>f&lt;-function(a,b=2,c)
+
+f(1, 3)   # error
+f(a=1, c=3)   # a, b, c: 1, 2, 3
+f(1, a=0, 3)  # a, b, c: 0, 2, 3</code></pre></li>
+</ol></li>
+<li><p>flexible num of arguments</p></li>
 </ol>
+<p>Use <code>...</code></p>
+<p>eg.</p>
+<pre><code>maxlen &lt;- function (...) { # allow flexible arguments
+  arg &lt;- list(...) # save the argument list to arg
+  mx &lt;- 0 # initialize mx
+  for (x in arg) mx &lt;-max(mx,length(x)) # find max length
+  return(mx)
+}
+
+# indexing `...`
+s&lt;-function(multiplier,...){ 
+    print(..1)    # first element
+}</code></pre>
 </div>
 </div>
 <div id="recursive-functions" class="section level1">
 <h1><strong><em>recursive functions</em></strong></h1>
 <ol style="list-style-type: decimal">
 <li><p>syntax</p>
-<p>eg
-<code>fac&lt;-function(n){      if (n&lt;=2) return(n)      else return(n*fac(n-1))  }</code></p></li>
+<p>eg</p>
+<pre><code>fac&lt;-function(n){
+    if (n&lt;=2) return(n)
+    else return(n*fac(n-1))
+}</code></pre></li>
+<li><p>template</p>
+<pre><code>function() {
+
+if (base_case) {
+    return
+}
+
+# non base case
+
+}</code></pre></li>
 </ol>
 </div>
 <div id="error-handling" class="section level1">
@@ -2967,40 +3006,40 @@ function but there is no risk of a clash</li>
 <h1><strong><em>“rename” functions</em></strong></h1>
 <ol style="list-style-type: decimal">
 <li><p>User defined operator</p>
-<p>eg.</p>
+<ol style="list-style-type: decimal">
+<li><p>note: name must naming starts and ends with
+<code>%</code></p></li>
+<li><p>eg.</p>
 <pre><code>&gt; &quot;%+-%&quot; &lt;- function(x,s) { c(x-s,x+s) }
-&gt; 3 %+-% 5
-[1] -2 8</code></pre></li>
+&gt; 3 %+-% 5    # way 1
+[1] -2 8
+&gt; &quot;%+-%&quot;(3, 5)  # way 2
+[1] -2  8</code></pre></li>
+</ol></li>
 <li><p>Replacement functions</p>
 <ol style="list-style-type: decimal">
-<li><p>idea: similar to <code>names()</code></p></li>
-<li><p>eg</p>
+<li><p>syntax:</p>
+<ol style="list-style-type: decimal">
+<li>the fun name must end with <code>&lt;-</code></li>
+<li>the value is a keyword argument, cannot change its name</li>
+</ol></li>
+<li><p>explain on eg</p>
 <pre><code>&gt; &quot;modify&lt;-&quot; &lt;- function(x, position, value) {
       x[position] &lt;- value
+      x
   }
 &gt; x &lt;- 1:10
 &gt; modify(x,2) &lt;- 5L
 &gt; x
-[1] 5</code></pre></li>
+[1]  1  5  3  4  5  6  7  8  9 10</code></pre>
+<p>which is equivalent to</p>
+<pre><code>x &lt;- &quot;modify&lt;-&quot;(x, 2, 5L)</code></pre></li>
 </ol></li>
 </ol>
-</div>
-<div id="flexible-num-of-arguments" class="section level1">
-<h1><strong><em>flexible num of arguments</em></strong></h1>
-<p>Use <code>...</code></p>
-<p>eg.</p>
-<pre><code>```
-maxlen &lt;- function (...) { # allow flexible arguments
-    arg &lt;- list(...) # save the argument list to arg
-    mx &lt;- 0 # initialize mx
-    for (x in arg) mx &lt;-max(mx,length(x)) # find max length
-    return(mx)
-}
-```</code></pre>
 <!-- rnb-text-end -->
 </div>
 
-<div id="rmd-source-code">LS0tDQp0aXRsZTogIjVfcHJvZ3JhbW1pbmciDQpvdXRwdXQ6IA0KICBodG1sX25vdGVib29rOg0KICAgIHRvYzogdHJ1ZQ0KICAgIHRvY19mbG9hdDogdHJ1ZQ0KLS0tDQoNCiMgKioqYmFzaWMgYnVpbHQtaW4gZnVuY3Rpb25zIGZvciBmdW5jdGlvbioqKg0KDQojIyAxLiAqKm1pc2MqKg0KDQoxLiBpbXBvcnQgZnVuY3Rpb25zOiAgDQoNCiAgICBgYGANCiAgICBzb3VyY2UoImNoNC5yIikNCiAgICBgYGANCiAgICANCjEuIEZ1bmN0aW9ucyBjYW4gYmUgZW50ZXJlZCBvciBlZGl0ZWQgdXNpbmcgYGZpeChmdW5jdGlvbl9uYW1lKWANCg0KMS4gYHN0b3AobWVzc2FnZSlgOiB0ZXJtaW5hdGVzIGV2YWx1YXRpb24gb2YgdGhlIGN1cnJlbnQgZnVuY3Rpb24gYW5kIGRpc3BsYXkgbWVzc2FnZQ0KICANCiMjIDIuICoqYmFzaWMgZnVuY3Rpb24gc3ludGF4KiogIA0KDQoxLiBEZWZpbmUgIA0KDQogICAgMS4gc3ludGF4ICANCiAgDQogICAgICAgIGBgYA0KICAgICAgICBteWZ1bmN0aW9uIDwtIGZ1bmN0aW9uKGFyZzEsIGFyZzIsIC4uLiApIHsNCiAgICAgICAgICBzdGF0ZW1lbnRzDQogICAgICAgICAgLi4uDQogICAgICAgICAgcmV0dXJuKG9iamVjdCkNCiAgICAgICAgfQ0KICAgICAgICBgYGANCiAgICAgICAgDQogICAgMS4gbm90ZXMNCiAgICAgICAgMS4gSWYgdGhlcmUgYXJlIG5vIGV4cGxpY2l0IHJldHVybnMgZnJvbSBhIGZ1bmN0aW9uLCB0aGUgdmFsdWUgb2YgdGhlIGxhc3QgZXZhbHVhdGVkIGV4cHJlc3Npb24gaXMgcmV0dXJuZWQgYXV0b21hdGljYWxseS4NCiAgICAgICAgMS4gQ2FuIHJldHVybiBvbmx5IG9uZSBvYmplY3QuIElmIG11bHRpcGxlLCB3cmFwIGl0IGluIGEgbGlzdC92ZWN0b3IgLi4uDQogICAgICAgIA0KIyMgMy4gRnVuY3Rpb24gcmVsYXRlZCBzeW50YXgNCg0KMS4gU2NvcGUNCg0KICAgIDEuIHZhcmlhYmxlcyBkZWZpbmVkIHdpdGhpbiBmdW5jdGlvbnMgaGF2ZSBsb2NhbCBzY29wZQ0KICAgICAgICAxLiBFdmVuIGlmIHVzaW5nIGA8LWAuIA0KICAgICAgICAxLiBBIHZhcmlhYmxlIHdpdGggdGhlIHNhbWUgbmFtZSBjb3VsZCBiZSBjcmVhdGVkIGluIGEgZGlmZmVyZW50IGZ1bmN0aW9uIGJ1dCB0aGVyZSBpcyBubyByaXNrIG9mIGEgY2xhc2gNCiAgICAgIA0KICAgIDEuIHN1cGVyIGFzc2lnbm1lbnQgDQogICAgICAgIDEuIHN5bnRheDogdXNlIGA8PC1gDQogICAgICAgIDEuIGVnICANCiAgICAgICAgDQogICAgICAgICAgICBgYGANCiAgICAgICAgICAgIGYgPC0gZnVuY3Rpb24oKSB7DQogICAgICAgICAgICAgICAgaWYgKCFleGlzdHMoImZfY291bnQiKSkNCiAgICAgICAgICAgICAgICAgICAgIyBjaGVjayBleGlzdGVuY2Ugb2YgZl9jb3VudA0KICAgICAgICAgICAgICAgICAgICBmX2NvdW50IDw8LSAxDQogICAgICAgICAgICAgICAgZWxzZQ0KICAgICAgICAgICAgICAgICAgICBmX2NvdW50IDw8LSBmX2NvdW50ICsgMQ0KICAgICAgICAgICAgICAgIHJldHVybihmX2NvdW50KQ0KICAgICAgICAgICAgfQ0KICAgICAgICAgICAgYGBgDQogICAgICAgICAgICANCjEuIGRlZmF1bHQgdmFsdWUgb2YgZnVuY3Rpb24gYXJndW1lbnRzDQoNCiAgICBzYW1lIHdpdGggcHl0aG9uICg/KQ0KICAgIA0KIyAqKipyZWN1cnNpdmUgZnVuY3Rpb25zKioqDQoNCjEuIHN5bnRheA0KDQogICAgZWcNCiAgICBgYGANCiAgICBmYWM8LWZ1bmN0aW9uKG4pew0KICAgICAgICBpZiAobjw9MikgcmV0dXJuKG4pDQogICAgICAgIGVsc2UgcmV0dXJuKG4qZmFjKG4tMSkpDQogICAgfQ0KICAgIGBgYA0KICANCiMgKioqZXJyb3IgaGFuZGxpbmcqKioNCg0KMS4gcmFpc2UgZXJyb3I6IGJ5IGBzdG9wYA0KDQogICAgZWcuIGBgYGlmIChsb3c+dXApIHN0b3AgKCJFcnJvcjogZmlyc3QgYXJnLiA+IHNlY29uZCBhcmcuIilgYGANCiAgICANCjEuIHJhaXNlIHdhcm5pbmc6IGJ5IGB3YXJuaW5nKClgDQoNCiAgICBlZy4gYGBgd2FybmluZygiVzEiKWBgYA0KICAgIA0KIyAqKioicmVuYW1lIiBmdW5jdGlvbnMqKioNCg0KMS4gVXNlciBkZWZpbmVkIG9wZXJhdG9yDQoNCiAgICBlZy4NCiAgICANCiAgICBgYGANCiAgICA+ICIlKy0lIiA8LSBmdW5jdGlvbih4LHMpIHsgYyh4LXMseCtzKSB9DQogICAgPiAzICUrLSUgNQ0KICAgIFsxXSAtMiA4DQogICAgYGBgDQoNCjEuIFJlcGxhY2VtZW50IGZ1bmN0aW9ucw0KICAgIDEuIGlkZWE6IHNpbWlsYXIgdG8gYG5hbWVzKClgDQogICAgMS4gZWcNCiAgICANCiAgICAgICAgYGBgDQogICAgICAgID4gIm1vZGlmeTwtIiA8LSBmdW5jdGlvbih4LCBwb3NpdGlvbiwgdmFsdWUpIHsNCiAgICAgICAgICAgICAgeFtwb3NpdGlvbl0gPC0gdmFsdWUNCiAgICAgICAgICB9DQogICAgICAgID4geCA8LSAxOjEwDQogICAgICAgID4gbW9kaWZ5KHgsMikgPC0gNUwNCiAgICAgICAgPiB4DQogICAgICAgIFsxXSA1DQogICAgICAgIGBgYA0KDQojICoqKmZsZXhpYmxlIG51bSBvZiBhcmd1bWVudHMqKioNCg0KVXNlIGAuLi5gDQoNCmVnLg0KDQogICAgYGBgDQogICAgbWF4bGVuIDwtIGZ1bmN0aW9uICguLi4pIHsgIyBhbGxvdyBmbGV4aWJsZSBhcmd1bWVudHMNCiAgICAgICAgYXJnIDwtIGxpc3QoLi4uKSAjIHNhdmUgdGhlIGFyZ3VtZW50IGxpc3QgdG8gYXJnDQogICAgICAgIG14IDwtIDAgIyBpbml0aWFsaXplIG14DQogICAgICAgIGZvciAoeCBpbiBhcmcpIG14IDwtbWF4KG14LGxlbmd0aCh4KSkgIyBmaW5kIG1heCBsZW5ndGgNCiAgICAgICAgcmV0dXJuKG14KQ0KICAgIH0NCiAgICBgYGANCg0K</div>
+<div id="rmd-source-code">LS0tDQp0aXRsZTogIjVfcHJvZ3JhbW1pbmciDQpvdXRwdXQ6IA0KICBodG1sX25vdGVib29rOg0KICAgIHRvYzogdHJ1ZQ0KICAgIHRvY19mbG9hdDogdHJ1ZQ0KLS0tDQoNCiMgKioqYmFzaWMgYnVpbHQtaW4gZnVuY3Rpb25zIGZvciBmdW5jdGlvbioqKg0KDQojIyAxLiAqKm1pc2MqKg0KDQoxLiBpbXBvcnQgZnVuY3Rpb25zOiAgDQoNCiAgICBgYGANCiAgICBzb3VyY2UoImNoNC5yIikNCiAgICBgYGANCiAgICANCjEuIEZ1bmN0aW9ucyBjYW4gYmUgZW50ZXJlZCBvciBlZGl0ZWQgdXNpbmcgYGZpeChmdW5jdGlvbl9uYW1lKWANCg0KMS4gYHN0b3AobWVzc2FnZSlgOiB0ZXJtaW5hdGVzIGV2YWx1YXRpb24gb2YgdGhlIGN1cnJlbnQgZnVuY3Rpb24gYW5kIGRpc3BsYXkgbWVzc2FnZQ0KICANCiMjIDIuICoqYmFzaWMgZnVuY3Rpb24gc3ludGF4KiogIA0KDQoxLiBEZWZpbmUgIA0KDQogICAgMS4gc3ludGF4ICANCiAgDQogICAgICAgIGBgYA0KICAgICAgICBteWZ1bmN0aW9uIDwtIGZ1bmN0aW9uKGFyZzEsIGFyZzIsIC4uLiApIHsNCiAgICAgICAgICBzdGF0ZW1lbnRzDQogICAgICAgICAgLi4uDQogICAgICAgICAgcmV0dXJuKG9iamVjdCkNCiAgICAgICAgfQ0KICAgICAgICBgYGANCiAgICAgICAgDQogICAgMS4gbm90ZXMNCiAgICAgICAgMS4gSWYgdGhlcmUgYXJlIG5vIGV4cGxpY2l0IHJldHVybnMgZnJvbSBhIGZ1bmN0aW9uLCB0aGUgdmFsdWUgb2YgdGhlIGxhc3QgZXZhbHVhdGVkIGV4cHJlc3Npb24gaXMgcmV0dXJuZWQgYXV0b21hdGljYWxseS4NCiAgICAgICAgMS4gQ2FuIHJldHVybiBvbmx5IG9uZSBvYmplY3QuIElmIG11bHRpcGxlLCB3cmFwIGl0IGluIGEgbGlzdC92ZWN0b3IgLi4uDQogICAgICAgIA0KIyMgMy4gRnVuY3Rpb24gcmVsYXRlZCBzeW50YXgNCg0KMS4gU2NvcGUNCg0KICAgIDEuIHZhcmlhYmxlcyBkZWZpbmVkIHdpdGhpbiBmdW5jdGlvbnMgaGF2ZSBsb2NhbCBzY29wZQ0KICAgICAgICAxLiBFdmVuIGlmIHVzaW5nIGA8LWAuIA0KICAgICAgICAxLiBBIHZhcmlhYmxlIHdpdGggdGhlIHNhbWUgbmFtZSBjb3VsZCBiZSBjcmVhdGVkIGluIGEgZGlmZmVyZW50IGZ1bmN0aW9uIGJ1dCB0aGVyZSBpcyBubyByaXNrIG9mIGEgY2xhc2gNCiAgICAgIA0KICAgIDEuIHN1cGVyIGFzc2lnbm1lbnQgDQogICAgICAgIDEuICoqKiEhISoqKiBJbiBmdW5jdGlvbnMgdG8gbW9kaWZ5IGdsb2JhbCB2YXJpYWJsZSwgYWx3YXlzIHVzZSBzdXBlciBhc3NpZ25tZW50DQogICAgICAgIDEuIHN5bnRheDogdXNlIGA8PC1gDQogICAgICAgIDEuIGVnICANCiAgICAgICAgDQogICAgICAgICAgICBgYGANCiAgICAgICAgICAgIGYgPC0gZnVuY3Rpb24oKSB7DQogICAgICAgICAgICAgICAgaWYgKCFleGlzdHMoImZfY291bnQiKSkNCiAgICAgICAgICAgICAgICAgICAgIyBjaGVjayBleGlzdGVuY2Ugb2YgZl9jb3VudA0KICAgICAgICAgICAgICAgICAgICBmX2NvdW50IDw8LSAxDQogICAgICAgICAgICAgICAgZWxzZQ0KICAgICAgICAgICAgICAgICAgICBmX2NvdW50IDw8LSBmX2NvdW50ICsgMQ0KICAgICAgICAgICAgICAgIHJldHVybihmX2NvdW50KQ0KICAgICAgICAgICAgfQ0KICAgICAgICAgICAgYGBgDQogICAgICAgICAgICANCjEuIGRlZmF1bHQgdmFsdWUgb2YgZnVuY3Rpb24gYXJndW1lbnRzDQoNCiAgICAxLiBJZiBub3Qgc3BlY2lmaWVkIGJlbG93LCBpcyBzYW1lIHdpdGggcHl0aG9uDQogICAgDQogICAgMS4gdGhlIGRlZmF1bHQgdmFsdWVkIGFyZ3VtZW50cyBkb24ndCBoYXZlIHRvIGdvIGFmdGVyIHRoZSBhcmd1bWVudHMgdy8wIGRlZmF1bHQgdmFsdWUNCiAgICANCiAgICAxLiB3aWxsIHJlY2VpdmUga2V5d29yZCBmaXJzdCwgdGhlbiBkbyBpdCBieSBvcmRlcg0KICAgIA0KICAgICAgICBgYGANCiAgICAgICAgZjwtZnVuY3Rpb24oYSxiPTIsYykNCiAgICAgICAgDQogICAgICAgIGYoMSwgMykgICAjIGVycm9yDQogICAgICAgIGYoYT0xLCBjPTMpICAgIyBhLCBiLCBjOiAxLCAyLCAzDQogICAgICAgIGYoMSwgYT0wLCAzKSAgIyBhLCBiLCBjOiAwLCAyLCAzDQogICAgICAgIGBgYA0KICAgIA0KMS4gZmxleGlibGUgbnVtIG9mIGFyZ3VtZW50cw0KDQpVc2UgYC4uLmANCg0KZWcuDQoNCmBgYA0KbWF4bGVuIDwtIGZ1bmN0aW9uICguLi4pIHsgIyBhbGxvdyBmbGV4aWJsZSBhcmd1bWVudHMNCiAgYXJnIDwtIGxpc3QoLi4uKSAjIHNhdmUgdGhlIGFyZ3VtZW50IGxpc3QgdG8gYXJnDQogIG14IDwtIDAgIyBpbml0aWFsaXplIG14DQogIGZvciAoeCBpbiBhcmcpIG14IDwtbWF4KG14LGxlbmd0aCh4KSkgIyBmaW5kIG1heCBsZW5ndGgNCiAgcmV0dXJuKG14KQ0KfQ0KDQojIGluZGV4aW5nIGAuLi5gDQpzPC1mdW5jdGlvbihtdWx0aXBsaWVyLC4uLil7IA0KICAgIHByaW50KC4uMSkgICAgIyBmaXJzdCBlbGVtZW50DQp9DQpgYGANCg0KDQojICoqKnJlY3Vyc2l2ZSBmdW5jdGlvbnMqKioNCg0KMS4gc3ludGF4DQoNCiAgICBlZw0KICAgIA0KICAgIGBgYA0KICAgIGZhYzwtZnVuY3Rpb24obil7DQogICAgICAgIGlmIChuPD0yKSByZXR1cm4obikNCiAgICAgICAgZWxzZSByZXR1cm4obipmYWMobi0xKSkNCiAgICB9DQogICAgYGBgDQogICAgDQoxLiB0ZW1wbGF0ZQ0KDQogICAgYGBgDQogICAgZnVuY3Rpb24oKSB7DQogICAgDQogICAgaWYgKGJhc2VfY2FzZSkgew0KICAgICAgICByZXR1cm4NCiAgICB9DQogICAgDQogICAgIyBub24gYmFzZSBjYXNlDQogICAgDQogICAgfQ0KICAgIGBgYA0KICANCiMgKioqZXJyb3IgaGFuZGxpbmcqKioNCg0KMS4gcmFpc2UgZXJyb3I6IGJ5IGBzdG9wYA0KDQogICAgZWcuIGBgYGlmIChsb3c+dXApIHN0b3AgKCJFcnJvcjogZmlyc3QgYXJnLiA+IHNlY29uZCBhcmcuIilgYGANCiAgICANCjEuIHJhaXNlIHdhcm5pbmc6IGJ5IGB3YXJuaW5nKClgDQoNCiAgICBlZy4gYGBgd2FybmluZygiVzEiKWBgYA0KICAgIA0KICAgIA0KIyAqKioicmVuYW1lIiBmdW5jdGlvbnMqKioNCg0KMS4gVXNlciBkZWZpbmVkIG9wZXJhdG9yDQoNCiAgICAxLiBub3RlOiBuYW1lIG11c3QgbmFtaW5nIHN0YXJ0cyBhbmQgZW5kcyB3aXRoIGAlYA0KDQogICAgMi4gZWcuDQogICAgDQogICAgICAgIGBgYA0KICAgICAgICA+ICIlKy0lIiA8LSBmdW5jdGlvbih4LHMpIHsgYyh4LXMseCtzKSB9DQogICAgICAgID4gMyAlKy0lIDUgICAgIyB3YXkgMQ0KICAgICAgICBbMV0gLTIgOA0KICAgICAgICA+ICIlKy0lIigzLCA1KSAgIyB3YXkgMg0KICAgICAgICBbMV0gLTIgIDgNCiAgICAgICAgYGBgDQoNCjEuIFJlcGxhY2VtZW50IGZ1bmN0aW9ucw0KICAgIDEuIHN5bnRheDogDQogICAgICAgIDEuIHRoZSBmdW4gbmFtZSBtdXN0IGVuZCB3aXRoIGA8LWANCiAgICAgICAgMS4gdGhlIHZhbHVlIGlzIGEga2V5d29yZCBhcmd1bWVudCwgY2Fubm90IGNoYW5nZSBpdHMgbmFtZQ0KICAgIDEuIGV4cGxhaW4gb24gZWcNCiAgICANCiAgICAgICAgYGBgDQogICAgICAgID4gIm1vZGlmeTwtIiA8LSBmdW5jdGlvbih4LCBwb3NpdGlvbiwgdmFsdWUpIHsNCiAgICAgICAgICAgICAgeFtwb3NpdGlvbl0gPC0gdmFsdWUNCiAgICAgICAgICAgICAgeA0KICAgICAgICAgIH0NCiAgICAgICAgPiB4IDwtIDE6MTANCiAgICAgICAgPiBtb2RpZnkoeCwyKSA8LSA1TA0KICAgICAgICA+IHgNCiAgICAgICAgWzFdICAxICA1ICAzICA0ICA1ICA2ICA3ICA4ICA5IDEwDQogICAgICAgIGBgYA0KICAgICAgICANCiAgICAgICAgd2hpY2ggaXMgZXF1aXZhbGVudCB0bw0KICAgICAgICANCiAgICAgICAgYGBgDQogICAgICAgIHggPC0gIm1vZGlmeTwtIih4LCAyLCA1TCkNCiAgICAgICAgYGBgDQoNCg0K</div>
 
 
 </div>
