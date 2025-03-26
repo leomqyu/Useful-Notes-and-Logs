@@ -40,7 +40,7 @@ When you say run a command like `ls`, how does it know which exe is this `ls`? J
 
 5. Inspect process by PID
     ```
-    ps -p <PID> -o user,comm        # get the command and the user name
+    ps -o user,args -p <PID>       # get the command and the user name
     ```
 
 # OS related

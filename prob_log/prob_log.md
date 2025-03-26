@@ -310,6 +310,22 @@ Change all the `normed=True` to `density=True` in `plt.hist()`
 
 ---
 
+# <span style="color:green"> 25-03-25 torch.vmap runtime error of "Access data pointer of tensor that doesn't have storage" </span>
+
+### error message 
+
+When using vmap to wrap up functions, has the error 
+
+```
+RuntimeError: Cannot access data pointer of Tensor that doesn't have storage
+```
+
+### solution
+
+`vmap` cannot work for functions involving non pytorch code, eg `.numpy()`.
+
+---
+
 ## <span style="color:green"> 25-02-24 Multiple GPU distributed, kill process but memory on GPU persists </span>
 
 ### error message 
