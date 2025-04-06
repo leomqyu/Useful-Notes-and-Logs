@@ -73,3 +73,32 @@ When you say run a command like `ls`, how does it know which exe is this `ls`? J
 # Others
 1. Find
     `find . -name thisfile.txt`
+
+1. time
+
+    `time <normal command>`
+
+    1. Real Time (real). The actual time it took to execute the command, from start to finish.
+    1. User Time (user). The time the CPU spent on the task itself.
+    1. System Time (sys). The time the CPU spent on system-level tasks related to the command.
+   
+1. rsync
+    `rsync -chavzP --stats user@remote.host:/path/to/copy /path/to/local/storage`
+
+1. inspect storage
+   ```
+   du -sh <dir or file name>
+   du -h --max-depth=1 /path/to/parent/directory | sort -h      # inspect the size of child dir
+   ```
+
+1. link
+   ```
+   # soft: point to the link
+   ln -s [source] [link]	
+
+   # hard: store the same inode
+   ln [source] [link]
+
+   # eg: create a file called my_link to link to an already existing file myfile.txt
+   ln -s /path/to/myfile.txt /path/to/my_link
+   ```

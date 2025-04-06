@@ -64,6 +64,8 @@ conda create --name venv2 --clone venv1 
 conda config –add / --remove channels <name>
 ```
 
+or to directly `vim vim ~/.condarc`
+
 
 # pytorch, cuda
 
