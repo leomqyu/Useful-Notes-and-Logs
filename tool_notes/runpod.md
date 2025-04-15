@@ -14,7 +14,7 @@ Choose the type and num of GPU, and deploy. Then either use the terminal / jupyt
 
 1. On windows cmd
    1. ```ssh-keygen -t ed25519```
-   2. ```type %USERPROFILE%\.ssh\id_id_ed25519.pub``` for windows, ```cat``` for mac to get ssh publich keys
+   2. ```type %USERPROFILE%\.ssh\id_ed25519.pub``` for windows, ```cat``` for mac to get ssh publich keys
    3. go to run pod home page, `settings` -> `SSH Public Keys` to get key -> update the key
    4. Get a pod (note when newing this pod, must click allow SSH (is allowed by default))
    5. On the pod page, click connect and can see `SSH over-exposed TCP`, use the ssh command and just connect it in VSCode.

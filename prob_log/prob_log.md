@@ -230,7 +230,7 @@ export PATH="${PATH}:/path/to/directory/containing/wrapper"
 
 ---
 
-## <span style="color:green">25-02-17 Cannot commit due to pull error </span>
+## <span style="color:green">25-04-15 Cannot access / write on remote server </span>
 ### brief analysis
 
 If the remote repo is modified in remote, and tried to push on local repo, then should be pulled first
@@ -238,6 +238,31 @@ If the remote repo is modified in remote, and tried to push on local repo, then 
 ### solution
 
 Just follow the instruction to do git pull then push.
+
+---
+
+## <span style="color:green">25-02-17 Cannot git push because "unable to access" </span>
+
+### error message 
+
+```
+fatal: unable to access 'https://github.com/Leo221211/xxx.git/': The requested URL returned error: 403
+```
+
+### brief analysis
+
+On a remote server, when want to (eg) push to remote (private) repo, gets the problem
+(already used PAT token)
+```
+Username for 'https://github.com': Leo221211
+Password for 'https://Leo221211@github.com': 
+remote: Write access to repository not granted.
+fatal: unable to access 'https://github.com/Leo221211/xxx.git/': The requested URL returned error: 403
+```
+
+### solution
+
+The problem is that when creating the PAT tokens the scope isn't enough. Don't have the limit to write. Can regenerate the PAT with enough scope.
 
 ---
 
@@ -310,6 +335,28 @@ Change all the `normed=True` to `density=True` in `plt.hist()`
 
 ---
 
+# <span style="color:green"> 25-03=4-15 When using Lightning ddp, the process gets stuck on loading data </span>
+
+### error message 
+
+When I used Lightning on runpod (some GPU types, eg RTX6000 Ada), I can train the model with one GPU, but when I use multiple GPU, the training gets stuck on the stage of loading training data. The GPU usage is shown to be 100%, but stuck forever.
+
+### solution
+
+Enable PyTorch debug and let it print full information. Paste the information to GPT and gets the conclusion that it is because there's a dead lock of communication between GPUs.
+To solve this, add the beginning of the file, before importing torch torch and lightning, change the communication to a safer type by
+
+```
+import os
+os.environ["NCCL_P2P_LEVEL"]="NVL"
+```
+
+### takeaway
+
+Debug smartly. Try to use smaller datafiles to determine the bug. 
+
+---
+
 # <span style="color:green"> 25-03-25 torch.vmap runtime error of "Access data pointer of tensor that doesn't have storage" </span>
 
 ### error message 
@@ -338,7 +385,7 @@ In this way, when using the `nvidia-smi`, not able to see the running process, b
 The best way is to use tmux or screen from the start and don't directly kill a process.  
 If this already happens, use `fuser -v /dev/nvidia0` (also /dev/nvidia1, /dev/nvidia2 ...) to find the process occupying gpu. Then kill it.
 
-command to kill 
+command to kill (Note: don't know why but this might damage all processes on all gpus of the same user)
 ```
 fuser -vk /dev/nvidia5  # Lists and asks for confirmation
 fuser -vkM /dev/nvidia5 # Kills with SIGKILL (-9)
