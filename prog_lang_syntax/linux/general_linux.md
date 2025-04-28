@@ -60,6 +60,7 @@ When you say run a command like `ls`, how does it know which exe is this `ls`? J
     tar -czvf [archive name].tar.gz [pathtofile]
 1. uncompress 
     tar -xzvf [file .tar.gz]
+    tar -xvf [file .tar]
 
     zip file: unzip file.zip
     bed file: gunzip [file path]
