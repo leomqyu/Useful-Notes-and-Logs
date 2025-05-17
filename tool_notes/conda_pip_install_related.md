@@ -27,15 +27,18 @@ verify:
     ```conda remove --name ENV_NAME --all```
     all means all the packages
 
-2. list info
+1. list info
     list environments: ```conda env list```
     list packages: ```conda list```
 
-3. search version
+1. search version
    ```conda search```	
 check all versions: 
     ```conda search -f```
 
+1. conda storage management
+   
+    conda environment some times take up very big spaces. To clean the environment, first remove environments no longer wanted; then clean the cache by: `conda clean --all`
 
 
 # Yaml or requirements.txt

@@ -89,7 +89,8 @@ When you say run a command like `ls`, how does it know which exe is this `ls`? J
 1. inspect storage
    ```
    du -sh <dir or file name>
-   du -h --max-depth=1 /path/to/parent/directory | sort -h      # inspect the size of child dir
+   du -h --max-depth=1 /path/to/parent/directory | sort -h
+   du -sh path/* | sort -h  # storage of sub directory sorted
    ```
 
 1. link

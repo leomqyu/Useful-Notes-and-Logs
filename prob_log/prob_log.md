@@ -28,6 +28,21 @@ how to avoid this next time
 
 ---
 
+## <span style="color:green">25-05-09 WSL too much memory </span>
+
+### error message 
+
+The Ubuntu may fail to open
+
+### solution
+
+refer to  this [link](https://blog.csdn.net/2401_82888200/article/details/141535603)
+1. delete ~/.cache
+2. use compact disk
+
+
+---
+
 ## <span style="color:green">25-01-17 version `GLIBCXX_3.4.29' not found </span>
 
 ### error message 
@@ -383,7 +398,7 @@ In this way, when using the `nvidia-smi`, not able to see the running process, b
 ### solution
 
 The best way is to use tmux or screen from the start and don't directly kill a process.  
-If this already happens, use `fuser -v /dev/nvidia0` (also /dev/nvidia1, /dev/nvidia2 ...) to find the process occupying gpu. Then kill it.
+If this already happens, use ` -v /dev/fusernvidia0` (also /dev/nvidia1, /dev/nvidia2 ...) to find the process occupying gpu. Then kill it.
 
 command to kill (Note: don't know why but this might damage all processes on all gpus of the same user)
 ```
@@ -505,6 +520,31 @@ Just waited for one night and becomes OK
 #  <span style="color:blue"> Other tools and packages </span>
 
 ---
+
+## <span style="color:green"> 25-05-12 Cannot download hugging face </span>
+
+### error message 
+```
+URLError: <urlopen error [Errno 101] Network is unreachable>
+```
+
+### brief analysis
+
+Because of the great fire wall. Use a mirror website
+
+### solution
+
+1. pip install huggingface_hub
+2. set env and download using the command
+    ```bash
+    HF_ENDPOINT=https://hf-mirror.com \
+    HF_HOME=/data/mqyu/cache \
+    huggingface-cli download timm/ViT-SO400M-14-SigLIP-384 \
+    --cache-dir /data/mqyu/cache \
+    --include "*.bin" "*.json" "*.txt" "*.model" "*.py" \
+    --resume-download
+    ```
+
 
 ## <span style="color:green"> 25-03-05 executing mysql on WSL gets error </span>
 
