@@ -36,7 +36,7 @@ The Ubuntu may fail to open
 
 ### solution
 
-refer to  this [link](https://blog.csdn.net/2401_82888200/article/details/141535603)
+refer to  this [link](https://blog.csdn.net/2401_82888200/article/details/141535603) and this [link](https://zhuanlan.zhihu.com/p/358528257?utm_id=0)
 1. delete ~/.cache
 2. use compact disk
 
