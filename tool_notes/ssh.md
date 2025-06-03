@@ -21,14 +21,20 @@ ServerAliveInterval 60
    ssh-keygen -t ed25519
    ```
 
-   To use, create at the machine that want to connect from, then copy the public key to the machine that want to connect to
+   To use, create at the machine that want to connect FROM (local computer), 
+   
+1. copy the public key to the machine that want to connect to (remote server)
+
+just copy the content in the `~/.ssh/id_rsa_xxx.pub` of local machine to the file with the same name in te folder `.ssh/authorized_keys` the remote machine
 
 2. connect with keys
     ```
     ssh -i <path_to_private_key> ...
     ```
 
-3. copy private key to other machine:
+    (In vscode, if use ssh key, some times need to open ssh configuration file and change "IdentityFile" to the correct file path)
+
+3. copy private key to other machine (try to avoid):
     ```
     # first just copy the file to new machine
     ssh-agent bash
