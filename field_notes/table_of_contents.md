@@ -4,12 +4,18 @@
 3. [Statistics](https://zhuanlan.zhihu.com/p/1913328613161428501)
 
 # AI
+1. [Traditional ML algorithms](https://zhuanlan.zhihu.com/p/1916440259421533499)
 1. [AI misc concepts](https://zhuanlan.zhihu.com/p/1913322427523527491)
 1. [CNN](https://zhuanlan.zhihu.com/p/1913325083327459352)
 1. [GNN](https://zhuanlan.zhihu.com/p/1913260843107321204)
 1. [Diffusion Models](https://zhuanlan.zhihu.com/p/1913226131466872447)
+1. Computer vision
+   1. [3D vision](https://zhuanlan.zhihu.com/p/1915710518171240060)
+1. [LLM](https://zhuanlan.zhihu.com/p/1915759089444689599)
 
 # Biomed
-1. RNA-DNA-protein
-   1. [Biology Notes](https://zhuanlan.zhihu.com/p/1913326537517831630)
+1. Neuroscience
+   1. [Neuroscience misc notes](https://zhuanlan.zhihu.com/p/1916192539595245445)   
+2. RNA-DNA-protein
+   1. [Genetics Misc Notes](https://zhuanlan.zhihu.com/p/1913326537517831630)
    2. [Databases](https://zhuanlan.zhihu.com/p/1913327272536027462)
