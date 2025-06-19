@@ -11,11 +11,16 @@
 1. [Diffusion Models](https://zhuanlan.zhihu.com/p/1913226131466872447)
 1. Computer vision
    1. [3D vision](https://zhuanlan.zhihu.com/p/1915710518171240060)
-1. [LLM](https://zhuanlan.zhihu.com/p/1915759089444689599)
+1. LLM
+   1. [LLM misc concepts](https://zhuanlan.zhihu.com/p/1918246498128344349)
+   2. [Finetuning techniques](https://zhuanlan.zhihu.com/p/1915759089444689599)
+1. Open source code notes
+   1. [BERT source code]()
 
 # Biomed
 1. Neuroscience
-   1. [Neuroscience misc notes](https://zhuanlan.zhihu.com/p/1916192539595245445)   
+   1. [Neuroscience misc notes](https://zhuanlan.zhihu.com/p/1916192539595245445)  
+   2. [Brain connectivity](https://zhuanlan.zhihu.com/p/1919038169329952390) 
 2. RNA-DNA-protein
    1. [Genetics Misc Notes](https://zhuanlan.zhihu.com/p/1913326537517831630)
    2. [Databases](https://zhuanlan.zhihu.com/p/1913327272536027462)
