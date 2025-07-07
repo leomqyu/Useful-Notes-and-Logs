@@ -26,6 +26,9 @@ git push  # update all the remote branches that have updated in local tracking b
 (DON’T MERGE PULL REQUEST!)
 ```
 
+# PAT (Personal Access Tokens)
+usually needed when trying to connect to github using in a non web-based manner. Will be a prompt for username and password. Username just the username, password use the PAT token.
+
 
 # config
 to set your account's default identity:
@@ -36,3 +39,7 @@ git config --global user.name "Your Name"
 ```
 
 Omit --global to set the identity only in this repository.
+
+# Convert existing non-empty directory to Git repository
+
+[link](https://stackoverflow.com/questions/3311774/how-to-convert-existing-non-empty-directory-into-a-git-working-directory-and-pus), answer by Hitesh Sahu
