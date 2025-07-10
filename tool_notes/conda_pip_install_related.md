@@ -40,6 +40,19 @@ check all versions:
    
     conda environment some times take up very big spaces. To clean the environment, first remove environments no longer wanted; then clean the cache by: `conda clean --all`
 
+1. clone: 
+```
+conda create --name venv2 --clone venv1 
+```
+
+1. add/remove channels: 
+```
+conda config –add / --remove channels <name>
+```
+
+or to directly `vim vim ~/.condarc`
+
+
 
 # Yaml or requirements.txt
 
@@ -49,6 +62,8 @@ check all versions:
 or
 ```conda install --yes --file requirements.txt``` 
 
+note: `--yes` or `-y` means don't need to type `y`.
+
 ## 2. yml
 
 1. create env
@@ -56,18 +71,6 @@ or
 conda env export > env.yml
 conda env create  -f env.yml
 ```
-
-2. clone: 
-```
-conda create --name venv2 --clone venv1 
-```
-
-3. add/remove channels: 
-```
-conda config –add / --remove channels <name>
-```
-
-or to directly `vim vim ~/.condarc`
 
 
 # pytorch, cuda
