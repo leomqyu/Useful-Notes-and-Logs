@@ -27,18 +27,23 @@ git push  # update all the remote branches that have updated in local tracking b
 ```
 
 # PAT (Personal Access Tokens)
-usually needed when trying to connect to github using in a non web-based manner. Will be a prompt for username and password. Username just the username, password use the PAT token.
+usually needed when trying to connect to github using in a non web-based manner. Will be a prompt for username and password. Username just the username, password use the PAT token (when using command line, when tell you to input password, always the PAT not the real password).
 
 
 # config
-to set your account's default identity:
+1. to set your account's default identity:
+    ```
+    git config --global user.email "you@example.com"
+    git config --global user.name "Your Name"
+    ```
+    1. Omit --global to set the identity only in this repository.
 
-```
-git config --global user.email "you@example.com"
-git config --global user.name "Your Name"
-```
 
-Omit --global to set the identity only in this repository.
+1. to remember the password for a time period
+    ```
+    git config --global credential.helper 'cache --timeout=3600'    # for an hour
+    ```
+
 
 # Convert existing non-empty directory to Git repository
 
