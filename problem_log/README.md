@@ -350,7 +350,7 @@ Change all the `normed=True` to `density=True` in `plt.hist()`
 
 ---
 
-# <span style="color:green"> 25-03=4-15 When using Lightning ddp, the process gets stuck on loading data </span>
+## <span style="color:green"> 25-03=4-15 When using Lightning ddp, the process gets stuck on loading data </span>
 
 ### error message 
 
@@ -372,7 +372,7 @@ Debug smartly. Try to use smaller datafiles to determine the bug.
 
 ---
 
-# <span style="color:green"> 25-03-25 torch.vmap runtime error of "Access data pointer of tensor that doesn't have storage" </span>
+## <span style="color:green"> 25-03-25 torch.vmap runtime error of "Access data pointer of tensor that doesn't have storage" </span>
 
 ### error message 
 
@@ -521,6 +521,27 @@ Just waited for one night and becomes OK
 
 ---
 
+## <span style="color:green"> 25-07-16 VSCode go to definition not working </span>
+
+### error message 
+
+In VS Code, F12 and Ctrl + Click and Right Click "Go To Definition" wasn't working.
+
+### solution
+
+1. Go to Extensions
+1. Click "Disable All Installed Extensions"
+1. Close and Reopen VS Code
+1. Back to Extensions and "Enable All Extensions"
+
+Or, just update vscode
+
+### ref
+
+`https://stackoverflow.com/questions/37341849/vscode-go-to-definition-not-working`
+
+---
+
 ## <span style="color:green"> 25-05-12 Cannot download hugging face </span>
 
 ### error message 
@@ -587,11 +608,6 @@ Details follow [this link](https://stackoverflow.com/questions/64883580/wsl-cant
   ```
   sudo /etc/init.d/mysql start
   ```
-
----
-
-
-#  <span style="color:blue"> Others </span>
 
 ---
 
