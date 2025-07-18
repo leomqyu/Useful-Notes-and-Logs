@@ -28,6 +28,25 @@ how to avoid this next time
 
 ---
 
+## <span style="color:green">25-07-18 WSL cannot open bash </span>
+
+### error message 
+
+The Ubuntu fail to open:  
+`由于连接方在一段时间后没有正确答复或连接的主机没有反应，连接尝试失败。 错误代码: Wsl/Service/0x8007274c`
+
+### solution
+
+restart wsl. refer to [this blog](https://blog.csdn.net/weixin_43667077/article/details/130779371)
+
+```
+wsl --shutdown
+wsl
+```
+
+
+---
+
 ## <span style="color:green">25-05-09 WSL too much memory </span>
 
 ### error message 
@@ -521,11 +540,16 @@ Just waited for one night and becomes OK
 
 ---
 
-## <span style="color:green"> 25-07-16 VSCode go to definition not working </span>
+## <span style="color:green"> 25-07-17 VSCode go to debugging cannot stop at external libraries </span>
 
-### error message 
+### error message
 
-In VS Code, F12 and Ctrl + Click and Right Click "Go To Definition" wasn't working.
+When mark a checkpoint at external libraries, it turns grey and shows:
+
+```
+Breakpoint in file excluded by filters.
+Note: may be excluded because of "justMyCode" option (default == true).
+```
 
 ### solution
 
@@ -539,6 +563,31 @@ Or, just update vscode
 ### ref
 
 `https://stackoverflow.com/questions/37341849/vscode-go-to-definition-not-working`
+
+---
+
+## <span style="color:green"> 25-07-16 VSCode go to definition not working </span>
+
+### error message 
+
+In VS Code, F12 and Ctrl + Click and Right Click "Go To Definition" wasn't working.
+
+### brief analysis
+
+Because of the debug settings. 
+
+### solution
+
+1. If debugging `.py` files, can (?)   
+    1. either add the argument `"justMyCode": true` in the debug configuration (the `launch.json` file for debugging) (?),  
+    1. or change it in the vscode setting: on Settings>Features>Debug Turn on the option Allow Breakpoints Everywhere
+    (or both?)
+    ref: https://stackoverflow.com/questions/58430028/visual-studio-code-breakpoint-set-to-grey-color-not-working-errormay-be-exclu 
+
+1. if debugging `.ipynb` files, there is no use to change things in `launch.json`. Can only do it in settings.  
+    details see https://github.com/microsoft/vscode-docs/blob/vnext/release-notes/v1_74.md#jupyter 
+
+
 
 ---
 
