@@ -1,3 +1,4 @@
+<!--- 
 # <span style="color:blue">sample template</span>
 ## <span style="color:green">24-10-03 sample prob</span>
 
@@ -21,8 +22,7 @@ did what to solve
 
 how to avoid this next time
 
----
-
+--->
 
 # <span style="color:blue"> linux related </span>
 
