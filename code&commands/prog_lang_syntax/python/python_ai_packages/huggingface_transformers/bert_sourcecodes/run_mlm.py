@@ -13,7 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 """
-training code of masked language modeling (MLM), follow the `# (1)` ... comments
+training code of masked language modeling (MLM), follow the `#// (1)` ... comments
 """
 """
 Fine-tuning the library models for masked language modeling (BERT, ALBERT, RoBERTa...) on a text file or a dataset.
@@ -315,7 +315,7 @@ def main():
     # In distributed training, the load_dataset function guarantee that only one local process can concurrently
     # download the dataset.
 
-    # (1) load the dataset
+    #// (1) load the dataset
     # here the dataset is just pure text organized in some kind of dictionary, but still pure language text, very unorgaized
     if data_args.dataset_name is not None:
         # Downloading and loading a dataset from the hub.
@@ -384,7 +384,7 @@ def main():
     # See more about loading any type of standard or custom dataset (from files, python dict, pandas DataFrame, etc) at
     # https://huggingface.co/docs/datasets/loading_datasets.
 
-    # (2) Load pretrained model and tokenizer
+    #// (2) Load pretrained model and tokenizer
     #
     # Distributed training:
     # The .from_pretrained methods guarantee that only one local process can concurrently
@@ -537,9 +537,9 @@ def main():
                     batched=True,
                     remove_columns=column_names,
                 )
-        # (2) end of tokenization and get tokenized_datasets
+        #// (2) end of tokenization and get tokenized_datasets
 
-        # (3) group the texts together
+        #// (3) group the texts together
         # previously there are different natural language texts, can be understood as different stories. 
         # Previously did tokenization, now it's to group or concat each of these stories together, to chunks into fixed-length segments
         # Main data processing function that will concatenate all texts from our dataset and generate chunks of
@@ -621,7 +621,7 @@ def main():
             preds = preds[mask]
             return metric.compute(predictions=preds, references=labels)
 
-    # (4) Data collator
+    #// (4) Data collator
     # Data collator
     # This one will take care of randomly masking the tokens.
     # see `data_collator.py`
@@ -632,7 +632,7 @@ def main():
         pad_to_multiple_of=8 if pad_to_multiple_of_8 else None,
     )
 
-    # (5) start training,
+    #// (5) start training,
     # Initialize our Trainer, model is using BERTforMaskedLM in modeling_bert.py
     trainer = Trainer(
         model=model,

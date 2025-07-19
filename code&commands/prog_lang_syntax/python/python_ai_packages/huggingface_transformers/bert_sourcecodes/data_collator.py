@@ -1,7 +1,14 @@
 """
 originally at: huggingface/transformers/blob/main/src/transformers/data/data_collator.py
 """
-
+"""
+A DataCollator is a function that takes a list of samples from a Dataset and collate them into a batch, as a dictionary
+of PyTorch/TensorFlow tensors or NumPy arrays.
+In there, it has torch and tf implementations
+"""
+"""
+to inspect, search `#//` for my own comments
+"""
 # Copyright 2020 The HuggingFace Team. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -33,10 +40,7 @@ from ..utils import PaddingStrategy
 
 InputDataClass = NewType("InputDataClass", Any)
 
-"""
-A DataCollator is a function that takes a list of samples from a Dataset and collate them into a batch, as a dictionary
-of PyTorch/TensorFlow tensors or NumPy arrays.
-"""
+
 DataCollator = NewType("DataCollator", Callable[[list[InputDataClass]], dict[str, Any]])
 
 
@@ -1036,12 +1040,16 @@ class DataCollatorForLanguageModeling(DataCollatorMixin):
             batch["labels"] = labels
         return batch
 
+    #// (1)
+    # the function for doing token masking
+    # return the masked tokens and the labels (the unmasked original tokens)
     def torch_mask_tokens(self, inputs: Any, special_tokens_mask: Optional[Any] = None) -> tuple[Any, Any]:
         """
         Prepare masked tokens inputs/labels for masked language modeling: 80% MASK, 10% random, 10% original.
         """
         import torch
 
+        # the label is the unmasked original tokens
         labels = inputs.clone()
         # We sample a few tokens in each sequence for MLM training (with probability `self.mlm_probability`)
         probability_matrix = torch.full(labels.shape, self.mlm_probability)
@@ -1054,9 +1062,13 @@ class DataCollatorForLanguageModeling(DataCollatorMixin):
             special_tokens_mask = special_tokens_mask.bool()
 
         probability_matrix.masked_fill_(special_tokens_mask, value=0.0)
+        #// find the masked indices by random
         masked_indices = torch.bernoulli(probability_matrix, generator=self.generator).bool()
+        #// -100 is the same token for padding, and in the pytorch cross entropy loss, it will be ignored by default
+        # only the masked labels are NOT -100, so when calculating loss, cal only the masked
         labels[~masked_indices] = -100  # We only compute loss on masked tokens
 
+        #// for the masked tokens, 80% of the time, we replace them with tokenizer.mask_token ([MASK])
         # mask_replace_prob% of the time, we replace masked input tokens with tokenizer.mask_token ([MASK])
         indices_replaced = (
             torch.bernoulli(torch.full(labels.shape, self.mask_replace_prob), generator=self.generator).bool()

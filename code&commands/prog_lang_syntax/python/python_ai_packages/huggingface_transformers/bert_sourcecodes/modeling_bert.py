@@ -861,6 +861,8 @@ class BertForPreTrainingOutput(ModelOutput):
     `add_cross_attention` set to `True`; an `encoder_hidden_states` is then expected as an input to the forward pass.
     """
 )
+#// can be the basic encoder with self attention
+#// or the encoder with cross attention, by specifying some special arguments
 class BertModel(BertPreTrainedModel):
     _no_split_modules = ["BertEmbeddings", "BertLayer"]
 
@@ -1257,6 +1259,9 @@ class BertLMHeadModel(BertPreTrainedModel, GenerationMixin):
         return reordered_past
 
 
+#// the model for pretraining, predicting the masked tokens
+#// basically just use the `class BertModel` as the encoder (self.bert), 
+# and a fully connected layer (self.cls) as the head to predict the masked tokens, not cross attention!
 @auto_docstring
 class BertForMaskedLM(BertPreTrainedModel):
     _tied_weights_keys = ["predictions.decoder.bias", "cls.predictions.decoder.weight"]
@@ -1270,6 +1275,7 @@ class BertForMaskedLM(BertPreTrainedModel):
                 "bi-directional self-attention."
             )
 
+        # the encoder   
         self.bert = BertModel(config, add_pooling_layer=False)
         self.cls = BertOnlyMLMHead(config)
 
@@ -1308,6 +1314,7 @@ class BertForMaskedLM(BertPreTrainedModel):
 
         return_dict = return_dict if return_dict is not None else self.config.use_return_dict
 
+        #// the original bert model, the encoder
         outputs = self.bert(
             input_ids,
             attention_mask=attention_mask,
@@ -1322,7 +1329,7 @@ class BertForMaskedLM(BertPreTrainedModel):
             return_dict=return_dict,
         )
 
-        sequence_output = outputs[0]
+        sequence_output = outputs[0]    #// encoder, shape = [B, seq_len, hidden_dim]
         prediction_scores = self.cls(sequence_output)
 
         masked_lm_loss = None

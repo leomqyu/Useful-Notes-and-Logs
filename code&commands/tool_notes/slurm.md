@@ -47,3 +47,13 @@ a job scheduler, submit jobs to it, it manages the queue and push the jobs to th
     ```
     srun --mem=1G --cpus-per-task=1 --time=1:00:00 --partition=gpu --gres=gpu:1 --pty bash
     ```
+
+# using python notebook on computational node and managing it on the vscode of log-in node
+1. on the log-in node, use srun to go to the comp node
+    ```
+    srun --job-name srunbash --mem=1G --cpus-per-task=1 --time=10:00:00 --partition=gpu --gres=gpu:1 --pty bash
+    ```
+1. set up a jupyter notebook (by using ip=0.0.0.0, all nodes can access, no port forwarding needed) (or start it in a screen session): 
+    ```jupyter notebook --no-browser --port=55555 --ip=0.0.0.0```
+1. jot down the URL from jupyter notebook, that NOT start with the localhost, eg http://m3g111:55555/api/kernels/2f7288b9-e9ea-4865-be8b-7274d88f23dd...
+1. open the vscode and on the top right corner of “select server”, choose “existing jupyter server” and paste in the URL in step 3. then can function

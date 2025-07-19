@@ -24,6 +24,7 @@
 
 # LLM
 1. [LLM misc concepts](https://zhuanlan.zhihu.com/p/1918246498128344349)
+1. [transformer decoders](https://zhuanlan.zhihu.com/p/1929529070703575250)
 1. [Finetuning techniques](https://zhuanlan.zhihu.com/p/1915759089444689599)
 1. Open source code notes
    1. [BERT source code](https://zhuanlan.zhihu.com/p/1919002472665576389)
