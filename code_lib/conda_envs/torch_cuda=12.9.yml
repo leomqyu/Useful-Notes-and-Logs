@@ -1,3 +1,4 @@
+# the one used on MU MASSIVE SERVER
 name: dsks_cuda_12_2
 channels:
   - pytorch
@@ -85,7 +86,6 @@ dependencies:
   - fonttools=4.59.0=py39heb7d2ae_0
   - fqdn=1.5.1=pyhd8ed1ab_1
   - freetype=2.13.3=ha770c72_1
-  - fsspec=2025.5.1=py39he3bba80_0
   - gast=0.6.0=pyhd8ed1ab_0
   - giflib=5.2.2=hd590300_0
   - gmp=6.3.0=hac33072_2
@@ -291,7 +291,6 @@ dependencies:
   - rich=14.0.0=pyh29332c3_0
   - rpds-py=0.26.0=py39h20260ba_0
   - sacremoses=master=py_0
-  - safetensors=0.3.3=py39_0
   - scikit-learn=1.6.1=py39h4b7350c_0
   - scipy=1.13.1=py39haf93ffa_0
   - send2trash=1.8.3=pyh0d859eb_1
@@ -309,16 +308,13 @@ dependencies:
   - srsly=2.5.1=py39hf88036b_1
   - stack_data=0.6.3=pyhd8ed1ab_1
   - svt-av1=1.4.1=hcb278e6_0
-  - sympy=1.14.0=pyh2585a3b_105
   - tensorboard-data-server=0.7.0=py39h7170ec2_2
-  - tensorflow=2.17.0=cuda120py39h298b457_203
   - termcolor=3.1.0=pyhd8ed1ab_0
   - terminado=0.18.1=pyh0d859eb_0
   - thinc=8.3.6=py39h0f8f440_0
   - threadpoolctl=3.6.0=pyhecae5ae_0
   - tinycss2=1.4.0=pyhd8ed1ab_0
   - tk=8.6.13=noxft_hd72426e_102
-  - tokenizers=0.13.0.dev0=py39_0
   - tomli=2.2.1=pyhd8ed1ab_1
   - torchaudio=2.5.1=py39_cu124
   - torchtriton=3.1.0=py39
@@ -326,7 +322,6 @@ dependencies:
   - tornado=6.5.1=py39h8cd3c5a_0
   - tqdm=4.67.1=pyhd8ed1ab_1
   - traitlets=5.14.3=pyhd8ed1ab_1
-  - transformers=4.33.3=py_0
   - typer=0.16.0=pyh167b9f4_0
   - typer-slim=0.16.0=pyhe01879c_0
   - typer-slim-standard=0.16.0=hf964461_0
@@ -364,14 +359,40 @@ dependencies:
   - zstandard=0.23.0=py39h8cd3c5a_2
   - zstd=1.5.7=hb8e6e7a_2
   - pip:
+      - accelerate==1.9.0
+      - aiohappyeyeballs==2.6.1
+      - aiohttp==3.12.14
+      - aiosignal==1.4.0
+      - async-timeout==5.0.1
+      - bitsandbytes==0.46.1
       - brainspace==0.1.20
       - cachetools==5.5.2
+      - datasets==4.0.0
+      - deepspeed==0.17.2
+      - dill==0.3.8
+      - einops==0.8.1
+      - eval-type-backport==0.2.2
+      - flash-attn==2.8.1
+      - frozenlist==1.7.0
+      - fsspec==2025.3.0
+      - gitdb==4.0.12
+      - gitpython==3.1.45
       - google-auth==2.40.3
       - google-auth-oauthlib==1.0.0
-      - keras==2.14.0
+      - hf-xet==1.1.5
+      - hjson==3.1.0
+      - huggingface-hub==0.33.4
+      - imageio==2.37.0
+      - imageio-ffmpeg==0.6.0
+      - keras==3.10.0
       - keras-nightly==3.10.0.dev2025052003
       - libclang==18.1.1
       - ml-dtypes==0.5.1
+      - moviepy==2.2.1
+      - msgpack==1.1.1
+      - multidict==6.6.3
+      - multiprocess==0.70.16
+      - ninja==1.11.1.4
       - nvidia-cublas-cu12==12.3.4.1
       - nvidia-cuda-cupti-cu12==12.3.101
       - nvidia-cuda-nvcc-cu12==12.3.107
@@ -385,15 +406,32 @@ dependencies:
       - nvidia-nccl-cu12==2.19.3
       - nvidia-nvjitlink-cu12==12.3.101
       - oauthlib==3.3.1
-      - protobuf==6.31.1
+      - peft==0.16.0
+      - proglog==0.1.12
+      - propcache==0.3.2
+      - protobuf==5.29.5
+      - py-cpuinfo==9.0.0
+      - pyarrow==21.0.0
       - pyasn1==0.6.1
       - pyasn1-modules==0.4.2
+      - python-dotenv==1.1.1
       - requests-oauthlib==2.0.0
       - rsa==4.9.1
+      - safetensors==0.5.3
+      - seaborn==0.13.2
+      - sentry-sdk==2.33.2
+      - smmap==5.0.2
+      - sympy==1.13.1
       - tb-nightly==2.19.0a20250218
-      - tensorboard==2.14.1
-      - tensorflow-estimator==2.14.0
-      - tensorflow-io-gcs-filesystem==0.37.1
+      - tensorboard==2.19.0
+      - tf-keras==2.19.0
       - tf-nightly==2.20.0.dev20250716
+      - timm==0.4.12
+      - tokenizers==0.21.2
+      - transformers==4.53.2
+      - trl==0.19.1
+      - wandb==0.21.0
       - wrapt==1.14.1
+      - xxhash==3.5.0
+      - yarl==1.20.1
 prefix: /scratch/dn68/muquany/conda/envs/dsks_cuda_12_2

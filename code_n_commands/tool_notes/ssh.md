@@ -45,14 +45,19 @@ https://www.cloudbolt.io/blog/linux-how-to-login-with-a-ssh-private-key/
    
 1. copy the public key to the machine that want to connect to (remote server)
 
-just copy the content in the `~/.ssh/id_rsa_xxx.pub` of local machine to the file with the same name in te folder `.ssh/authorized_keys` the remote machine
+    just copy the content in the `~/.ssh/id_rsa_xxx.pub` of local machine to the file with the same name in te folder `.ssh/authorized_keys` the remote machine
+
+    Note, in some machines, just copy the content of `id_rsa_xxx.pub` to a file named `.ssh/authorized_keys`.
+
+    Other note:  
+        - if not OK, sometimes possibly because of the file mode.
 
 2. connect with keys
     ```
     ssh -i <path_to_private_key> ...
     ```
 
-    (In vscode, if use ssh key, some times need to open ssh configuration file and change "IdentityFile" to the correct file path)
+    (In vscode, if use ssh key, some times need to open ssh configuration file and change "IdentityFile" to the correct file path; for windows path, change `\` to `/`)
 
 3. copy private key to other machine (try to avoid):
     ```

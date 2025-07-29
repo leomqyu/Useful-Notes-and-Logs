@@ -540,6 +540,19 @@ Just waited for one night and becomes OK
 
 ---
 
+## <span style="color:green"> 25-07-21 Setting keyboard shortcut on different OS </span>
+
+### solution
+
+Apple devices: go to settings and search "keyboard" can find.
+Windows: 设置 - 时间和语言 - 语言和区域 - 选项 -微软拼音 - 词库和自学习 - 用户自定义短语
+
+### ref
+
+`https://stackoverflow.com/questions/37341849/vscode-go-to-definition-not-working`
+
+---
+
 ## <span style="color:green"> 25-07-17 VSCode go to debugging cannot stop at external libraries </span>
 
 ### error message
