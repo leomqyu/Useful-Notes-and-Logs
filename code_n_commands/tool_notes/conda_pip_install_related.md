@@ -14,45 +14,88 @@ verify:
 
 # Conda 
 
-1. create environment
+## conda basics
+
+    1. create environment
+        ```
+        conda create -n <env_name> [python=3.6]
+        ```
+
+    1.	conda install 
+        specify version:
+        ```conda install <pkg>=<version>```
+
+    1.	delete: 
+        ```conda remove --name ENV_NAME --all```
+        all means all the packages
+
+    1. list info
+        list environments: ```conda env list```
+        list packages: ```conda list```
+
+    1. search version
+    ```conda search```	
+    check all versions: 
+        ```conda search -f```
+
+    1. conda storage management
+    
+        conda environment some times take up very big spaces. To clean the environment, first remove environments no longer wanted; then clean the cache by: `conda clean --all`
+
+    1. clone: 
     ```
-    conda create -n <env_name> [python=3.6]
+    conda create --name venv2 --clone venv1 
     ```
 
-1.	conda install 
-    specify version:
-    ```conda install <pkg>=<version>```
+    1. add/remove channels: 
+    ```
+    conda config –add / --remove channels <name>
+    ```
 
-1.	delete: 
-    ```conda remove --name ENV_NAME --all```
-    all means all the packages
+    or to directly `vim vim ~/.condarc`
 
-1. list info
-    list environments: ```conda env list```
-    list packages: ```conda list```
+## Install conda w/o sudo
 
-1. search version
-   ```conda search```	
-check all versions: 
-    ```conda search -f```
+1. install 
+    ```
+    wget https://repo.anaconda.com/archive/Anaconda3-2024.02-1-Linux-x86_64.sh
+    bash Anaconda3-2024.02-1-Linux-x86_64.sh
+    source anaconda3/bin/activate
+    conda init
+    ```
 
-1. conda storage management
-   
-    conda environment some times take up very big spaces. To clean the environment, first remove environments no longer wanted; then clean the cache by: `conda clean --all`
+1. munually activate conda
 
-1. clone: 
+    ```
+    cd ~
+    eval "$( path_to_anaconda3/anaconda3/bin/conda shell.bash hook )"
+    # then should see `(base)`
+    conda activate base
+    ```
+
+## conda channel / mirror related
+
+1. show all sources: 
 ```
-conda create --name venv2 --clone venv1 
+conda config --show channels
 ```
 
-1. add/remove channels: 
+2. 查看channel名字：
+   cat ~/.condarc
+	或 conda config --show channels
+
+3. 删除 
+   conda config --remove channels CHANNEL_NAME
+
+4. 添加镜像：
 ```
-conda config –add / --remove channels <name>
+conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/main
+conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free
+conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/pro 
+conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/msys2
+conda install -c https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free/ r-essentials
+pip install -i https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free/ package
 ```
-
-or to directly `vim vim ~/.condarc`
-
-
 
 # Yaml or requirements.txt
 
@@ -134,37 +177,5 @@ conda install tensorflow=2.1    # then python=3.7 is automatically installed
 ```tf.config.list_physical_devices('GPU')```
 
 
-
-# Install conda w/o sudo
-```
-wget https://repo.anaconda.com/archive/Anaconda3-2024.02-1-Linux-x86_64.sh
-bash Anaconda3-2024.02-1-Linux-x86_64.sh
-source anaconda3/bin/activate
-conda init
-```
-
-# mirror related
-
-1. show all sources: 
-```
-conda config --show channels
-```
-
-2. 查看channel名字：
-   cat ~/.condarc
-	或 conda config --show channels
-
-3. 删除 
-   conda config --remove channels CHANNEL_NAME
-
-4. 添加镜像：
-```
-conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/main
-conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free
-conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/pro 
-conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/msys2
-conda install -c https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free/ r-essentials
-pip install -i https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free/ package
-```
  
 

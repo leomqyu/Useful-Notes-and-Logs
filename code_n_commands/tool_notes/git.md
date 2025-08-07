@@ -40,9 +40,19 @@ usually needed when trying to connect to github using in a non web-based manner.
 
 
 1. to remember the password for a time period
+    If always being prompted, probably because using a HTTPS protocal
+
+    1. `[NOT RECOMMENDED]` 
     ```
+    git config --global credential.helper store # permanent, store the password in file  ~/.git-credentials
     git config --global credential.helper 'cache --timeout=3600'    # for an hour
     ```
+
+    It is stored in the file, then other users (eg root might be able to access your github password)
+
+    2. update to ssh and not use https, set ssh keys, etc
+
+    3. just use the text replacement on local machine to remember the passwords
 
 
 # Convert existing non-empty directory to Git repository

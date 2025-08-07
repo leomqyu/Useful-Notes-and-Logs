@@ -43,10 +43,6 @@ When you say run a command like `ls`, how does it know which exe is this `ls`? J
     ps -o user,args -p <PID>       # get the command and the user name
     ```
 
-# OS related
-1. See the size of a dir:
-    `du -sb /path/to/directory`
-
 # Connection
 1. scp and file transfer
 

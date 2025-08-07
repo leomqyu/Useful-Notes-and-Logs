@@ -28,6 +28,50 @@ how to avoid this next time
 
 ---
 
+## <span style="color:green">25-08-07 Cannot access internet at eg school linux server </span>
+
+### error message 
+
+Just cannot access to internet. 
+One possibility is that the proxy is not correctly configured.
+
+### solution
+
+If is the proxy problem, can set the proxy variable at the `~/.bashrc`.
+
+1. Find a node / user that can successfully connect to internet, and do 
+
+  ```
+  env | grep -i proxy
+  ```
+
+  will likely get something below:
+
+  ```
+  ftp_proxy=http://proxy.cse.cuhk.edu.hk:8000/
+  https_proxy=http://proxy.cse.cuhk.edu.hk:8000/
+  FTP_PROXY=http://proxy.cse.cuhk.edu.hk:8000/
+  HTTPS_PROXY=http://proxy.cse.cuhk.edu.hk:8000/
+  HTTP_PROXY=http://proxy.cse.cuhk.edu.hk:8000/
+  http_proxy=http://proxy.cse.cuhk.edu.hk:8000/
+  ```
+
+2. Then in the new server, at the `~/.bashrc`, add
+
+  ```
+  export http_proxy="http://proxy.cse.cuhk.edu.hk:8000/"
+  export https_proxy="http://proxy.cse.cuhk.edu.hk:8000/"
+  export ftp_proxy="http://proxy.cse.cuhk.edu.hk:8000/"
+  export HTTP_PROXY="http://proxy.cse.cuhk.edu.hk:8000/"
+  export HTTPS_PROXY="http://proxy.cse.cuhk.edu.hk:8000/"
+  export FTP_PROXY="http://proxy.cse.cuhk.edu.hk:8000/"
+  export no_proxy="localhost,127.0.0.1"
+  ```
+  Note: mindly the last line. 
+  Then `source ~/.bashrc`
+
+---
+
 ## <span style="color:green">25-07-18 WSL cannot open bash </span>
 
 ### error message 
@@ -542,10 +586,15 @@ Just waited for one night and becomes OK
 
 ## <span style="color:green"> 25-07-21 Setting keyboard shortcut on different OS </span>
 
+### keywords
+
+text replacement, keyboard shortcut, 个性化, 自定义
+
 ### solution
 
 Apple devices: go to settings and search "keyboard" can find.
 Windows: 设置 - 时间和语言 - 语言和区域 - 选项 -微软拼音 - 词库和自学习 - 用户自定义短语
+选项: 简体中文(中国大陆) -> `...` 符号 -> 语言选项
 
 ### ref
 

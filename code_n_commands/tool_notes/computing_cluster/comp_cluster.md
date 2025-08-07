@@ -32,6 +32,19 @@ https://docs.erc.monash.edu/M3/RunningJobsOnM3/BatchJobs
         srun --job-name srunbash --mem=8G --cpus-per-task=1 --time=10:00:00 --partition=gpu --gres=gpu:1 --pty bash		# specify GPU type
         srun --mem=1G --cpus-per-task=1 --time=10:00:00 --pty bash  # cpu only
         ```
+    3. if allowed to ssh, the full process
+        1. use `salloc` to allocate memory as in srun
+            ```
+            salloc --job-name srunbash --mem=8G --cpus-per-task=1 --time=10:00:00 --partition=gpu --gres=gpu:2
+            ```
+        2. then ssh to the allocated node
+            ```
+            ssh m3g107
+            ```
+
+    4. cancel jobs
+        1. Use commands like show_job to find all your jobs
+        2. `scancel [job_id]`
 
 # Use jupyter notebook on clusters' computational nodes (in vscode)
 1. BG: when you go to a cluster, all you're doing and all vscode can access is the log-in node. But sometimes we want the jupyter notebook to run in computation nodes
