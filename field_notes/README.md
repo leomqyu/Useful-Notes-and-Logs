@@ -12,6 +12,7 @@
 1. [Traditional ML algorithms](https://zhuanlan.zhihu.com/p/1916440259421533499)
 1. [AI misc concepts](https://zhuanlan.zhihu.com/p/1913322427523527491)
 1. [Knowledge distillation](https://zhuanlan.zhihu.com/p/1925976818923598593)
+1. [Explainable AI](https://zhuanlan.zhihu.com/p/1941219884651517087)
 
 
 # DL general models
