@@ -42,7 +42,7 @@
 1. Neuroscience
    1. [Neuroscience misc notes](https://zhuanlan.zhihu.com/p/1916192539595245445)  
    2. [Brain connectivity](https://zhuanlan.zhihu.com/p/1919038169329952390) 
-   3. [Atkinson–Shiffrin model aka multi-store model](https://zhuanlan.zhihu.com/p/1930926481959269042)
+   3. [Human Memory Models](https://zhuanlan.zhihu.com/p/1930926481959269042)
 2. RNA-DNA-protein
    1. [Genetics Misc Notes](https://zhuanlan.zhihu.com/p/1913326537517831630)
    2. [Databases](https://zhuanlan.zhihu.com/p/1913327272536027462)

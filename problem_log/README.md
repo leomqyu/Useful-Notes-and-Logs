@@ -580,7 +580,15 @@ Just waited for one night and becomes OK
 
 ---
 
-#  <span style="color:blue"> Other tools and packages </span>
+#  <span style="color:blue"> OS related </span>
+
+---
+
+## <span style="color:green"> 25-08-26 Windows set the color theme of command line </span>
+
+### ref
+
+`https://blog.csdn.net/weixin_40827685/article/details/116084885`
 
 ---
 
@@ -599,6 +607,11 @@ Windows: 设置 - 时间和语言 - 语言和区域 - 选项 -微软拼音 - 词
 ### ref
 
 `https://stackoverflow.com/questions/37341849/vscode-go-to-definition-not-working`
+
+---
+
+
+#  <span style="color:blue"> Other tools and packages </span>
 
 ---
 
@@ -735,5 +748,3 @@ add below to the .md file
     </script>
 ```
 
-
----
