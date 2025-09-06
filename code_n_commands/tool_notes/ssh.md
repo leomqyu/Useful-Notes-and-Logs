@@ -51,6 +51,7 @@ https://www.cloudbolt.io/blog/linux-how-to-login-with-a-ssh-private-key/
 
     Other note:  
         - if not OK, sometimes possibly because of the file mode.
+        - if authorized_keys has public keys from multiple sources, just each public key at a line.
 
 2. connect with keys
     ```
