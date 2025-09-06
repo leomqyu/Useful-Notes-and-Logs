@@ -63,6 +63,7 @@ verify:
     source anaconda3/bin/activate
     conda init
     ```
+    The `wget` file can be fund at https://repo.continuum.io/archive  
 
 1. munually activate conda
 
