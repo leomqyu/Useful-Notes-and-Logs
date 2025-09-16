@@ -65,7 +65,7 @@ verify:
     ```
     The `wget` file can be fund at https://repo.continuum.io/archive  
 
-1. munually activate conda
+1. manually activate conda
 
     ```
     cd ~
@@ -125,8 +125,7 @@ conda env create  -f env.yml
 ## check version
 
 1. check cuda version: 
-   ```conda list cudatoolkit```
-
+   ```conda list cuda-toolkit```
 1. check pytorch version: 
    ```python, import torch, print(torch.cuda.is_available())```
 1. check torch’s certain cuda version: 
@@ -134,9 +133,17 @@ conda env create  -f env.yml
 
 ## Install 
 
-在pytorch网站上找到对应的conda install的package，
-安装完之后python， import torch， print(torch.version.cuda)
-之后按照输出的version用conda install 对应的cuda version
+1. Check cuda driver version: 
+    cuda driver is usually installed in the server, 
+    use `nvidia-smi` to check, right top will be a line called `cuda version`, which is the cuda driver version
+1. determine the cuda toolkit version and install
+    1. Cuda toolkit version not higher than cuda driver version is OK
+    1. ~~Find cuda toolkit download script at https://developer.nvidia.com/cuda-toolkit-archive~~
+        If without sudo, install cuda toolkit via conda: https://anaconda.org/nvidia/cuda-toolkit 
+    1. Check cuda version and verify
+    - Note: to check Linux version, architecture, and distribution, see `Useful-Notes-and-Logs/code_n_commands/tool_notes/linux/general_linux.md`
+1. find compatible pytroch version and install
+   on https://pytorch.org/ 
 
 **Available:**
 
@@ -146,8 +153,11 @@ conda install pytorch torchvision torchaudio pytorch-cuda=11.8 -c pytorch -c nvi
 conda install nvidia/label/cuda-11.8.0::cuda
 
 # cuda=12.1
-conda install pytorch torchvision torchaudio pytorch-cuda=12.1 -c pytorch -c nvidia
-conda install nvidia/label/cuda-12.1.0::cuda    
+conda create -n cuda121 python=3.10
+conda install nvidia/label/cuda-12.1.1::cuda-toolkit
+pip install torch==2.3.1 torchvision==0.18.1 --index-url https://download.pytorch.org/whl/cu121
+pip install timm==0.6.12
+pip install mmengine==0.2.0
 ``` 
 
 ## check if successfully installed

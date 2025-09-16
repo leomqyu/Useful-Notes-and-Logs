@@ -308,6 +308,17 @@ export PATH="${PATH}:/path/to/directory/containing/wrapper"
 
 ---
 
+## <span style="color:green">25-09-12 In mlcn servers, can ping github but cannot clone etc </span>
+### brief analysis
+
+If the remote repo is modified in remote, and tried to push on local repo, then should be pulled first
+
+### solution
+
+Just follow the instruction to do git pull then push.
+
+---
+
 ## <span style="color:green">25-04-15 Cannot access / write on remote server </span>
 ### brief analysis
 

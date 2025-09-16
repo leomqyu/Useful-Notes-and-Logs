@@ -1,3 +1,17 @@
+# Check system version, architecture and distribution
+```
+# version
+uname -r
+cat /proc/version   # alternative
+
+# architecture
+uname -m
+
+# distribution & release
+lsb_release -a
+cat /etc/os-release # alternaltive
+```
+
 # Path
 
 **Describe**

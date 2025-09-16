@@ -54,7 +54,42 @@ usually needed when trying to connect to github using in a non web-based manner.
 
     3. just use the text replacement on local machine to remember the passwords
 
+# git internal files
+
+1. `.git/`: The Git database folder that contains all version control history and metadata. If delete, turn into a regular folder that is not a repo.
+
+1. `.github/`: A folder for GitHub-specific configurations like workflows, issue templates, and automation
+
+1. `.gitignore`: A text file that tells Git which files and folders to ignore and not track in version control
 
 # Convert existing non-empty directory to Git repository
 
 [link](https://stackoverflow.com/questions/3311774/how-to-convert-existing-non-empty-directory-into-a-git-working-directory-and-pus), answer by Hitesh Sahu
+
+# Git submodule (child repo integrated into parent repo)
+
+1. Add a submodule (which is a "child" github repo) to the parent:
+
+    ```
+    git submodule add https://github.com/google-research/vision_transformer.git 20_ViT
+    ```
+    Note that if it is not a repo that you have permission to modify, have to fork it.
+
+1. After making changes in the submodules
+
+
+1. To completely delete a submodule:
+
+    ```
+    git submodule deinit -f path/to/submodule
+    git rm --cached path/to/submodule
+    rm -rf <path_to_submodule>
+    git config -f .gitmodules --remove-section submodule.<submodule_name>
+    ```
+
+1. To check submodule status:
+    ```
+    git submodule status
+    ```
+1. Other notes
+    1. You mush have permission to access the submodule to change the content of the submodule (basically submodule is just to provide a link to another repo)
