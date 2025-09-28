@@ -20,6 +20,7 @@
 1. [RNN](https://zhuanlan.zhihu.com/p/1926728535822799318)
 1. [Diffusion Models](https://zhuanlan.zhihu.com/p/1913226131466872447)
 1. [Attention and Transformer](https://zhuanlan.zhihu.com/p/1949037392515269210)
+1. [Mamba](https://zhuanlan.zhihu.com/p/1952853303798003531)
 1. Less used but inspiring architectures
    1. [Capsule Networks](https://zhuanlan.zhihu.com/p/1925582765358819315)
    1. [Restricted Boltzmann Machine](https://zhuanlan.zhihu.com/p/1926951884440204915)
@@ -30,7 +31,10 @@
 # Computer vision
 1. [CV misc concepts](https://zhuanlan.zhihu.com/p/1950685975320699227)
 1. [3D vision](https://zhuanlan.zhihu.com/p/1915710518171240060)
-1. [CV backbones](https://zhuanlan.zhihu.com/p/1948125535973676971)
+1. CV backbones
+   1. [Misc](https://zhuanlan.zhihu.com/p/1955713591136215987)
+   1. [2022 and before](https://zhuanlan.zhihu.com/p/1955712631856951716)
+   1. [2023 and later](https://zhuanlan.zhihu.com/p/1948125535973676971)
 
 # LLM
 1. [LLM misc concepts](https://zhuanlan.zhihu.com/p/1918246498128344349)

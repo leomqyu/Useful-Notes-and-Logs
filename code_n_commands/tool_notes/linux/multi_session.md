@@ -80,6 +80,10 @@ screen -S <window_name>
     ```
     screen -ls
     ```
+1. inside a screen, check which screen session you are in:
+    ```
+    echo $STY
+    ```
 
 ## Attach and detach window
 
