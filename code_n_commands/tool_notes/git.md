@@ -62,6 +62,48 @@ usually needed when trying to connect to github using in a non web-based manner.
 
 1. `.gitignore`: A text file that tells Git which files and folders to ignore and not track in version control
 
+# Use ssh keys to access github from server
+
+1. Generate ssh key at server
+    ```
+    ssh-keygen -t ed25519 -C "your_email@example.com"
+
+    eval "$(ssh-agent -s)"
+
+    ssh-add ~/.ssh/id_ed25519_xxx
+    ```
+
+2. Add public key to github.com
+    ```
+    # copy the content of public key
+    cat ~/.ssh/id_ed25519_xxx.pub
+
+    # Go to GitHub > Settings > SSH and GPG keys > New SSH key (or Add SSH key)
+    # Add key
+    ```
+
+3. Test github connection on server
+    ```
+    ssh -T git@github.com
+    ```
+
+4. Update repo to ssh (if it is currently not)
+    ```
+    # cd to git repo dir
+    git remote -v   # eg https://github.com/leomqyu/BraInCoRL.git
+    git remote set-url origin git@github.com:leomqyu/BraInCoRL.git  # no prev https part!
+    ```
+
+5. Update repo to Https, so can every time input username and pat
+
+    ```
+    git remote -v   # get the username and repo name
+    git remote set-url origin https://github.com/username/repo_name.git
+    git remote -v   # check if successful
+    git config --get credential.helper  # assert no other credential, otherwise delete them
+    git credential-cache exit
+    ```
+
 # Convert existing non-empty directory to Git repository
 
 [link](https://stackoverflow.com/questions/3311774/how-to-convert-existing-non-empty-directory-into-a-git-working-directory-and-pus), answer by Hitesh Sahu
