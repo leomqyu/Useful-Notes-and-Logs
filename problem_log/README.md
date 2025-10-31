@@ -472,7 +472,7 @@ In this way, when using the `nvidia-smi`, not able to see the running process, b
 ### solution
 
 The best way is to use tmux or screen from the start and don't directly kill a process.  
-If this already happens, use ` -v /dev/fusernvidia0` (also /dev/nvidia1, /dev/nvidia2 ...) to find the process occupying gpu. Then kill it.
+If this already happens, use `fuser -v /dev/fusernvidia0` (also /dev/nvidia1, /dev/nvidia2 ...) to find the process occupying gpu. Then kill it.
 
 command to kill (Note: don't know why but this might damage all processes on all gpus of the same user)
 ```

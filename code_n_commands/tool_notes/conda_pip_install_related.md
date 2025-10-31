@@ -16,43 +16,45 @@ verify:
 
 ## conda basics
 
-    1. create environment
-        ```
-        conda create -n <env_name> [python=3.6]
-        ```
+1. create environment
+    ```
+    conda create -n <env_name> [python=3.6]
+    ```
 
-    1.	conda install 
-        specify version:
-        ```conda install <pkg>=<version>```
+1.	conda install 
+    specify version:
+    ```conda install <pkg>=<version>```
 
-    1.	delete: 
-        ```conda remove --name ENV_NAME --all```
-        all means all the packages
+1.	delete: 
+    ```conda remove --name ENV_NAME --all```
+    all means all the packages
 
-    1. list info
-        list environments: ```conda env list```
-        list packages: ```conda list```
+1. list info
+    list environments: ```conda env list```
+    list packages: ```conda list```
 
-    1. search version
-    ```conda search```	
-    check all versions: 
-        ```conda search -f```
+1. search version
+    ```
+    conda search <pkg name>
+    # check all versions: 
+    conda search -f <pkg name>
+    ```
 
-    1. conda storage management
-    
-        conda environment some times take up very big spaces. To clean the environment, first remove environments no longer wanted; then clean the cache by: `conda clean --all`
+1. conda storage management
 
-    1. clone: 
+    conda environment some times take up very big spaces. To clean the environment, first remove environments no longer wanted; then clean the cache by: `conda clean --all`
+
+1. clone: 
     ```
     conda create --name venv2 --clone venv1 
     ```
 
-    1. add/remove channels: 
+1. add/remove channels: 
     ```
     conda config –add / --remove channels <name>
     ```
 
-    or to directly `vim vim ~/.condarc`
+    or to directly `vim ~/.condarc`
 
 ## Install conda w/o sudo
 
@@ -98,6 +100,33 @@ conda install -c https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free/ r-esse
 pip install -i https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free/ package
 ```
 
+# pip install
+
+Python's install tool. Usually faster than conda, but sometimes have incompatibility issues
+
+1. Install
+
+    ```
+    python -m pip install numpy     # safer, definitely same with current python
+    pip install numpy               # should double check which `python` and `which pip`
+    ```
+
+2. Misc op
+
+    ```
+    # check version
+    pip index versions <package name>
+
+    # install specific version
+    pip install numpy==1.0.0
+
+    # uninstall
+    pip uninstall numpy
+    ```
+
+
+
+
 # Yaml or requirements.txt
 
 ## 1. requirments.txt
@@ -124,7 +153,7 @@ conda env create  -f env.yml
 
 ## check version
 
-1. check cuda version: 
+1. check cuda (toolkit) version: 
    ```conda list cuda-toolkit```
 1. check pytorch version: 
    ```python, import torch, print(torch.cuda.is_available())```
@@ -135,8 +164,9 @@ conda env create  -f env.yml
 
 1. Check cuda driver version: 
     cuda driver is usually installed in the server, 
-    use `nvidia-smi` to check, right top will be a line called `cuda version`, which is the cuda driver version
+    use `nvidia-smi` to check, right top will be a line called `cuda version`, which is the cuda driver version. For a more detailed, use `nvcc --version`; nvcc stands for NVidia Cuda Compiler.
 1. determine the cuda toolkit version and install
+    1. Cuda toolkit can usually be customized in conda environments. Check toolkit version: `conda list cuda-toolkit`.
     1. Cuda toolkit version not higher than cuda driver version is OK
     1. ~~Find cuda toolkit download script at https://developer.nvidia.com/cuda-toolkit-archive~~
         If without sudo, install cuda toolkit via conda: https://anaconda.org/nvidia/cuda-toolkit 
