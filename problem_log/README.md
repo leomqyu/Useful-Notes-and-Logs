@@ -307,6 +307,21 @@ export PATH="${PATH}:/path/to/directory/containing/wrapper"
 # <span style="color:blue"> Git related  </span>
 
 ---
+## <span style="color:green">25-11-24 VS Code saves git credentials </span>
+### brief analysis
+
+Sometimes git credentials is saved by linux / VS Code, with run logging (eg in multiple user share one account).
+
+### solution
+
+Use the below to run git and forgetting all the credential information, so that can retype all the information.
+
+```
+VSCODE_GIT_ASKPASS_NODE="" VSCODE_GIT_ASKPASS_MAIN="" VSCODE_GIT_ASKPASS_EXTRA_ARGS="" GIT_ASKPASS="" git push
+```
+
+---
+
 
 ## <span style="color:green">25-09-12 In mlcn servers, can ping github but cannot clone etc </span>
 ### brief analysis
