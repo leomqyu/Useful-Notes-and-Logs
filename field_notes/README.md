@@ -4,6 +4,7 @@
 3. [Statistics](https://zhuanlan.zhihu.com/p/1913328613161428501)
 
 # Computer Science
+1. [Theoretical Computer Science]()
 1. [Parallel Computing](https://zhuanlan.zhihu.com/p/1933070157338640995)
 1. [Mixed Precision](https://zhuanlan.zhihu.com/p/1933088903058941346)
 
@@ -31,6 +32,7 @@
 # Computer vision
 1. [CV misc concepts](https://zhuanlan.zhihu.com/p/1950685975320699227)
 1. [3D vision](https://zhuanlan.zhihu.com/p/1915710518171240060)
+1. [CV augmetation methods](https://zhuanlan.zhihu.com/p/1985032988287840345)
 1. CV backbones
    1. [Misc](https://zhuanlan.zhihu.com/p/1955713591136215987)
    1. [2022 and before](https://zhuanlan.zhihu.com/p/1955712631856951716)

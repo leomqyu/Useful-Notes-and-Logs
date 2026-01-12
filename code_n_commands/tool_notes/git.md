@@ -26,6 +26,15 @@ git push  # update all the remote branches that have updated in local tracking b
 (DON’T MERGE PULL REQUEST!)
 ```
 
+# Push / Pull misc
+
+1. how to pull the exact same content from remote and overwrite the local
+
+    ```
+    git reset --hard HEAD
+    git pull
+    ```
+
 # PAT (Personal Access Tokens)
 usually needed when trying to connect to github using in a non web-based manner. Will be a prompt for username and password. Username just the username, password use the PAT token (when using command line, when tell you to input password, always the PAT not the real password).
 
