@@ -641,6 +641,16 @@ Windows: 设置 - 时间和语言 - 语言和区域 - 选项 -微软拼音 - 词
 
 ---
 
+## <span style="color:green"> 26-02-16 VSCode Default initialize server at home directory, but not enough space </span>
+
+### ref
+
+`https://stackoverflow.com/questions/62613523/how-to-change-vscode-server-directory`  
+or  
+`https://forum.cursor.com/t/change-default-location-of-cursor-server/2065/4`
+
+---
+
 ## <span style="color:green"> 25-07-17 VSCode go to debugging cannot stop at external libraries </span>
 
 ### error message

@@ -41,6 +41,12 @@ for epoch in range(2, epochs):
 run.finish()
 ```
 
+# CLI related
+
+```bash
+wandb login --relogin  # reloging to the correct account
+```
+
 # Sync local to online
 
 `wandb sync proj_dir/wandb/offline-run-20260108_162402-0zhbs625`

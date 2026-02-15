@@ -2,11 +2,13 @@
 1. [General](https://zhuanlan.zhihu.com/p/1913327850058154764)
 2. [Linear Algebra](https://zhuanlan.zhihu.com/p/1913328312719242727)
 3. [Statistics](https://zhuanlan.zhihu.com/p/1913328613161428501)
+4. [Fourier Transform](https://zhuanlan.zhihu.com/p/2003066811873260866)
 
 # Computer Science
 1. [Theoretical Computer Science]()
 1. [Parallel Computing](https://zhuanlan.zhihu.com/p/1933070157338640995)
 1. [Mixed Precision](https://zhuanlan.zhihu.com/p/1933088903058941346)
+1. [Network](https://zhuanlan.zhihu.com/p/1998442436490436729)
 
 # AI theory
 1. [Traditional ML algorithms](https://zhuanlan.zhihu.com/p/1916440259421533499)
@@ -20,7 +22,9 @@
 1. [GNN](https://zhuanlan.zhihu.com/p/1913260843107321204)
 1. [RNN](https://zhuanlan.zhihu.com/p/1926728535822799318)
 1. [Diffusion Models](https://zhuanlan.zhihu.com/p/1913226131466872447)
-1. [Attention and Transformer](https://zhuanlan.zhihu.com/p/1949037392515269210)
+1. Attention related
+   1. [Attention and Transformer](https://zhuanlan.zhihu.com/p/1949037392515269210)
+   1. [Attention Variations](https://zhuanlan.zhihu.com/p/2001357166938959961)
 1. [Mamba](https://zhuanlan.zhihu.com/p/1952853303798003531)
 1. Less used but inspiring architectures
    1. [Capsule Networks](https://zhuanlan.zhihu.com/p/1925582765358819315)
