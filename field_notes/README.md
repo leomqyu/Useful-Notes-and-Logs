@@ -16,6 +16,7 @@
 1. [Explainable AI](https://zhuanlan.zhihu.com/p/1941219884651517087)
 1. [Knowledge distillation](https://zhuanlan.zhihu.com/p/1925976818923598593)
 1. [Parameter and Complexity for AI modules](https://zhuanlan.zhihu.com/p/1951426723196437031)
+1. [Continual Learning](https://zhuanlan.zhihu.com/p/2009300477733523952)
 
 # DL general models
 1. [CNN](https://zhuanlan.zhihu.com/p/1913325083327459352)
@@ -35,6 +36,7 @@
 
 # Computer vision
 1. [CV misc concepts](https://zhuanlan.zhihu.com/p/1950685975320699227)
+1. [CV basic tasks](https://zhuanlan.zhihu.com/p/2009300410767253790)
 1. [3D vision](https://zhuanlan.zhihu.com/p/1915710518171240060)
 1. [CV augmetation methods](https://zhuanlan.zhihu.com/p/1985032988287840345)
 1. CV backbones
