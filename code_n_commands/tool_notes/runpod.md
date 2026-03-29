@@ -10,6 +10,15 @@ Choose the type and num of GPU, and deploy. Then either use the terminal / jupyt
 2. Running notes:
    1. Note: store all files under the `/workspace` dir! otherwise after stop everything will be lost
 
+# Network Volume
+
+For storing large, permanent files (eg dataset). When deploying a GPU pod, select the network volume want to mount, and the data will be mounted to /workspace.
+
+Find network volume at "Storage" section.
+
+- can only increase size, not decrease
+
+
 # Run runpod on vscode
 
 1. On windows cmd
@@ -21,3 +30,4 @@ Choose the type and num of GPU, and deploy. Then either use the terminal / jupyt
    <!-- 6. When connect to VS code, will let you to choose an IP address, choose the same seen in step 5 -->
 
    6. to scp: `eg scp -r -P 24413 -i ~/.ssh/id_ed25519 Desktop/fk73k_nonoi_pretrain root@195.26.233.54:/root`
+   7. if env installed in network volume, everytime need to `source anaconda3/bin/activate`

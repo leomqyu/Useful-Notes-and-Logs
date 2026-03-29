@@ -387,6 +387,67 @@ follow the instruction on https://git-lfs.com/ to  track the file, then do the t
 
 ---
 
+## <span style="color:green">26-03-30 Install selective_scan EfficientVMamba as example</span>
+
+### 1. problem 1
+
+Use `pip install`, the conda env has torch, but error says doesn't have torch. Solution: `pip install . --no-build-isolation`
+
+### 2. problem 2
+
+Problem: `[Errno 2] No such file or directory: '/usr/local/cuda/bin/nvcc'`
+To find where is the nvcc:
+
+1. To get the nvcc directory:
+  ```
+  module avail cuda
+  module load cuda/12.0
+  which nvcc
+  ```
+
+2. Then export CUDA_HOME to be the wanted directory
+  ```
+  export CUDA_HOME=$(dirname $(dirname $(which nvcc)))
+  ```
+
+### problem 3
+
+When doing `pytest`, got `ModuleNotFoundError: No module named 'selective_scan_cuda'`.
+Didn't do `pip install mamba-ssm`, or simply ignore it.
+
+### problem 4
+
+When running the real model forward pass code, got the import error:
+
+Change the import lines from:
+```
+try:
+    "sscore acts the same as mamba_ssm"
+    SSMODE = "sscore"
+    if torch.__version__ > '2.0.0':
+        from selective_scan_vmamba_pt202 import selective_scan_cuda_core
+    else:
+        from selective_scan_vmamba import selective_scan_cuda_core
+except Exception as e:
+    print(e, flush=True)
+    "you should install mamba_ssm to use this"
+    SSMODE = "mamba_ssm"
+    import selective_scan_cuda
+    # from mamba_ssm.ops.selective_scan_interface import selective_scan_fn, selective_scan_ref
+```
+
+to
+
+```
+try:
+    import selective_scan_cuda_core
+    SSMODE = "sscore"
+except Exception as e:
+    print("Failed to import selective_scan_cuda_core:", e, flush=True)
+    raise ImportError("You need to build selective_scan_cuda_core")
+
+```
+
 ## <span style="color:green">25-01-17 In VScode ipynb cannot find kernel in when selecting kernel</span>
 
 ### error message 
